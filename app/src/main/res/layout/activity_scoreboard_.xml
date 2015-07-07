@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffe48f">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="305dp"
+        android:layout_height="60dp"
+        android:id="@+id/layoutTopScoreBoard"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="false"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/topscoreboard" />
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/layoutTopScoreBoard"
+        android:layout_marginTop="30dp"
+        android:layout_above="@+id/layoutBottomScoreBoard"
+        android:id="@+id/listViewStructure">
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/legendScore"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="23dp"
+                    android:id="@+id/userScore"
+                    android:src="@drawable/userscore" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="23dp"
+                    android:id="@+id/levelScore"
+                    android:src="@drawable/levelscore" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="23dp"
+                    android:id="@+id/pointsScore"
+                    android:src="@drawable/pointsscore" />
+
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="23dp"
+                    android:id="@+id/worngScore"
+                    android:src="@drawable/worngscore" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewWrap"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_below="@+id/legendScore"
+            android:layout_above="@+id/listViewBackButton"
+            android:layout_centerHorizontal="true">
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_height="wrap_content"
+                android:layout_width="296dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="top"
+                android:background="#ffffffff">
+            </ListView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewBackButton"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true">
+            <Button
+                android:layout_width="116dp"
+                android:layout_height="34dp"
+                android:id="@+id/btnBackLevels"
+                android:onClick= "OnClick"
+                android:singleLine="false"
+                android:layout_gravity="bottom|right"
+                android:gravity="bottom|center_horizontal"
+                android:background="@drawable/buttomhin10" />
+
+            </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="305dp"
+        android:layout_height="40dp"
+        android:id="@+id/layoutBottomScoreBoard"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bottomcreateuser"
+        android:layout_alignParentBottom="true"/>
+
+
+</RelativeLayout>

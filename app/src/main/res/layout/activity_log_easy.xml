@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.example.kelly.logeasysummerresearch.LogEasy"
+    android:id="@+id/LayoutBase"
+    android:background="#ffffe490"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="290dp"
+        android:layout_height="148dp"
+        android:layout_gravity="top"
+        android:id="@+id/LayoutLogo"
+        android:gravity="top|start|center_horizontal"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/logeasylogo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="70dp"
+        android:id="@+id/LayoutButtons">
+
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="48dp"
+            android:id="@+id/btnStart"
+            android:background="@drawable/buttonazul"
+            android:layout_gravity="top|center_horizontal"
+            android:gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="152dp"
+            android:layout_height="48dp"
+            android:id="@+id/btnInfo"
+            android:background="@drawable/buttongreen"
+            android:layout_marginTop="36dp"
+            android:layout_gravity="bottom|center_horizontal" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,105 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" tools:context=".LoginActivity"
+    android:id="@+id/layoutLoginUser"
+    android:background="#ffffe48f">
+
+    <!-- Login progress -->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="305dp"
+        android:layout_height="60dp"
+        android:id="@+id/layoutTopLoginUser"
+        android:background="@drawable/toploginuser"
+        android:layout_centerHorizontal="true"/>
+
+    <ScrollView android:id="@+id/login_form" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_below="@+id/layoutTopLoginUser"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/layoutBottomLoginUser">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:id="@+id/layoutLoginInfo"
+            android:measureWithLargestChild="false">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="185dp"
+                android:layout_height="220dp"
+                android:id="@+id/layoutTopLoginInfo"
+                android:background="#ffffffff"
+                android:layout_gravity="top|center_horizontal"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="&quot;Username&quot;"
+                    android:id="@+id/lblUsername"
+                    android:textSize="30dp"
+                    android:textIsSelectable="false"
+                    android:singleLine="true"
+                    android:textColor="#ff8c0000"
+                    android:layout_gravity="top|center_horizontal" />
+
+                <ImageView
+                    android:layout_width="172dp"
+                    android:layout_height="172dp"
+                    android:id="@+id/imvUserGuide"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/avatar4" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layoutBottomLoginInfo"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <EditText android:id="@+id/txtPassword" android:layout_width="match_parent"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified" android:inputType="textPassword"
+                    android:maxLines="1" android:singleLine="true"
+                    android:layout_height="wrap_content" android:hint="@string/prompt_password"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_margin="10dp" />
+
+                <Button android:id="@+id/btnLogin"
+                    android:layout_width="95dp" android:layout_height="35dp"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:background="@drawable/buttonlogin"
+                    android:layout_margin="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="305dp"
+        android:layout_height="40dp"
+        android:id="@+id/layoutBottomLoginUser"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bottomcreateuser"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+
+
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.example.kelly.logeasysummerresearch.Choose_Player"
+    android:background="#ffffe48f"
+    android:padding="15dp">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="305dp"
+        android:layout_height="61dp"
+        android:gravity="top|start|center_horizontal"
+        android:layout_alignParentTop="true"
+        android:id="@+id/layoutTopLogin"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/toploginpage">
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:id="@+id/layoutCenterLogin"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/layoutTopLogin">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutWhiteBack"
+            android:background="#ffffffff">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffffffff"
+                android:id="@+id/layoutGrid">
+
+                <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:columnWidth="150dp"
+                    android:numColumns="2"
+                    android:verticalSpacing="7dp"
+                    android:horizontalSpacing="7dp"
+                    android:stretchMode="columnWidth"
+                    android:gravity="top"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="95dp"
+            android:layout_height="34dp"
+            android:id="@+id/btnnewuser"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@drawable/buttonred"
+            android:gravity="bottom"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="305dp"
+        android:layout_height="61dp"
+        android:gravity="bottom|end|center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/layoutBottompLogin"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bottomloginpage">
+
+    </RelativeLayout>
+
+</RelativeLayout>

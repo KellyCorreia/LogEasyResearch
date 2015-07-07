@@ -1,0 +1,318 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kelly.logeasysummerresearch.Create_User"
+    android:orientation="vertical"
+    android:background="#ffffe48f"
+    android:padding="10dp">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scvCenter"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layoutCentroScroll"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_below="@+id/layoutTopCreateUser"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:id="@+id/layoutTopCentro"
+                android:layout_gravity="top|center_horizontal"
+                android:background="#ffffffff"
+                android:padding="3dp"
+                android:gravity="top|center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="27dp"
+                    android:id="@+id/imvChooseAvatar"
+                    android:src="@drawable/chooseaguide"
+                    android:layout_gravity="center_horizontal" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/svwAvatarsOptions"
+                    android:background="#ffffffff"
+                    android:layout_gravity="center_horizontal"
+                    android:focusableInTouchMode="false"
+                    android:layout_margin="5dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="top|center_horizontal"
+                        android:id="@+id/layoutSVWAvatars">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/layoutAvatar1"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:touchscreenBlocksFocus="true"
+                            android:background="#ff187070"
+                            android:focusableInTouchMode="true">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbtAvatar1"
+                                android:gravity="center|center_horizontal"
+                                android:textAlignment="center"
+                                android:layout_gravity="center_horizontal"
+                                android:checked="true" />
+
+                            <ImageView
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:id="@+id/imvAvatar1"
+                                android:layout_gravity="center_horizontal"
+                                android:src="@drawable/avatar1" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/layoutAvatar2"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:touchscreenBlocksFocus="true"
+                            android:background="#ff95adbd"
+                            android:focusableInTouchMode="true">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbtAvatar2"
+                                android:gravity="center_horizontal"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:id="@+id/imvAvatar2"
+                                android:layout_gravity="left|center_horizontal"
+                                android:src="@drawable/avatar2" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/layoutAvatar3"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:touchscreenBlocksFocus="true"
+                            android:background="#ff739a87"
+                            android:focusableInTouchMode="true">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbtAvatar3"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:id="@+id/imvAvatar3"
+                                android:layout_gravity="top|left|center_horizontal"
+                                android:src="@drawable/avatar3" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/layoutAvatar4"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginRight="2dp"
+                            android:touchscreenBlocksFocus="true"
+                            android:background="#ff8b8c8b"
+                            android:focusableInTouchMode="true">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/rbtAvatar4"
+                                android:checked="false"
+                                android:gravity="bottom"
+                                android:layout_gravity="center_horizontal"
+                                />
+
+                            <ImageView
+                                android:layout_width="90dp"
+                                android:layout_height="90dp"
+                                android:id="@+id/imvAvatar4"
+                                android:layout_gravity="top|right|center_horizontal"
+                                android:src="@drawable/avatar4" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layoutCentroCentro"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/svwUserDetails"
+                    android:layout_gravity="left|center_horizontal">
+
+                </ScrollView>
+
+                <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/layoutUserDetails"
+                    android:gravity="right">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowUsername"
+                        android:showDividers="middle"
+                        android:gravity="left|center_vertical"
+                        android:layout_gravity="left|center_vertical">
+
+                        <ImageView
+                            android:layout_width="110dp"
+                            android:layout_height="15dp"
+                            android:id="@+id/imvUsername"
+                            android:src="@drawable/username"
+                            android:layout_gravity="left|center_vertical"
+                            android:adjustViewBounds="false"
+                            android:baselineAlignBottom="false" />
+
+                        <EditText
+                            android:layout_width="190dp"
+                            android:layout_height="50dp"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/txtusername"
+                            android:layout_gravity="left|center_vertical" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowEmail"
+                        android:gravity="left|center_vertical"
+                        android:layout_gravity="left|center_vertical">
+
+                        <ImageView
+                            android:layout_width="77dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/imvEmail"
+                            android:src="@drawable/email"
+                            android:layout_gravity="left|center_vertical"
+                            android:adjustViewBounds="false"
+                            android:baselineAlignBottom="false" />
+
+                        <EditText
+                            android:layout_width="190dp"
+                            android:layout_height="50dp"
+                            android:inputType="textEmailAddress"
+                            android:ems="10"
+                            android:id="@+id/txtemail"
+                            android:layout_gravity="left|center_vertical"
+                            android:gravity="left|center_vertical" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rowPassword"
+                        android:gravity="left|center_vertical"
+                        android:layout_gravity="left|center_vertical">
+
+                        <ImageView
+                            android:layout_width="107dp"
+                            android:layout_height="20dp"
+                            android:id="@+id/imvPassword"
+                            android:src="@drawable/password"
+                            android:layout_gravity="left|center_vertical"
+                            android:adjustViewBounds="false"
+                            android:baselineAlignBottom="false" />
+
+                        <EditText
+                            android:layout_width="190dp"
+                            android:layout_height="50dp"
+                            android:inputType="textPassword"
+                            android:ems="10"
+                            android:id="@+id/txtpassword"
+                            android:layout_gravity="left|center_vertical"
+                            android:gravity="left|center_vertical" />
+                    </TableRow>
+                </TableLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:id="@+id/layoutBottomCentro"
+                android:gravity="bottom|center_horizontal">
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/btncreateuser"
+                    android:layout_gravity="center_vertical|right"
+                    android:onClick="btnCreateOnClick"
+                    android:background="@drawable/buttonsignup" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
