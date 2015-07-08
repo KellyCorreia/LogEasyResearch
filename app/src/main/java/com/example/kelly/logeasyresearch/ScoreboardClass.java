@@ -9,13 +9,13 @@ import android.os.Parcelable;
 public class ScoreboardClass implements Parcelable{
     private long user_id;
     private int points;
-    private int wrong_percent;
+    private int wrong_number;
     private String level_id;
 
     public ScoreboardClass(){
         user_id=0;
         points=0;
-        wrong_percent=0;
+        wrong_number=0;
         level_id="";
     }
 
@@ -26,7 +26,7 @@ public class ScoreboardClass implements Parcelable{
     public ScoreboardClass(long user, int no_of_points, int percent_wrong, String level){
         user_id=user;
         points=no_of_points;
-        wrong_percent=percent_wrong;
+        wrong_number=percent_wrong;
         level_id=level;
     }
 
@@ -38,8 +38,8 @@ public class ScoreboardClass implements Parcelable{
         return points;
     }
 
-    public int getWrong_percent() {
-        return wrong_percent;
+    public int getWrong_number() {
+        return wrong_number;
     }
 
     public String getLevel_id() {
@@ -54,8 +54,8 @@ public class ScoreboardClass implements Parcelable{
         this.points = points;
     }
 
-    public void setWrong_percent(int wrong_percent) {
-        this.wrong_percent = wrong_percent;
+    public void setWrong_number(int wrong_number) {
+        this.wrong_number = wrong_number;
     }
 
     public void setLevel_id(String level_id) {
@@ -72,14 +72,14 @@ public class ScoreboardClass implements Parcelable{
     public void writeToParcel(Parcel out, int flags) {
         out.writeLong(user_id);
         out.writeInt(points);
-        out.writeInt(wrong_percent);
+        out.writeInt(wrong_number);
         out.writeString(level_id);
     }
 
     private void readFromParcel(Parcel in) {
         user_id = in.readLong();
         points = in.readInt();
-        wrong_percent = in.readInt();
+        wrong_number = in.readInt();
         level_id = in.readString();
     }
 

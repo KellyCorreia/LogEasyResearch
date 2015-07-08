@@ -9,51 +9,41 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kelly on 03/04/2015.
- */
+
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
+
+    //Declaration of Table Questions
     public static final String TABLE_QUESTIONS = "table_questions";
     public static final String COLUMN_QUESTION_ID = "Q_id";
     public static final String COLUMN_QUESTION_TEXT = "Q_text";
-    public static final String COLUMN_RIGHT_ANSWER = "right_A";
     public static final String COLUMN_LEVEL_ID = "L_id";
     private static final String QUESTIONS_DATABASE_CREATE = "create table "
             + TABLE_QUESTIONS + "(" + COLUMN_QUESTION_ID
             + " text primary key, " + COLUMN_QUESTION_TEXT
             + " text not null, " + COLUMN_LEVEL_ID
-            + " text not null, " + COLUMN_RIGHT_ANSWER
             + " text not null);";
-    public static final String TABLE_USERS_ACT = "users_activity";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_USER_ID = "user_id";
-    // + Q_id
-    public static final String COLUMN_WRONG_YN = "wrong_YN";
-    public static final String COLUMN_DATE = "date";
+
+
+    //Declaration of Table ANSWERS
     public static final String TABLE_ANSWERS = "table_answers";
     public static final String COLUMN_ANSWER_ID = "A_id";
-    private static final String USERS_ACT_DATABASE_CREATE = "CREATE TABLE "
-            + TABLE_USERS_ACT + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_USER_ID
-            + " integer not null, " + COLUMN_QUESTION_ID
-            + " text, " + COLUMN_ANSWER_ID
-            + " text, " + COLUMN_DATE
-            + " text);";
-    // + Q_id
     public static final String COLUMN_ANSWER_TEXT = "A_text";
+    public static final Boolean COLUMN_ANSWER_STATE = false;
     private static final String ANSWERS_DATABASE_CREATE = "CREATE TABLE "
             + TABLE_ANSWERS + "(" + COLUMN_ANSWER_ID
             + " text primary key, " + COLUMN_ANSWER_TEXT
             + " text not null, " + COLUMN_QUESTION_ID
-            + " text not null);";
+            + " text not null);" + COLUMN_ANSWER_STATE
+            + false;
+
+
+    //Declaration of Table USERS
     public static final String TABLE_USERS = "table_users";
-    //user_id;
+    public static final String COLUMN_USER_ID = "user_id";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PASS = "password";
-    public static final String COLUMN_POINTS = "points";
-    public static final String COLUMN_WRONG_PERCENT = "wrong_percent";
     public static final String COLUMN_AVATAR = "avatar";
     private static final String USERS_DATABASE_CREATE = "CREATE TABLE "
             + TABLE_USERS + "(" + COLUMN_USER_ID
@@ -62,13 +52,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + " text not null, " + COLUMN_PASS
             + " text not null, " + COLUMN_AVATAR
             + " text);";
+
+
+    //Declaration of Table SCOREBOARD
     public static final String TABLE_SCOREBOARD = "table_scoreboard";
+    public static final String COLUMN_POINTS = "points";
+    public static final String COLUMN_WRONG_NUMBER = "wrong_number";
     private static final String SCOREBOARD_DATABASE_CREATE = "CREATE TABLE "
             + TABLE_SCOREBOARD + "(" + COLUMN_USER_ID
             + " integer primary key, " + COLUMN_POINTS
-            + " integer, " + COLUMN_WRONG_PERCENT
+            + " integer, " + COLUMN_WRONG_NUMBER
             + " integer, " + COLUMN_LEVEL_ID
             + " text);";
+
+    //Declaration of Table LEVEL
     public static final String TABLE_LEVEL = "table_level";
     public static final String COLUMN_LEVEL_NAME = "l_name";
     public static final String COLUMN_LESSON = "lesson";
@@ -79,19 +76,19 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             + " text not null, " + COLUMN_LESSON
             + " text," + COLUMN_TIP
             + " text);";
-    public static final String TABLE_SCOREBOARD_SCREEN = "table_scoreboard_screen";
 
-    // Database creation sql statement
-    public static final String COLUMN_USERNAME_SCOREBOARD = "user_name";
-    public static final String COLUMN_LEVELNAME_SCOREBOARD = "level_name";
-    public static final String COLUMN_POINTS_SCOREBOARD = "user_points";
-    public static final String COLUMN_WRONGPERC_SCOREBOARD = "user_wrongperc";
+
+    //ver se ainda precisa dessa tabela ou faze-la por meio de consulta
+    //Declaration of Table SCOREBOARD_SCREEN
+    public static final String TABLE_SCOREBOARD_SCREEN = "table_scoreboard_screen";
     private static final String SCOREBOARD_SCREEN_DATABASE_CREATE = "create table "
-            + TABLE_SCOREBOARD_SCREEN + "(" + COLUMN_USERNAME_SCOREBOARD
-            + " text primary key, " + COLUMN_LEVELNAME_SCOREBOARD
-            + " text, " + COLUMN_POINTS_SCOREBOARD
-            + " text, " + COLUMN_WRONGPERC_SCOREBOARD
+            + TABLE_SCOREBOARD_SCREEN + "(" + COLUMN_USERNAME
+            + " text primary key, " + COLUMN_LEVEL_NAME
+            + " text, " + COLUMN_POINTS
+            + " text, " + COLUMN_WRONG_NUMBER
             + " text);";
+
+
     private static final String DATABASE_NAME = "database.db";
     private static final int DATABASE_VERSION = 1;
     //OR:     private SQLiteDatabase dbase;
@@ -106,7 +103,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         database = db;
         db.execSQL(QUESTIONS_DATABASE_CREATE);
-        db.execSQL(USERS_ACT_DATABASE_CREATE);
         db.execSQL(USERS_DATABASE_CREATE);
         db.execSQL(ANSWERS_DATABASE_CREATE);
         db.execSQL(SCOREBOARD_DATABASE_CREATE);
@@ -117,1104 +113,1102 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         addLevels();
     }
 
+
     private void addQuestions() {
         QuestionClass q1 = new QuestionClass("Q001", "Which one is the contradictory of the " +
-                "following claim: \n “Sometimes the wind is blowing hard.”", "L01", "A001c");
+                "following claim: \n “Sometimes the wind is blowing hard.”", "L01");
         this.addQuestion(q1);
 
         QuestionClass q2 = new QuestionClass("Q002", "Which one is the contradictory of the " +
-                "following statement: \n “The wind is blowing all the time.”", "L01", "A002b");
+                "following statement: \n “The wind is blowing all the time.”", "L01");
         this.addQuestion(q2);
 
         QuestionClass q3 = new QuestionClass("Q003", "Which one of the following sentences becomes " +
-                "true after applying the NOT operator.", "L01", "A003c");
+                "true after applying the NOT operator.", "L01");
         this.addQuestion(q3);
 
         QuestionClass q4 = new QuestionClass("Q004", "Which one of the following affirmation becomes " +
-                "true after applying the NOT operator.", "L01", "A004b");
+                "true after applying the NOT operator.", "L01");
         this.addQuestion(q4);
 
         QuestionClass q5 = new QuestionClass("Q005", "Which one of the following affirmation becomes " +
-                "true after applying the NOT operator.", "L01", "A005b");
+                "true after applying the NOT operator.", "L01");
         this.addQuestion(q5);
 
         QuestionClass q6 = new QuestionClass("Q006", "Which one of the following affirmation becomes " +
-                "true after applying the NOT operator.", "L01", "A006a");
+                "true after applying the NOT operator.", "L01");
         this.addQuestion(q6);
 
         QuestionClass q7 = new QuestionClass("Q007", "Which one of the following affirmation becomes " +
-                "true after applying the NOT operator.", "L01", "A007a");
+                "true after applying the NOT operator.", "L01");
         this.addQuestion(q7);
 
         QuestionClass q8 = new QuestionClass("Q008", "Which one is the contradictory of the following" +
-                " statement: \n “The wind has no direction.”", "L01", "A008a");
+                " statement: \n “The wind has no direction.”", "L01");
         this.addQuestion(q8);
 
         QuestionClass q9 = new QuestionClass("Q009", "Which one is the contradictory of the following" +
-                " claim: \n “The wind’s direction is North.”", "L01", "A009b");
+                " claim: \n “The wind’s direction is North.”", "L01");
         this.addQuestion(q9);
 
         QuestionClass q10 = new QuestionClass("Q010", "Which one is the contradictory of the following" +
-                " sentence: \n “Some breeze is a light wind.”", "L01", "A010a");
+                " sentence: \n “Some breeze is a light wind.”", "L01");
         this.addQuestion(q10);
 
         QuestionClass q11 = new QuestionClass("Q011", "Given: a = “The sound is a vibration” is  " +
-                "true and b = “The sound is not a wave” is false. Which of the following is true:", "L02", "A011c");
+                "true and b = “The sound is not a wave” is false. Which of the following is true:", "L02");
         this.addQuestion(q11);
 
         QuestionClass q12 = new QuestionClass("Q012", "Given: a = “The sound propagates through the air”" +
-                " is true. Which of the following is false:", "L02", "A012b");
+                " is true. Which of the following is false:", "L02");
         this.addQuestion(q12);
 
         QuestionClass q13 = new QuestionClass("Q013", "Given: a = “The sound propagates through solids”" +
-                " is true and b = “The sound is not a vibration” is false. Which of the following is true:", "L02", "A013b");
+                " is true and b = “The sound is not a vibration” is false. Which of the following is true:", "L02");
         this.addQuestion(q13);
 
         QuestionClass q14 = new QuestionClass("Q014", "Given: “The speed of the sound is 972m/s” is " +
                 "true and “Sound propagates through the air”. Considering the exclusive “or”. Which " +
-                "of the following is true:", "L02", "A014c");
+                "of the following is true:", "L02");
         this.addQuestion(q14);
 
         QuestionClass q15 = new QuestionClass("Q015", "Given: a = “All sound come from a vibrating " +
-                "source” is true and b = “Sound can be heard” is true. Which os the following is true:", "L02", "A015a");
+                "source” is true and b = “Sound can be heard” is true. Which os the following is true:", "L02");
         this.addQuestion(q15);
 
         QuestionClass q16 = new QuestionClass("Q016", "Given: a = “Sound cannot be heard” is false " +
-                "and b = “Sound is a current of air” is false. Which os the following is false:", "L02", "A016c");
+                "and b = “Sound is a current of air” is false. Which os the following is false:", "L02");
         this.addQuestion(q16);
 
         QuestionClass q17 = new QuestionClass("Q017", "Given: a = “Music is a combination of sounds”" +
-                " is true. Which os the following is false:", "L02", "A017b");
+                " is true. Which os the following is false:", "L02");
         this.addQuestion(q17);
 
         QuestionClass q18 = new QuestionClass("Q018", "Given: a = “Music is a combination of sounds”" +
                 " is true,  b = “Sound is a current of air” is false and c = “All sound come from a" +
-                " vibrating source” is true. Which one of the following is true:", "L02", "A018b");
+                " vibrating source” is true. Which one of the following is true:", "L02");
         this.addQuestion(q18);
 
         QuestionClass q19 = new QuestionClass("Q019", "Given: a = “Sound cannot be heard” is false" +
                 " and b = “All sound come from a vibrating source” is true. Which of the following " +
-                "is true:", "L02", "A019c");
+                "is true:", "L02");
         this.addQuestion(q19);
 
         QuestionClass q20 = new QuestionClass("Q020", "Given: a = “Music is a combination of sound " +
                 "and silence” is true, b = “A very strong sound forms a tornado” is false and c = " +
-                "“Sound is not a wave” is false. Which of the following is true:", "L02", "A020a");
+                "“Sound is not a wave” is false. Which of the following is true:", "L02");
         this.addQuestion(q20);
 
         QuestionClass q21 = new QuestionClass("Q021", "Given:  a = “The earth is full of metals” is" +
-                " true and b = “Gold is a metal” is true.  Which of the following is false:", "L03", "A021c");
+                " true and b = “Gold is a metal” is true.  Which of the following is false:", "L03");
         this.addQuestion(q21);
 
-        QuestionClass q22 = new QuestionClass("Q022", "Which one of the following propositions is true:", "L03", "A022b");
+        QuestionClass q22 = new QuestionClass("Q022", "Which one of the following propositions is true:", "L03");
         this.addQuestion(q22);
 
         QuestionClass q23 = new QuestionClass("Q023", "Given: a = “All metals are found in the earth”" +
-                " is true and b = “Silver is a crystal” is false. Which one of the following is false.", "L03", "A023b");
+                " is true and b = “Silver is a crystal” is false. Which one of the following is false.", "L03");
         this.addQuestion(q23);
 
         QuestionClass q24 = new QuestionClass("Q024", "Given: a = “Gold is more expensive than silver”" +
                 " is true and b = “Both gold and silver are metals” is true. Which one of the following" +
-                " is true.", "L03", "A024b");
+                " is true.", "L03");
         this.addQuestion(q24);
 
         QuestionClass q25 = new QuestionClass("Q025", "Given: a = “Gold is a gemstone” and  b = “Ruby" +
-                " is a metal” both are false. Which one of the following is true:", "L03", "A025a");
+                " is a metal” both are false. Which one of the following is true:", "L03");
         this.addQuestion(q25);
 
         QuestionClass q26 = new QuestionClass("Q026", "Given: a = “Silver is a stone” is false and b" +
-                " = “All metals are found in the earth” is true. Which one of the following is false:", "L03", "A026c");
+                " = “All metals are found in the earth” is true. Which one of the following is false:", "L03");
         this.addQuestion(q26);
 
         QuestionClass q27 = new QuestionClass("Q027", "Given: “All metals are found in the earth and " +
                 "gold is a metal” is true and “Ruby is a stone or gold is a stone” is true. Which one of " +
-                "the following is true:", "L03", "A027b");
+                "the following is true:", "L03");
         this.addQuestion(q27);
 
         QuestionClass q28 = new QuestionClass("Q028", "Given: “Silver is a precious metal and gold is not" +
-                " a stone” is true. Which one of the following is true:", "L03", "A028a");
+                " a stone” is true. Which one of the following is true:", "L03");
         this.addQuestion(q28);
 
-        QuestionClass q29 = new QuestionClass("Q029", "Given: “Iron is a metal”  is true. Which one of the following is false:", "L03", "A029a");
+        QuestionClass q29 = new QuestionClass("Q029", "Given: “Iron is a metal”  is true. Which one of the following is false:", "L03");
         this.addQuestion(q29);
 
         QuestionClass q30 = new QuestionClass("Q030", "Given: “Gold is the most expensive metal” is true " +
-                "and “Silver is a metal” is true. Which one of the following is false:", "L03", "A030c");
+                "and “Silver is a metal” is true. Which one of the following is false:", "L03");
         this.addQuestion(q30);
 
         QuestionClass q31 = new QuestionClass("Q031", "Which one of the following is the contradictory" +
-                " of A: Sandy soil is ideal for crops and farming.", "L04", "A031a");
+                " of A: Sandy soil is ideal for crops and farming.", "L04");
         this.addQuestion(q31);
 
         QuestionClass q32 = new QuestionClass("Q032", "Which one of the following is the contradictory " +
-                "of A: Wild beaches are undiscovered and you can’t find any hotels nearby.", "L04", "A032b");
+                "of A: Wild beaches are undiscovered and you can’t find any hotels nearby.", "L04");
         this.addQuestion(q32);
 
         QuestionClass q33 = new QuestionClass("Q033", "Which one of the following is the contradictory" +
-                " of A: Some beaches are formed along an ocean and they don’t have life guards posts.", "L04", "A033c");
+                " of A: Some beaches are formed along an ocean and they don’t have life guards posts.", "L04");
         this.addQuestion(q33);
 
         QuestionClass q34 = new QuestionClass("Q034", "Which of the following is the contradictory of A:" +
-                " Performance artists draw images in sand and this type of art is called sand animation.", "L04", "A034a");
+                " Performance artists draw images in sand and this type of art is called sand animation.", "L04");
         this.addQuestion(q34);
 
         QuestionClass q35 = new QuestionClass("Q035", "Which of the following is the contradictory" +
-                " of A: Sand is composed by rock and mineral particles.\n", "L04", "A035c");
+                " of A: Sand is composed by rock and mineral particles.\n", "L04");
         this.addQuestion(q35);
 
         QuestionClass q36 = new QuestionClass("Q036", "Given A: Only the sandy beaches are visited by" +
-                " tourist and this is a fact. - true. Which one is the contradictory of A from the following:", "L04", "A036b");
+                " tourist and this is a fact. - true. Which one is the contradictory of A from the following:", "L04");
         this.addQuestion(q36);
 
         QuestionClass q37 = new QuestionClass("Q037", "Given A: Sand is finer than gravel and coarser " +
-                "than silt. Which one is the contradictory of A from the following compound claims:", "L04", "A037c");
+                "than silt. Which one is the contradictory of A from the following compound claims:", "L04");
         this.addQuestion(q37);
 
         QuestionClass q38 = new QuestionClass("Q038", "Given the contradictory of A: A common type of " +
-                "sand was not created by coral or shellfish. Please choose A from the following:", "L04", "A038b");
+                "sand was not created by coral or shellfish. Please choose A from the following:", "L04");
         this.addQuestion(q38);
 
         QuestionClass q39 = new QuestionClass("Q039", "Given the contradictory of B: Sand and water table " +
-                "are fun in the back garden or in the livingroom . Find the compound claim B:", "L04", "A039b");
+                "are fun in the back garden or in the livingroom . Find the compound claim B:", "L04");
         this.addQuestion(q39);
 
         QuestionClass q40 = new QuestionClass("Q040", "Given the contradictory of B: In the back garden, " +
-                "children cannot play with sand or water. Find the compound claim B:", "L04", "A040a");
+                "children cannot play with sand or water. Find the compound claim B:", "L04");
         this.addQuestion(q40);
 
         QuestionClass q41 = new QuestionClass("Q041", "Which one of the following is the contradictory " +
-                "of A: Precipitations can fall in form of ice crystals or in snow.", "L05", "A041a");
+                "of A: Precipitations can fall in form of ice crystals or in snow.", "L05");
         this.addQuestion(q41);
 
         QuestionClass q42 = new QuestionClass("Q042", "Which one of the following is the contradictory " +
-                "of C: not (A or B). A: Snow has a fluffy structure. B: Snow is composed of small ice particles.", "L05", "A042b");
+                "of C: not (A or B). A: Snow has a fluffy structure. B: Snow is composed of small ice particles.", "L05");
         this.addQuestion(q42);
 
         QuestionClass q43 = new QuestionClass("Q043", "Given: A: Snow has an open and soft structure." +
-                " Which one of the following is the contradictory of A:", "L05", "A043c");
+                " Which one of the following is the contradictory of A:", "L05");
         this.addQuestion(q43);
 
         QuestionClass q44 = new QuestionClass("Q044", "Given: A: not (B or C); B: Snow is precipitation in form of " +
-                "ice flakes; C: Snow has a soft structure.  Which one of the following represents A:", "L05", "A044c");
+                "ice flakes; C: Snow has a soft structure.  Which one of the following represents A:", "L05");
         this.addQuestion(q44);
 
         QuestionClass q45 = new QuestionClass("Q045", "Given: ¬(A v B): Water cannot fall from the clouds in form of " +
-                "snow neither ice crystals. Which of the following represents A and B:", "L05", "A045a");
+                "snow neither ice crystals. Which of the following represents A and B:", "L05");
         this.addQuestion(q45);
 
         QuestionClass q46 = new QuestionClass("Q046", "Which one of the following is the contradictory of AvB. " +
-                "Given: A: Snow is formed by small ice particles; B: Snowflakes come in a variety of sizes and shapes.", "L05", "A046a");
+                "Given: A: Snow is formed by small ice particles; B: Snowflakes come in a variety of sizes and shapes.", "L05");
         this.addQuestion(q46);
 
         QuestionClass q47 = new QuestionClass("Q047", "Which one of the following is the contradictory " +
-                "of A. Given: A: Snow has an open or soft structure.", "L05", "A047c");
+                "of A. Given: A: Snow has an open or soft structure.", "L05");
         this.addQuestion(q47);
 
         QuestionClass q48 = new QuestionClass("Q048", "Which one of the following is the contradictory of A: " +
-                "Snow falls from the clouds or the process of precipitating snow is called snowfall.", "L05", "A048a");
+                "Snow falls from the clouds or the process of precipitating snow is called snowfall.", "L05");
         this.addQuestion(q48);
 
         QuestionClass q49 = new QuestionClass("Q049", "Which one of the following is the contradictory of A: " +
-                "Snow does not fall from the clouds or the process of precipitating snow is not called snowfall.", "L05", "A049b");
+                "Snow does not fall from the clouds or the process of precipitating snow is not called snowfall.", "L05");
         this.addQuestion(q49);
 
         QuestionClass q50 = new QuestionClass("Q050", "Which one of the following is the contradictory A: " +
-                "Snow has a fluffy structure or it is composed of small ice particles.", "L05", "A050c");
+                "Snow has a fluffy structure or it is composed of small ice particles.", "L05");
         this.addQuestion(q50);
 
         QuestionClass q51 = new QuestionClass("Q051", "Given: A: The plants grow fast. and B: Amy waters" +
-                " the plants everyday. Which of the following represents if A then B:", "L06", "A051c");
+                " the plants everyday. Which of the following represents if A then B:", "L06");
         this.addQuestion(q51);
 
         QuestionClass q52 = new QuestionClass("Q052", "Given: A: If flowers grow from seeds then they are plants " +
-                ": True. Which one of the following is false:", "L06", "A052a");
+                ": True. Which one of the following is false:", "L06");
         this.addQuestion(q52);
 
         QuestionClass q53 = new QuestionClass("Q053", "Consider A: Plants obtain energy if exposed to " +
-                "sunlight. Please select the false statement from the following:", "L06", "A053c");
+                "sunlight. Please select the false statement from the following:", "L06");
         this.addQuestion(q53);
 
         QuestionClass q54 = new QuestionClass("Q054", "Please select the antecedent from the following" +
-                " claim: B = Otherwise, plants will not survive on this planet.", "L06", "A054b");
+                " claim: B = Otherwise, plants will not survive on this planet.", "L06");
         this.addQuestion(q54);
 
         QuestionClass q55 = new QuestionClass("Q055", "Please select the antecedent from the following" +
-                " claim: C = Don’t water the flowers for a month and you won’t have them anymore.", "L06", "A055c");
+                " claim: C = Don’t water the flowers for a month and you won’t have them anymore.", "L06");
         this.addQuestion(q55);
 
         QuestionClass q56 = new QuestionClass("Q056", "Please select the consequent from the following" +
-                " claim: A = Anyone who loves plants deserves a planthouse.", "L06", "A056b");
+                " claim: A = Anyone who loves plants deserves a planthouse.", "L06");
         this.addQuestion(q56);
 
         QuestionClass q57 = new QuestionClass("Q057", "Please select the consequent from the following" +
-                " claim: B = Visit us and you will get a free green plant pot.", "L06", "A057a");
+                " claim: B = Visit us and you will get a free green plant pot.", "L06");
         this.addQuestion(q57);
 
         QuestionClass q58 = new QuestionClass("Q058", "Consider A: House plants won’t grow if over-watered" +
-                " or under-watered. Please select the false statement from the following:", "L06", "A058a");
+                " or under-watered. Please select the false statement from the following:", "L06");
         this.addQuestion(q58);
         //two questions skipped
 
         QuestionClass q61 = new QuestionClass("Q061", "Please select the contradictory of A: If lightning" +
-                " strikes then you can hear it.", "L07", "A061a");
+                " strikes then you can hear it.", "L07");
         this.addQuestion(q61);
 
         QuestionClass q62 = new QuestionClass("Q062", "Please select the contradictory of A: If the electric" +
-                " field is strong enough, a positive streamer can develop from those points.", "L07", "A062b");
+                " field is strong enough, a positive streamer can develop from those points.", "L07");
         this.addQuestion(q62);
 
         QuestionClass q63 = new QuestionClass("Q063", "Which one of the following is the contradictory of C:" +
-                " If a lightning hits an object on the ground it is called a strike.", "L07", "A063a");
+                " If a lightning hits an object on the ground it is called a strike.", "L07");
         this.addQuestion(q63);
 
         QuestionClass q64 = new QuestionClass("Q064", "Which one of the following is the contradictory" +
-                " of A: If a lightning hits an object, the object will burn.", "L07", "A064c");
+                " of A: If a lightning hits an object, the object will burn.", "L07");
         this.addQuestion(q64);
 
         QuestionClass q65 = new QuestionClass("Q065", "Which one of the following is the contradictory" +
-                " of B: If the house is on fire then only fire department can save lives.", "L07", "A065c");
+                " of B: If the house is on fire then only fire department can save lives.", "L07");
         this.addQuestion(q65);
 
         QuestionClass q66 = new QuestionClass("Q066", "Which one of the following is the contradictory " +
-                "of C: If there is a storm then some lightnings are pretty spectacular.", "L07", "A066c");
+                "of C: If there is a storm then some lightnings are pretty spectacular.", "L07");
         this.addQuestion(q66);
 
         QuestionClass q67 = new QuestionClass("Q067", "Which one of the following is the contradictory of " +
-                "B: If lightning strikes a person, it is usually fatal.", "L07", "A067a");
+                "B: If lightning strikes a person, it is usually fatal.", "L07");
         this.addQuestion(q67);
 
         QuestionClass q68 = new QuestionClass("Q068", "Which one of the following is the contradictory " +
-                "of A: If somebody has a fear of thunder or lightning, they may have astraphobia.", "L07", "A068b");
+                "of A: If somebody has a fear of thunder or lightning, they may have astraphobia.", "L07");
         this.addQuestion(q68);
 
         QuestionClass q69 = new QuestionClass("Q069", "Which one of the following is the contradictory of " +
-                "C: You will learn more about lightning if you study fulminology.", "L07", "A069c");
+                "C: You will learn more about lightning if you study fulminology.", "L07");
         this.addQuestion(q69);
 
         QuestionClass q70 = new QuestionClass("Q070", "Which one of the following is the contradictory " +
-                "of A: Some people can hear the thunder if the distance is less than 20 kilometres.", "L07", "A070a");
+                "of A: Some people can hear the thunder if the distance is less than 20 kilometres.", "L07");
         this.addQuestion(q70);
 
         QuestionClass q71 = new QuestionClass("Q071", "Please select the false relationship for the following " +
-                "compound claim: Lava is expelled only if a volcano erupts.", "L08", "A071b");
+                "compound claim: Lava is expelled only if a volcano erupts.", "L08");
         this.addQuestion(q71);
 
         QuestionClass q72 = new QuestionClass("Q072", "Please select the false relationship for the following" +
-                " compound claim: Lava stops moving if and only if it solidifies.", "L08", "A072c");
+                " compound claim: Lava stops moving if and only if it solidifies.", "L08");
         this.addQuestion(q72);
 
         QuestionClass q73 = new QuestionClass("Q073", "Please select the true relationship for the following" +
-                " compound claim: The speed of the lava is higher if and only if the viscosity is lower.", "L08", "A073a");
+                " compound claim: The speed of the lava is higher if and only if the viscosity is lower.", "L08");
         this.addQuestion(q73);
 
         QuestionClass q74 = new QuestionClass("Q074", "Given: Magma becomes lava if and only if it is exposed" +
                 " to the surface. Please fill in the dots with the adecvate statement. \n \tIf magma becomes" +
-                " lava then it is exposed to the surface and …", "L08", "A074a");
+                " lava then it is exposed to the surface and …", "L08");
         this.addQuestion(q74);
 
         QuestionClass q75 = new QuestionClass("Q075", "Please select the equivalence statement:\n" +
-                "\tRocks melt if they reach the melting point and when they reach the melting point, rocks melt.", "L08", "A075a");
+                "\tRocks melt if they reach the melting point and when they reach the melting point, rocks melt.", "L08");
         this.addQuestion(q75);
         //5 questions skipped
 
         QuestionClass q81 = new QuestionClass("Q081", "Please select the contrapositive for the following " +
-                "statement: In order to save the forest you must stop the wildfire spreading. ", "L09", "A081c");
+                "statement: In order to save the forest you must stop the wildfire spreading. ", "L09");
         this.addQuestion(q81);
 
         QuestionClass q82 = new QuestionClass("Q082", "Please select the statement that has the following" +
-                " contrapositive: If predators did not existed then the village would have been safe.", "L09", "A082a");
+                " contrapositive: If predators did not existed then the village would have been safe.", "L09");
         this.addQuestion(q82);
 
         QuestionClass q83 = new QuestionClass("Q083", "Please select the contrapositive for the following statement:" +
-                " Battle training is crucial in order to win the war.", "L09", "A083a");
+                " Battle training is crucial in order to win the war.", "L09");
         this.addQuestion(q83);
 
         QuestionClass q84 = new QuestionClass("Q084", "Please select the statement that has the following contrapositive:" +
-                " If no flooding occurred then the village is not in danger.", "L09", "A084b");
+                " If no flooding occurred then the village is not in danger.", "L09");
         this.addQuestion(q84);
 
         QuestionClass q85 = new QuestionClass("Q085", "Please select the statement that has the following contrapositive:" +
-                " If some villages are not under attack then the world is safe.", "L09", "A085a");
+                " If some villages are not under attack then the world is safe.", "L09");
         this.addQuestion(q85);
 
         QuestionClass q86 = new QuestionClass("Q086", "Please select the contrapositive for the following statement:" +
-                " If somebody will help them, the village people won’t lose everything.", "L09", "A086c");
+                " If somebody will help them, the village people won’t lose everything.", "L09");
         this.addQuestion(q86);
         //4 questions skipped
 
         QuestionClass q91 = new QuestionClass("Q091", "Please select the inference that derive from the following premises:\n" +
-                "p: Heroes are people.\n" + "q: People are giving random acts of kindness.", "L10", "A091a");
+                "p: Heroes are people.\n" + "q: People are giving random acts of kindness.", "L10");
         this.addQuestion(q91);
 
         QuestionClass q92 = new QuestionClass("Q092", "Please select the inference that derive from the following premises:\n" +
-                "p: In order to save the world you need to be a hero.\n" + "q. Everyone can be a hero", "L10", "A092b");
+                "p: In order to save the world you need to be a hero.\n" + "q. Everyone can be a hero", "L10");
         this.addQuestion(q92);
 
         QuestionClass q93 = new QuestionClass("Q093", "Please select the inference that derive from the following premises:\n" +
-                "p: If the world is threatened then superheroes will react.\n" + "q: Superheroes are not reacting.\n", "L10", "A093c");
+                "p: If the world is threatened then superheroes will react.\n" + "q: Superheroes are not reacting.\n", "L10");
         this.addQuestion(q93);
 
         QuestionClass q94 = new QuestionClass("Q094", "Please select the inference that derive from the following premises:\n" +
                 "p: If you have super powers you are a superhero.\n" + "q: If you don’t have super powers than you are human.\n" +
-                "r: If you are a superhero then you need to save the world.", "L10", "A094b");
+                "r: If you are a superhero then you need to save the world.", "L10");
         this.addQuestion(q94);
 
 
     }
 
     private void addAnswers() {
-        AnswerClass a1 = new AnswerClass("A001a", "The wind is not blowing hard.", "Q001");
+        AnswerClass a1 = new AnswerClass("A001a", "The wind is not blowing hard.", "Q001", false);
         this.addAnswer(a1);
 
-        AnswerClass a2 = new AnswerClass("A001b", "Sometimes the wind is not blowing hard.", "Q001");
+        AnswerClass a2 = new AnswerClass("A001b", "Sometimes the wind is not blowing hard.", "Q001", false);
         this.addAnswer(a2);
 
-        AnswerClass a3 = new AnswerClass("A001c", "The wind is never blowing hard.", "Q001");
+        AnswerClass a3 = new AnswerClass("A001c", "The wind is never blowing hard.", "Q001", true);
         this.addAnswer(a3);
 
-        AnswerClass a4 = new AnswerClass("A002a", "The wind is not blowing.", "Q002");
+        AnswerClass a4 = new AnswerClass("A002a", "The wind is not blowing.", "Q002", false);
         this.addAnswer(a4);
 
-        AnswerClass a5 = new AnswerClass("A002b", "Sometimes the wind is not blowing.", "Q002");
+        AnswerClass a5 = new AnswerClass("A002b", "Sometimes the wind is not blowing.", "Q002", true);
         this.addAnswer(a5);
 
-        AnswerClass a6 = new AnswerClass("A002c", "The wind is never blowing.", "Q002");
+        AnswerClass a6 = new AnswerClass("A002c", "The wind is never blowing.", "Q002", false);
         this.addAnswer(a6);
 
-        AnswerClass a7 = new AnswerClass("A003a", "The wind can change directions.", "Q003");
+        AnswerClass a7 = new AnswerClass("A003a", "The wind can change directions.", "Q003", false);
         this.addAnswer(a7);
 
-        AnswerClass a8 = new AnswerClass("A003b", "The wind is blowing in the same direction.", "Q003");
+        AnswerClass a8 = new AnswerClass("A003b", "The wind is blowing in the same direction.", "Q003", false);
         this.addAnswer(a8);
 
-        AnswerClass a9 = new AnswerClass("A003c", "The wind can never change directions.", "Q003");
+        AnswerClass a9 = new AnswerClass("A003c", "The wind can never change directions.", "Q003", true);
         this.addAnswer(a9);
 
-        AnswerClass a10 = new AnswerClass("A004a", "The wind has the power to destroy houses", "Q004");
+        AnswerClass a10 = new AnswerClass("A004a", "The wind has the power to destroy houses", "Q004", false);
         this.addAnswer(a10);
 
-        AnswerClass a11 = new AnswerClass("A004b", "The wind can sometimes destroy houses.", "Q004");
+        AnswerClass a11 = new AnswerClass("A004b", "The wind can sometimes destroy houses.", "Q004", true);
         this.addAnswer(a11);
 
-        AnswerClass a12 = new AnswerClass("A004c", "The wind can destroy houses.", "Q004");
+        AnswerClass a12 = new AnswerClass("A004c", "The wind can destroy houses.", "Q004", false);
         this.addAnswer(a12);
 
-        AnswerClass a13 = new AnswerClass("A005a", "The wind can blow hard.", "Q005");
+        AnswerClass a13 = new AnswerClass("A005a", "The wind can blow hard.", "Q005", false);
         this.addAnswer(a13);
 
-        AnswerClass a14 = new AnswerClass("A005b", "The wind blows hard all the time.", "Q005");
+        AnswerClass a14 = new AnswerClass("A005b", "The wind blows hard all the time.", "Q005", true);
         this.addAnswer(a14);
 
-        AnswerClass a15 = new AnswerClass("A005c", "The wind is not blowing hard.", "Q005");
+        AnswerClass a15 = new AnswerClass("A005c", "The wind is not blowing hard.", "Q005", false);
         this.addAnswer(a15);
 
-        AnswerClass a16 = new AnswerClass("A006a", "The houses may be destroyed by the wind.", "Q006");
+        AnswerClass a16 = new AnswerClass("A006a", "The houses may be destroyed by the wind.", "Q006", true);
         this.addAnswer(a16);
 
-        AnswerClass a17 = new AnswerClass("A006b", "Some houses may be destroyed by the wind.", "Q006");
+        AnswerClass a17 = new AnswerClass("A006b", "Some houses may be destroyed by the wind.", "Q006", false);
         this.addAnswer(a17);
 
-        AnswerClass a18 = new AnswerClass("A006c", "Not all the houses can be destroyed by the wind.", "Q006");
+        AnswerClass a18 = new AnswerClass("A006c", "Not all the houses can be destroyed by the wind.", "Q006", false);
         this.addAnswer(a18);
 
-        AnswerClass a19 = new AnswerClass("A007a", "The wind’s direction never changes.", "Q007");
+        AnswerClass a19 = new AnswerClass("A007a", "The wind’s direction never changes.", "Q007", true);
         this.addAnswer(a19);
 
-        AnswerClass a20 = new AnswerClass("A007b", "The wind’s direction can change.", "Q007");
+        AnswerClass a20 = new AnswerClass("A007b", "The wind’s direction can change.", "Q007", true);
         this.addAnswer(a20);
 
-        AnswerClass a21 = new AnswerClass("A007c", "The wind’s direction can change sometimes.", "Q007");
+        AnswerClass a21 = new AnswerClass("A007c", "The wind’s direction can change sometimes.", "Q007", false);
         this.addAnswer(a21);
 
-        AnswerClass a22 = new AnswerClass("A008a", "The wind sometimes has a direction.", "Q008");
+        AnswerClass a22 = new AnswerClass("A008a", "The wind sometimes has a direction.", "Q008", true);
         this.addAnswer(a22);
 
-        AnswerClass a23 = new AnswerClass("A008b", "The wind doesn’t have a direction.", "Q008");
+        AnswerClass a23 = new AnswerClass("A008b", "The wind doesn’t have a direction.", "Q008", false);
         this.addAnswer(a23);
 
-        AnswerClass a24 = new AnswerClass("A008c", "The wind’s direction exists.", "Q008");
+        AnswerClass a24 = new AnswerClass("A008c", "The wind’s direction exists.", "Q008", false);
         this.addAnswer(a24);
 
-        AnswerClass a25 = new AnswerClass("A009a", "The wind’s direction is South.", "Q009");
+        AnswerClass a25 = new AnswerClass("A009a", "The wind’s direction is South.", "Q009", false);
         this.addAnswer(a25);
 
-        AnswerClass a26 = new AnswerClass("A009b", "Sometimes the wind’s direction is not North.", "Q009");
+        AnswerClass a26 = new AnswerClass("A009b", "Sometimes the wind’s direction is not North.", "Q009", true);
         this.addAnswer(a26);
 
-        AnswerClass a27 = new AnswerClass("A009c", "The wind’s direction is different.", "Q009");
+        AnswerClass a27 = new AnswerClass("A009c", "The wind’s direction is different.", "Q009", false);
         this.addAnswer(a27);
 
-        AnswerClass a28 = new AnswerClass("A010a", "No breeze is a light wind.", "Q010");
+        AnswerClass a28 = new AnswerClass("A010a", "No breeze is a light wind.", "Q010", true);
         this.addAnswer(a28);
 
-        AnswerClass a29 = new AnswerClass("A010b", "A breeze is sometimes a light wind.", "Q010");
+        AnswerClass a29 = new AnswerClass("A010b", "A breeze is sometimes a light wind.", "Q010", false);
         this.addAnswer(a29);
 
-        AnswerClass a30 = new AnswerClass("A010c", "All breezes are light.", "Q010");
+        AnswerClass a30 = new AnswerClass("A010c", "All breezes are light.", "Q010", false);
         this.addAnswer(a30);
 
-        AnswerClass a31 = new AnswerClass("A011a", "The sound is a vibration and it is not a wave.", "Q011");
+        AnswerClass a31 = new AnswerClass("A011a", "The sound is a vibration and it is not a wave.", "Q011", false);
         this.addAnswer(a31);
 
-        AnswerClass a32 = new AnswerClass("A011b", "The sound is not a vibration, but it is a wave.", "Q011");
+        AnswerClass a32 = new AnswerClass("A011b", "The sound is not a vibration, but it is a wave.", "Q011", false);
         this.addAnswer(a32);
 
-        AnswerClass a33 = new AnswerClass("A011c", "The sound is a vibration and it is a wave.", "Q011");
+        AnswerClass a33 = new AnswerClass("A011c", "The sound is a vibration and it is a wave.", "Q011", true);
         this.addAnswer(a33);
 
-        AnswerClass a34 = new AnswerClass("A012a", "The sound propagates through the air or it is not a wave.", "Q012");
+        AnswerClass a34 = new AnswerClass("A012a", "The sound propagates through the air or it is not a wave.", "Q012", false);
         this.addAnswer(a34);
 
-        AnswerClass a35 = new AnswerClass("A012b", "The sound doesn’t propagates through the air and it is a wave.", "Q012");
+        AnswerClass a35 = new AnswerClass("A012b", "The sound doesn’t propagates through the air and it is a wave.", "Q012", true);
         this.addAnswer(a35);
 
-        AnswerClass a36 = new AnswerClass("A012c", "The sound propagates through the air and it is a vibration.", "Q012");
+        AnswerClass a36 = new AnswerClass("A012c", "The sound propagates through the air and it is a vibration.", "Q012", false);
         this.addAnswer(a36);
 
-        AnswerClass a37 = new AnswerClass("A013a", "a ^ b", "Q013");
+        AnswerClass a37 = new AnswerClass("A013a", "a ^ b", "Q013", false);
         this.addAnswer(a37);
 
-        AnswerClass a38 = new AnswerClass("A013b", "a ^ ¬b", "Q013");
+        AnswerClass a38 = new AnswerClass("A013b", "a ^ ¬b", "Q013", true);
         this.addAnswer(a38);
 
-        AnswerClass a39 = new AnswerClass("A013c", "¬a ^ b", "Q013");
+        AnswerClass a39 = new AnswerClass("A013c", "¬a ^ b", "Q013", false);
         this.addAnswer(a39);
 
-        AnswerClass a40 = new AnswerClass("A014a", "The speed of the sound is 972m/s or it propagates through the air.", "Q014");
+        AnswerClass a40 = new AnswerClass("A014a", "The speed of the sound is 972m/s or it propagates through the air.", "Q014", false);
         this.addAnswer(a40);
 
-        AnswerClass a41 = new AnswerClass("A014b", "The speed of the sound is not 972m/s or it does not propagates through the air.", "Q014");
+        AnswerClass a41 = new AnswerClass("A014b", "The speed of the sound is not 972m/s or it does not propagates through the air.", "Q014", false);
         this.addAnswer(a41);
 
-        AnswerClass a42 = new AnswerClass("A014c", "The speed of the sound is 972m/s or it does not propagates through the air.", "Q014");
+        AnswerClass a42 = new AnswerClass("A014c", "The speed of the sound is 972m/s or it does not propagates through the air.", "Q014", true);
         this.addAnswer(a42);
 
-        AnswerClass a43 = new AnswerClass("A015a", "a ^ b", "Q015");
+        AnswerClass a43 = new AnswerClass("A015a", "a ^ b", "Q015", true);
         this.addAnswer(a43);
 
-        AnswerClass a44 = new AnswerClass("A015b", "¬a ^ b", "Q015");
+        AnswerClass a44 = new AnswerClass("A015b", "¬a ^ b", "Q015", false);
         this.addAnswer(a44);
 
-        AnswerClass a45 = new AnswerClass("A015c", "a ^ ¬b", "Q015");
+        AnswerClass a45 = new AnswerClass("A015c", "a ^ ¬b", "Q015", false);
         this.addAnswer(a45);
 
-        AnswerClass a46 = new AnswerClass("A016a", "a ^ b", "Q016");
+        AnswerClass a46 = new AnswerClass("A016a", "a ^ b", "Q016", false);
         this.addAnswer(a46);
 
-        AnswerClass a47 = new AnswerClass("A016b", "¬a ^ b", "Q016");
+        AnswerClass a47 = new AnswerClass("A016b", "¬a ^ b", "Q016", false);
         this.addAnswer(a47);
 
-        AnswerClass a48 = new AnswerClass("A016c", "¬a ^ ¬b", "Q016");
+        AnswerClass a48 = new AnswerClass("A016c", "¬a ^ ¬b", "Q016", true);
         this.addAnswer(a48);
 
-        AnswerClass a49 = new AnswerClass("A017a", "Music is a combination of sounds and sound is a current of air.", "Q017");
+        AnswerClass a49 = new AnswerClass("A017a", "Music is a combination of sounds and sound is a current of air.", "Q017", false);
         this.addAnswer(a49);
 
-        AnswerClass a50 = new AnswerClass("A017b", "Music is not a combination of sounds and sound is a vibration. ", "Q017");
+        AnswerClass a50 = new AnswerClass("A017b", "Music is not a combination of sounds and sound is a vibration. ", "Q017", true);
         this.addAnswer(a50);
 
-        AnswerClass a51 = new AnswerClass("A017c", "Music is a combination of sounds and sound cannot be heard.", "Q017");
+        AnswerClass a51 = new AnswerClass("A017c", "Music is a combination of sounds and sound cannot be heard.", "Q017", false);
         this.addAnswer(a51);
 
-        AnswerClass a52 = new AnswerClass("A018a", "a ^ b ^ c", "Q018");
+        AnswerClass a52 = new AnswerClass("A018a", "a ^ b ^ c", "Q018", false);
         this.addAnswer(a52);
 
-        AnswerClass a53 = new AnswerClass("A018b", "a ^ ¬b ^ c", "Q018");
+        AnswerClass a53 = new AnswerClass("A018b", "a ^ ¬b ^ c", "Q018", true);
         this.addAnswer(a53);
 
-        AnswerClass a54 = new AnswerClass("A018c", "a ^ b ^ ¬c", "Q018");
+        AnswerClass a54 = new AnswerClass("A018c", "a ^ b ^ ¬c", "Q018", false);
         this.addAnswer(a54);
 
-        AnswerClass a55 = new AnswerClass("A019a", "Sound can be heard and some sounds do not come from a vibrating source.", "Q019");
+        AnswerClass a55 = new AnswerClass("A019a", "Sound can be heard and some sounds do not come from a vibrating source.", "Q019", false);
         this.addAnswer(a55);
 
-        AnswerClass a56 = new AnswerClass("A019b", "All sound come from a vibrating source and sound cannot be heard.", "Q019");
+        AnswerClass a56 = new AnswerClass("A019b", "All sound come from a vibrating source and sound cannot be heard.", "Q019", false);
         this.addAnswer(a56);
 
-        AnswerClass a57 = new AnswerClass("A019c", "All sound come from a vibrating source and sound can be heard.", "Q019");
+        AnswerClass a57 = new AnswerClass("A019c", "All sound come from a vibrating source and sound can be heard.", "Q019", true);
         this.addAnswer(a57);
 
-        AnswerClass a58 = new AnswerClass("A020a", "Sound is a wave and a very strong sound does not form a tornado. ", "Q020");
+        AnswerClass a58 = new AnswerClass("A020a", "Sound is a wave and a very strong sound does not form a tornado. ", "Q020", true);
         this.addAnswer(a58);
 
-        AnswerClass a59 = new AnswerClass("A020b", "Music is a combination of sound and silence and a very strong sound forms a tornado.", "Q020");
+        AnswerClass a59 = new AnswerClass("A020b", "Music is a combination of sound and silence and a very strong sound forms a tornado.", "Q020", false);
         this.addAnswer(a59);
 
-        AnswerClass a60 = new AnswerClass("A020c", "Sound is not a wave and music is a combination of sound and silence.", "Q020");
+        AnswerClass a60 = new AnswerClass("A020c", "Sound is not a wave and music is a combination of sound and silence.", "Q020", false);
         this.addAnswer(a60);
 
-        AnswerClass a61 = new AnswerClass("A021a", "a v b", "Q021");
+        AnswerClass a61 = new AnswerClass("A021a", "a v b", "Q021", false);
         this.addAnswer(a61);
 
-        AnswerClass a62 = new AnswerClass("A021b", "a v ¬b", "Q021");
+        AnswerClass a62 = new AnswerClass("A021b", "a v ¬b", "Q021", false);
         this.addAnswer(a62);
 
-        AnswerClass a63 = new AnswerClass("A021c", "¬a v ¬b", "Q021");
+        AnswerClass a63 = new AnswerClass("A021c", "¬a v ¬b", "Q021", true);
         this.addAnswer(a63);
 
-        AnswerClass a64 = new AnswerClass("A022a", "Gold is a metal and silver is not a metal.", "Q022");
+        AnswerClass a64 = new AnswerClass("A022a", "Gold is a metal and silver is not a metal.", "Q022", false);
         this.addAnswer(a64);
 
-        AnswerClass a65 = new AnswerClass("A022b", "Gold is a metal or silver is not a metal.", "Q022");
+        AnswerClass a65 = new AnswerClass("A022b", "Gold is a metal or silver is not a metal.", "Q022", true);
         this.addAnswer(a65);
 
-        AnswerClass a66 = new AnswerClass("A022c", "Gold is not a metal or silver is not a metal.", "Q022");
+        AnswerClass a66 = new AnswerClass("A022c", "Gold is not a metal or silver is not a metal.", "Q022", false);
         this.addAnswer(a66);
 
-        AnswerClass a67 = new AnswerClass("A023a", "Some metals are not found in the earth or silver is not a crystal.", "Q023");
+        AnswerClass a67 = new AnswerClass("A023a", "Some metals are not found in the earth or silver is not a crystal.", "Q023", false);
         this.addAnswer(a67);
 
-        AnswerClass a68 = new AnswerClass("A023b", "Some metals are not found in the earth or silver is a crystal. ", "Q023");
+        AnswerClass a68 = new AnswerClass("A023b", "Some metals are not found in the earth or silver is a crystal. ", "Q023", true);
         this.addAnswer(a68);
 
-        AnswerClass a69 = new AnswerClass("A023c", "Silver is a metal and all metal are found in the earth.", "Q023");
+        AnswerClass a69 = new AnswerClass("A023c", "Silver is a metal and all metal are found in the earth.", "Q023", false);
         this.addAnswer(a69);
 
-        AnswerClass a70 = new AnswerClass("A024a", "Gold and silver are metals and silver is more expensive than gold.", "Q024");
+        AnswerClass a70 = new AnswerClass("A024a", "Gold and silver are metals and silver is more expensive than gold.", "Q024", false);
         this.addAnswer(a70);
 
-        AnswerClass a71 = new AnswerClass("A024b", "Gold is more expensive than silver or silver is not a metal.", "Q024");
+        AnswerClass a71 = new AnswerClass("A024b", "Gold is more expensive than silver or silver is not a metal.", "Q024", true);
         this.addAnswer(a71);
 
-        AnswerClass a72 = new AnswerClass("A024c", "Silver is more expensive than gold or gold is not a metal.", "Q024");
+        AnswerClass a72 = new AnswerClass("A024c", "Silver is more expensive than gold or gold is not a metal.", "Q024", false);
         this.addAnswer(a72);
 
-        AnswerClass a73 = new AnswerClass("A025a", "Gold is not a gemstone or ruby is a metal.", "Q025");
+        AnswerClass a73 = new AnswerClass("A025a", "Gold is not a gemstone or ruby is a metal.", "Q025", true);
         this.addAnswer(a73);
 
-        AnswerClass a74 = new AnswerClass("A025b", "Gold is a gemstone or ruby is a metal.", "Q025");
+        AnswerClass a74 = new AnswerClass("A025b", "Gold is a gemstone or ruby is a metal.", "Q025", false);
         this.addAnswer(a74);
 
-        AnswerClass a75 = new AnswerClass("A025c", "Gold and Ruby are metals.", "Q025");
+        AnswerClass a75 = new AnswerClass("A025c", "Gold and Ruby are metals.", "Q025", false);
         this.addAnswer(a75);
 
-        AnswerClass a76 = new AnswerClass("A026a", "¬a ^ b", "Q026");
+        AnswerClass a76 = new AnswerClass("A026a", "¬a ^ b", "Q026", false);
         this.addAnswer(a76);
 
-        AnswerClass a77 = new AnswerClass("A026b", "a v b", "Q026");
+        AnswerClass a77 = new AnswerClass("A026b", "a v b", "Q026", false);
         this.addAnswer(a77);
 
-        AnswerClass a78 = new AnswerClass("A026c", "a ^ b", "Q026");
+        AnswerClass a78 = new AnswerClass("A026c", "a ^ b", "Q026", true);
         this.addAnswer(a78);
 
-        AnswerClass a79 = new AnswerClass("A027a", "All metals are found in the earth and ruby is a stone.\n", "Q027");
+        AnswerClass a79 = new AnswerClass("A027a", "All metals are found in the earth and ruby is a stone.\n", "Q027", false);
         this.addAnswer(a79);
 
-        AnswerClass a80 = new AnswerClass("A027b", "Gold is a metal or gold is stone.", "Q027");
+        AnswerClass a80 = new AnswerClass("A027b", "Gold is a metal or gold is stone.", "Q027",true);
         this.addAnswer(a80);
 
-        AnswerClass a81 = new AnswerClass("A027c", "Gold is not a metal or a stone.", "Q027");
+        AnswerClass a81 = new AnswerClass("A027c", "Gold is not a metal or a stone.", "Q027", false);
         this.addAnswer(a81);
 
-        AnswerClass a82 = new AnswerClass("A028a", "Silver is a precious metal or gold is a stone.", "Q028");
+        AnswerClass a82 = new AnswerClass("A028a", "Silver is a precious metal or gold is a stone.", "Q028", true);
         this.addAnswer(a82);
 
-        AnswerClass a83 = new AnswerClass("A028b", "Silver is not a metal or gold is a stone.", "Q028");
+        AnswerClass a83 = new AnswerClass("A028b", "Silver is not a metal or gold is a stone.", "Q028", false);
         this.addAnswer(a83);
 
-        AnswerClass a84 = new AnswerClass("A028c", "Gold and silver are metals.", "Q028");
+        AnswerClass a84 = new AnswerClass("A028c", "Gold and silver are metals.", "Q028", false);
         this.addAnswer(a84);
 
-        AnswerClass a85 = new AnswerClass("A029a", "Gold is a metal, but iron is not.", "Q029");
+        AnswerClass a85 = new AnswerClass("A029a", "Gold is a metal, but iron is not.", "Q029", true);
         this.addAnswer(a85);
 
-        AnswerClass a86 = new AnswerClass("A029b", "Iron is not a metal or gold is a metal", "Q029");
+        AnswerClass a86 = new AnswerClass("A029b", "Iron is not a metal or gold is a metal", "Q029", false);
         this.addAnswer(a86);
 
-        AnswerClass a87 = new AnswerClass("A029c", "Iron is a metal or gold is a metal.", "Q029");
+        AnswerClass a87 = new AnswerClass("A029c", "Iron is a metal or gold is a metal.", "Q029", false);
         this.addAnswer(a87);
 
-        AnswerClass a88 = new AnswerClass("A030a", "Or silver or gold is the most expensive metal.", "Q030");
+        AnswerClass a88 = new AnswerClass("A030a", "Or silver or gold is the most expensive metal.", "Q030", false);
         this.addAnswer(a88);
 
-        AnswerClass a89 = new AnswerClass("A030b", "Gold and silver are the most expensive metals.", "Q030");
+        AnswerClass a89 = new AnswerClass("A030b", "Gold and silver are the most expensive metals.", "Q030", false);
         this.addAnswer(a89);
 
-        AnswerClass a90 = new AnswerClass("A030c", "Gold is not the most expensive metal or silver is not a metal.", "Q030");
+        AnswerClass a90 = new AnswerClass("A030c", "Gold is not the most expensive metal or silver is not a metal.", "Q030", true);
         this.addAnswer(a90);
 
-        AnswerClass a91 = new AnswerClass("A031a", "Sandy soil is not ideal for crops or for farming.", "Q031");
+        AnswerClass a91 = new AnswerClass("A031a", "Sandy soil is not ideal for crops or for farming.", "Q031", true);
         this.addAnswer(a91);
 
-        AnswerClass a92 = new AnswerClass("A031b", "Soil that is not sandy is ideal for crops or farming.", "Q031");
+        AnswerClass a92 = new AnswerClass("A031b", "Soil that is not sandy is ideal for crops or farming.", "Q031", false);
         this.addAnswer(a92);
 
-        AnswerClass a93 = new AnswerClass("A031c", "Sandy soil is not ideal for crops nor for farming.", "Q031");
+        AnswerClass a93 = new AnswerClass("A031c", "Sandy soil is not ideal for crops nor for farming.", "Q031", false);
         this.addAnswer(a93);
 
-        AnswerClass a94 = new AnswerClass("A032a", "Wild beaches are not undiscovered and you can’t find any hotels nearby.", "Q032");
+        AnswerClass a94 = new AnswerClass("A032a", "Wild beaches are not undiscovered and you can’t find any hotels nearby.", "Q032", false);
         this.addAnswer(a94);
 
-        AnswerClass a95 = new AnswerClass("A032b", "Wild beaches are not undiscovered but you can find some hotels nearby", "Q032");
+        AnswerClass a95 = new AnswerClass("A032b", "Wild beaches are not undiscovered but you can find some hotels nearby", "Q032", true);
         this.addAnswer(a95);
 
-        AnswerClass a96 = new AnswerClass("A032c", "Beaches that are not wild are discovered or you can find hotels nearby.", "Q032");
+        AnswerClass a96 = new AnswerClass("A032c", "Beaches that are not wild are discovered or you can find hotels nearby.", "Q032", false);
         this.addAnswer(a96);
 
-        AnswerClass a97 = new AnswerClass("A033a", "No beaches are formed along an ocean nor they have lifeguards posts.", "Q033");
+        AnswerClass a97 = new AnswerClass("A033a", "No beaches are formed along an ocean nor they have lifeguards posts.", "Q033", false);
         this.addAnswer(a97);
 
-        AnswerClass a98 = new AnswerClass("A033b", "Some beaches are not formed along an ocean or do they have lifeguards posts.", "Q033");
+        AnswerClass a98 = new AnswerClass("A033b", "Some beaches are not formed along an ocean or do they have lifeguards posts.", "Q033", false);
         this.addAnswer(a98);
 
-        AnswerClass a99 = new AnswerClass("A033c", "No beaches are formed along an ocean or they have lifeguards posts.", "Q033");
+        AnswerClass a99 = new AnswerClass("A033c", "No beaches are formed along an ocean or they have lifeguards posts.", "Q033", true);
         this.addAnswer(a99);
 
-        AnswerClass a100 = new AnswerClass("A034a", "Some performance artists do not draw images in sand or this type of art isn’t called sand animation.", "Q034");
+        AnswerClass a100 = new AnswerClass("A034a", "Some performance artists do not draw images in sand or this type of art isn’t called sand animation.", "Q034", true);
         this.addAnswer(a100);
 
-        AnswerClass a101 = new AnswerClass("A034b", "Some performance artists draw images in sand or this type of art  is not called sand animation.", "Q034");
+        AnswerClass a101 = new AnswerClass("A034b", "Some performance artists draw images in sand or this type of art  is not called sand animation.", "Q034", false);
         this.addAnswer(a101);
 
-        AnswerClass a102 = new AnswerClass("A034c", "Performance artists don’t draw images in sand nor they called it sand animation.", "Q034");
+        AnswerClass a102 = new AnswerClass("A034c", "Performance artists don’t draw images in sand nor they called it sand animation.", "Q034", false);
         this.addAnswer(a102);
 
-        AnswerClass a103 = new AnswerClass("A035a", "Sand is not composed by rock particles.", "Q035");
+        AnswerClass a103 = new AnswerClass("A035a", "Sand is not composed by rock particles.", "Q035", false);
         this.addAnswer(a103);
 
-        AnswerClass a104 = new AnswerClass("A035b", "Sand is composed by something else except rock and mineral particles.", "Q035");
+        AnswerClass a104 = new AnswerClass("A035b", "Sand is composed by something else except rock and mineral particles.", "Q035", false);
         this.addAnswer(a104);
 
-        AnswerClass a105 = new AnswerClass("A035c", "Sand is not composed by rock or by mineral particles. ", "Q035");
+        AnswerClass a105 = new AnswerClass("A035c", "Sand is not composed by rock or by mineral particles. ", "Q035", true);
         this.addAnswer(a105);
 
-        AnswerClass a106 = new AnswerClass("A036a", "No sandy beaches are visited and this is not a fact.", "Q036");
+        AnswerClass a106 = new AnswerClass("A036a", "No sandy beaches are visited and this is not a fact.", "Q036", false);
         this.addAnswer(a106);
 
-        AnswerClass a107 = new AnswerClass("A036b", "Some tourists do not visit sandy beaches or this is not a fact. ", "Q036");
+        AnswerClass a107 = new AnswerClass("A036b", "Some tourists do not visit sandy beaches or this is not a fact. ", "Q036", true);
         this.addAnswer(a107);
 
-        AnswerClass a108 = new AnswerClass("A036c", "Some tourists visit sandy beaches or this is a fact.", "Q036");
+        AnswerClass a108 = new AnswerClass("A036c", "Some tourists visit sandy beaches or this is a fact.", "Q036", false);
         this.addAnswer(a108);
 
-        AnswerClass a109 = new AnswerClass("A037a", "Sand is not finer than gravel and coarser than silt.", "Q037");
+        AnswerClass a109 = new AnswerClass("A037a", "Sand is not finer than gravel and coarser than silt.", "Q037", false);
         this.addAnswer(a109);
 
-        AnswerClass a110 = new AnswerClass("A037b", "Sand is gravel than finer or silt than coarser.", "Q037");
+        AnswerClass a110 = new AnswerClass("A037b", "Sand is gravel than finer or silt than coarser.", "Q037", false);
         this.addAnswer(a110);
 
-        AnswerClass a111 = new AnswerClass("A037c", "Sand is not finer than gravel or it is not coarser than silt.", "Q037");
+        AnswerClass a111 = new AnswerClass("A037c", "Sand is not finer than gravel or it is not coarser than silt.", "Q037", true);
         this.addAnswer(a111);
 
-        AnswerClass a112 = new AnswerClass("A038a", "An uncommon type of sand was created by coral and shellfish.", "Q038");
+        AnswerClass a112 = new AnswerClass("A038a", "An uncommon type of sand was created by coral and shellfish.", "Q038", false);
         this.addAnswer(a112);
 
-        AnswerClass a113 = new AnswerClass("A038b", "A common type of sand was created by coral and shellfish.", "Q038");
+        AnswerClass a113 = new AnswerClass("A038b", "A common type of sand was created by coral and shellfish.", "Q038",true);
         this.addAnswer(a113);
 
-        AnswerClass a114 = new AnswerClass("A038c", "A common type of sand was not created by coral or shellfish.", "Q038");
+        AnswerClass a114 = new AnswerClass("A038c", "A common type of sand was not created by coral or shellfish.", "Q038", false);
         this.addAnswer(a114);
 
-        AnswerClass a115 = new AnswerClass("A039a", "Sand or water table are not fun in the back garden or in the livingroom.", "Q039");
+        AnswerClass a115 = new AnswerClass("A039a", "Sand or water table are not fun in the back garden or in the livingroom.", "Q039", false);
         this.addAnswer(a115);
 
-        AnswerClass a116 = new AnswerClass("A039b", "Sand and water table are not fun in the back garden and in the livingroom.", "Q039");
+        AnswerClass a116 = new AnswerClass("A039b", "Sand and water table are not fun in the back garden and in the livingroom.", "Q039", true);
         this.addAnswer(a116);
 
-        AnswerClass a117 = new AnswerClass("A039c", "Sand or water table are fun in the back garden or in the livingroom.", "Q039");
+        AnswerClass a117 = new AnswerClass("A039c", "Sand or water table are fun in the back garden or in the livingroom.", "Q039", false);
         this.addAnswer(a117);
 
-        AnswerClass a118 = new AnswerClass("A040a", "In the back garden, children can play with sand and water.", "Q040");
+        AnswerClass a118 = new AnswerClass("A040a", "In the back garden, children can play with sand and water.", "Q040", true);
         this.addAnswer(a118);
 
-        AnswerClass a119 = new AnswerClass("A040b", "In the back garden, children cannot play with sand and water.", "Q040");
+        AnswerClass a119 = new AnswerClass("A040b", "In the back garden, children cannot play with sand and water.", "Q040", false);
         this.addAnswer(a119);
 
-        AnswerClass a120 = new AnswerClass("A040c", "In the back garden, children can play with sand or water.", "Q040");
+        AnswerClass a120 = new AnswerClass("A040c", "In the back garden, children can play with sand or water.", "Q040", false);
         this.addAnswer(a120);
 
-        AnswerClass a121 = new AnswerClass("A041a", "Precipitation cannot fall in form of ice crystals neither in form of snow.", "Q041");
+        AnswerClass a121 = new AnswerClass("A041a", "Precipitation cannot fall in form of ice crystals neither in form of snow.", "Q041", true);
         this.addAnswer(a121);
 
-        AnswerClass a122 = new AnswerClass("A041b", "Precipitations cannot fall in form of ice or in form of snow.", "Q041");
+        AnswerClass a122 = new AnswerClass("A041b", "Precipitations cannot fall in form of ice or in form of snow.", "Q041", false);
         this.addAnswer(a122);
 
-        AnswerClass a123 = new AnswerClass("A041c", "Precipitation can fall in form of snow but not ice crystals.", "Q041");
+        AnswerClass a123 = new AnswerClass("A041c", "Precipitation can fall in form of snow but not ice crystals.", "Q041", false);
         this.addAnswer(a123);
 
-        AnswerClass a124 = new AnswerClass("A042a", "Snow has a fluffy structure and it is composed of small ice particles.", "Q042");
+        AnswerClass a124 = new AnswerClass("A042a", "Snow has a fluffy structure and it is composed of small ice particles.", "Q042", false);
         this.addAnswer(a124);
 
-        AnswerClass a125 = new AnswerClass("A042b", "Snow is composed of small ice particles or it has a fluffy structure.", "Q042");
+        AnswerClass a125 = new AnswerClass("A042b", "Snow is composed of small ice particles or it has a fluffy structure.", "Q042", true);
         this.addAnswer(a125);
 
-        AnswerClass a126 = new AnswerClass("A042c", "Snow does not have a fluffy structure neither is composed of small ice particles.", "Q042");
+        AnswerClass a126 = new AnswerClass("A042c", "Snow does not have a fluffy structure neither is composed of small ice particles.", "Q042", false);
         this.addAnswer(a126);
 
-        AnswerClass a127 = new AnswerClass("A043a", "Snow does not have an open structure.", "Q043");
+        AnswerClass a127 = new AnswerClass("A043a", "Snow does not have an open structure.", "Q043", false);
         this.addAnswer(a127);
 
-        AnswerClass a128 = new AnswerClass("A043b", "Snow does not have a soft and open structure.", "Q043");
+        AnswerClass a128 = new AnswerClass("A043b", "Snow does not have a soft and open structure.", "Q043", false);
         this.addAnswer(a128);
 
-        AnswerClass a129 = new AnswerClass("A043c", "Snow does not have a soft neither an open structure.", "Q043");
+        AnswerClass a129 = new AnswerClass("A043c", "Snow does not have a soft neither an open structure.", "Q043", true);
         this.addAnswer(a129);
 
-        AnswerClass a130 = new AnswerClass("A044a", "Snow is not precipitation in form of ice flakes and it has no soft structure.", "Q044");
+        AnswerClass a130 = new AnswerClass("A044a", "Snow is not precipitation in form of ice flakes and it has no soft structure.", "Q044" , false);
         this.addAnswer(a130);
 
-        AnswerClass a131 = new AnswerClass("A044b", "Snow is precipitation in form of ice flakes and it has a soft structure.\n", "Q044");
+        AnswerClass a131 = new AnswerClass("A044b", "Snow is precipitation in form of ice flakes and it has a soft structure.\n", "Q044", false);
         this.addAnswer(a131);
 
-        AnswerClass a132 = new AnswerClass("A044c", "The structure of snow is not soft and it is not precipitation in form of ice flakes.", "Q044");
+        AnswerClass a132 = new AnswerClass("A044c", "The structure of snow is not soft and it is not precipitation in form of ice flakes.", "Q044", true);
         this.addAnswer(a132);
 
-        AnswerClass a133 = new AnswerClass("A045a", "Water can fall from the clouds in form of snow and ice crystals.", "Q045");
+        AnswerClass a133 = new AnswerClass("A045a", "Water can fall from the clouds in form of snow and ice crystals.", "Q045",true);
         this.addAnswer(a133);
 
-        AnswerClass a134 = new AnswerClass("A045b", "Water can fall from the clouds in form of snow or ice crystals.", "Q045");
+        AnswerClass a134 = new AnswerClass("A045b", "Water can fall from the clouds in form of snow or ice crystals.", "Q045", false);
         this.addAnswer(a134);
 
-        AnswerClass a135 = new AnswerClass("A045c", "Water cannot fall from the clouds in form of snow and ice crystals.", "Q045");
+        AnswerClass a135 = new AnswerClass("A045c", "Water cannot fall from the clouds in form of snow and ice crystals.", "Q045", false);
         this.addAnswer(a135);
 
-        AnswerClass a136 = new AnswerClass("A046a", "Snowflakes do not come in a variety of sizes and shapes neither snow is formed by small ice particles.", "Q046");
+        AnswerClass a136 = new AnswerClass("A046a", "Snowflakes do not come in a variety of sizes and shapes neither snow is formed by small ice particles.", "Q046", true);
         this.addAnswer(a136);
 
-        AnswerClass a137 = new AnswerClass("A046b", "Snowflakes do not come in a variety of sizes and shapes and snow is formed by small ice particles.", "Q046");
+        AnswerClass a137 = new AnswerClass("A046b", "Snowflakes do not come in a variety of sizes and shapes and snow is formed by small ice particles.", "Q046", false);
         this.addAnswer(a137);
 
-        AnswerClass a138 = new AnswerClass("A046c", "Snowflakes do not come in a variety of sizes and shapes or snow is formed by small ice particles.", "Q046");
+        AnswerClass a138 = new AnswerClass("A046c", "Snowflakes do not come in a variety of sizes and shapes or snow is formed by small ice particles.", "Q046", false);
         this.addAnswer(a138);
 
-        AnswerClass a139 = new AnswerClass("A047a", "Snow does not have an open and soft structure.", "Q047");
+        AnswerClass a139 = new AnswerClass("A047a", "Snow does not have an open and soft structure.", "Q047", false);
         this.addAnswer(a139);
 
-        AnswerClass a140 = new AnswerClass("A047b", "Snow does not have a soft structure.", "Q047");
+        AnswerClass a140 = new AnswerClass("A047b", "Snow does not have a soft structure.", "Q047", false);
         this.addAnswer(a140);
 
-        AnswerClass a141 = new AnswerClass("A047c", "Snow does not have an open neither a soft structure.", "Q047");
+        AnswerClass a141 = new AnswerClass("A047c", "Snow does not have an open neither a soft structure.", "Q047", true);
         this.addAnswer(a141);
 
-        AnswerClass a142 = new AnswerClass("A048a", "Snow does not fall from the clouds and the process of precipitating snow is not called snowfall.", "Q048");
+        AnswerClass a142 = new AnswerClass("A048a", "Snow does not fall from the clouds and the process of precipitating snow is not called snowfall.", "Q048", true);
         this.addAnswer(a142);
 
-        AnswerClass a143 = new AnswerClass("A048b", "The process of precipitating snow is not called snowfall or snow does not fall from the clouds.", "Q048");
+        AnswerClass a143 = new AnswerClass("A048b", "The process of precipitating snow is not called snowfall or snow does not fall from the clouds.", "Q048", false);
         this.addAnswer(a143);
 
-        AnswerClass a144 = new AnswerClass("A048c", "The process of precipitating snow is not called snowfall and snow fall from the clouds.", "Q048");
+        AnswerClass a144 = new AnswerClass("A048c", "The process of precipitating snow is not called snowfall and snow fall from the clouds.", "Q048", false);
         this.addAnswer(a144);
 
-        AnswerClass a145 = new AnswerClass("A049a", "Snow does not fall from the clouds and the process of precipitating snow is not called snowfall.\n", "Q049");
+        AnswerClass a145 = new AnswerClass("A049a", "Snow does not fall from the clouds and the process of precipitating snow is not called snowfall.\n", "Q049", false);
         this.addAnswer(a145);
 
-        AnswerClass a146 = new AnswerClass("A049b", "Snow falls from the clouds and the process of precipitating snow is called snowfall.", "Q049");
+        AnswerClass a146 = new AnswerClass("A049b", "Snow falls from the clouds and the process of precipitating snow is called snowfall.", "Q049", true);
         this.addAnswer(a146);
 
-        AnswerClass a147 = new AnswerClass("A049c", "The process of precipitating snow is called snowfall.", "Q049");
+        AnswerClass a147 = new AnswerClass("A049c", "The process of precipitating snow is called snowfall.", "Q049", false);
         this.addAnswer(a147);
 
-        AnswerClass a148 = new AnswerClass("A050a", "Snow has a fluffy structure and it is composed of small ice particles.", "Q050");
+        AnswerClass a148 = new AnswerClass("A050a", "Snow has a fluffy structure and it is composed of small ice particles.", "Q050", false);
         this.addAnswer(a148);
 
-        AnswerClass a149 = new AnswerClass("A050b", "Snow is composed of small ice particles or it has a fluffy structure.", "Q050");
+        AnswerClass a149 = new AnswerClass("A050b", "Snow is composed of small ice particles or it has a fluffy structure.", "Q050", false);
         this.addAnswer(a149);
 
-        AnswerClass a150 = new AnswerClass("A050c", "Snow does not have a fluffy structure and it is not composed of small ice particles.", "Q050");
+        AnswerClass a150 = new AnswerClass("A050c", "Snow does not have a fluffy structure and it is not composed of small ice particles.", "Q050", true);
         this.addAnswer(a150);
 
-        AnswerClass a151 = new AnswerClass("A051a", "The plants grow fast because Amy waters them everyday.", "Q051");
+        AnswerClass a151 = new AnswerClass("A051a", "The plants grow fast because Amy waters them everyday.", "Q051", false);
         this.addAnswer(a151);
 
-        AnswerClass a152 = new AnswerClass("A051b", "The plants do not grow fast if Amy does not waters them everyday.", "Q051");
+        AnswerClass a152 = new AnswerClass("A051b", "The plants do not grow fast if Amy does not waters them everyday.", "Q051", false);
         this.addAnswer(a152);
 
-        AnswerClass a153 = new AnswerClass("A051c", "If Amy waters the plants everyday then the plants grow fast. ", "Q051");
+        AnswerClass a153 = new AnswerClass("A051c", "If Amy waters the plants everyday then the plants grow fast. ", "Q051", true);
         this.addAnswer(a153);
 
-        AnswerClass a154 = new AnswerClass("A052a", "Flowers grow from seeds and they are not plants.", "Q052");
+        AnswerClass a154 = new AnswerClass("A052a", "Flowers grow from seeds and they are not plants.", "Q052", true);
         this.addAnswer(a154);
 
-        AnswerClass a155 = new AnswerClass("A052b", "Flowers do not grow from seeds or they are not plants.", "Q052");
+        AnswerClass a155 = new AnswerClass("A052b", "Flowers do not grow from seeds or they are not plants.", "Q052", false);
         this.addAnswer(a155);
 
-        AnswerClass a156 = new AnswerClass("A052c", "Flowers are plants if they grow from seeds.", "Q052");
+        AnswerClass a156 = new AnswerClass("A052c", "Flowers are plants if they grow from seeds.", "Q052", false);
         this.addAnswer(a156);
 
-        AnswerClass a157 = new AnswerClass("A053a", "If exposed to sunlight, plants will not obtain energy.", "Q053");
+        AnswerClass a157 = new AnswerClass("A053a", "If exposed to sunlight, plants will not obtain energy.", "Q053", false);
         this.addAnswer(a157);
 
-        AnswerClass a158 = new AnswerClass("A053b", "Plants obtain energy if not exposed to sunlight.", "Q053");
+        AnswerClass a158 = new AnswerClass("A053b", "Plants obtain energy if not exposed to sunlight.", "Q053", false);
         this.addAnswer(a158);
 
-        AnswerClass a159 = new AnswerClass("A053c", "Plants won’t obtain energy if exposed to sunlight.", "Q053");
+        AnswerClass a159 = new AnswerClass("A053c", "Plants won’t obtain energy if exposed to sunlight.", "Q053", true);
         this.addAnswer(a159);
 
-        AnswerClass a160 = new AnswerClass("A054a", "Plants", "Q054");
+        AnswerClass a160 = new AnswerClass("A054a", "Plants", "Q054", false);
         this.addAnswer(a160);
 
-        AnswerClass a161 = new AnswerClass("A054b", "Otherwise", "Q054");
+        AnswerClass a161 = new AnswerClass("A054b", "Otherwise", "Q054", true);
         this.addAnswer(a161);
 
-        AnswerClass a162 = new AnswerClass("A054c", "will not survive", "Q054");
+        AnswerClass a162 = new AnswerClass("A054c", "will not survive", "Q054", false);
         this.addAnswer(a162);
 
-        AnswerClass a163 = new AnswerClass("A055a", "You won’t have them anymore", "Q055");
+        AnswerClass a163 = new AnswerClass("A055a", "You won’t have them anymore", "Q055", false);
         this.addAnswer(a163);
 
-        AnswerClass a164 = new AnswerClass("A055b", "Don’t water", "Q055");
+        AnswerClass a164 = new AnswerClass("A055b", "Don’t water", "Q055", false);
         this.addAnswer(a164);
 
-        AnswerClass a165 = new AnswerClass("A055c", "Don’t water the flowers for a month", "Q055");
+        AnswerClass a165 = new AnswerClass("A055c", "Don’t water the flowers for a month", "Q055", true);
         this.addAnswer(a165);
 
-        AnswerClass a166 = new AnswerClass("A056a", "loves plants", "Q056");
+        AnswerClass a166 = new AnswerClass("A056a", "loves plants", "Q056", false);
         this.addAnswer(a166);
 
-        AnswerClass a167 = new AnswerClass("A056b", "deserves a planthouse", "Q056");
+        AnswerClass a167 = new AnswerClass("A056b", "deserves a planthouse", "Q056", true);
         this.addAnswer(a167);
 
-        AnswerClass a168 = new AnswerClass("A056c", "anyone who loves plants", "Q056");
+        AnswerClass a168 = new AnswerClass("A056c", "anyone who loves plants", "Q056", false);
         this.addAnswer(a168);
 
-        AnswerClass a169 = new AnswerClass("A057a", "you will get a free green pot ", "Q057");
+        AnswerClass a169 = new AnswerClass("A057a", "you will get a free green pot ", "Q057", true);
         this.addAnswer(a169);
 
-        AnswerClass a170 = new AnswerClass("A057b", "green plant pot", "Q057");
+        AnswerClass a170 = new AnswerClass("A057b", "green plant pot", "Q057", false);
         this.addAnswer(a170);
 
-        AnswerClass a171 = new AnswerClass("A057c", "visit us", "Q057");
+        AnswerClass a171 = new AnswerClass("A057c", "visit us", "Q057", false);
         this.addAnswer(a171);
 
-        AnswerClass a172 = new AnswerClass("A058a", "House plants will grow if over-watered or under-watered.", "Q058");
+        AnswerClass a172 = new AnswerClass("A058a", "House plants will grow if over-watered or under-watered.", "Q058", true);
         this.addAnswer(a172);
 
-        AnswerClass a173 = new AnswerClass("A058b", "House plants won’t grow if not over-watered or under-watered.", "Q058");
+        AnswerClass a173 = new AnswerClass("A058b", "House plants won’t grow if not over-watered or under-watered.", "Q058", false);
         this.addAnswer(a173);
 
-        AnswerClass a174 = new AnswerClass("A058c", "House plants will grow if not over-watered or under-watered.", "Q058");
+        AnswerClass a174 = new AnswerClass("A058c", "House plants will grow if not over-watered or under-watered.", "Q058", false);
         this.addAnswer(a174);
         //two questions skipped
 
-        AnswerClass a181 = new AnswerClass("A061a", "Lighting strikes and you can not hear it.", "Q061");
+        AnswerClass a181 = new AnswerClass("A061a", "Lighting strikes and you can not hear it.", "Q061",true);
         this.addAnswer(a181);
 
-        AnswerClass a182 = new AnswerClass("A061b", "Lightning strikes or you can not hear it.", "Q061");
+        AnswerClass a182 = new AnswerClass("A061b", "Lightning strikes or you can not hear it.", "Q061", false);
         this.addAnswer(a182);
 
-        AnswerClass a183 = new AnswerClass("A061c", "Lightning does not strike and you can not hear it.", "Q061");
+        AnswerClass a183 = new AnswerClass("A061c", "Lightning does not strike and you can not hear it.", "Q061", false);
         this.addAnswer(a183);
 
-        AnswerClass a184 = new AnswerClass("A062a", "The electric field is not strong enough and a positive streamer develops from those points.", "Q062");
+        AnswerClass a184 = new AnswerClass("A062a", "The electric field is not strong enough and a positive streamer develops from those points.", "Q062", false);
         this.addAnswer(a184);
 
-        AnswerClass a185 = new AnswerClass("A062b", "The electric field is strong enough and a positive streamer can not develop from those points.", "Q062");
+        AnswerClass a185 = new AnswerClass("A062b", "The electric field is strong enough and a positive streamer can not develop from those points.", "Q062", true);
         this.addAnswer(a185);
 
-        AnswerClass a186 = new AnswerClass("A062c", " If the electric field is strong enough, a positive streamer can not develop from those points.", "Q062");
+        AnswerClass a186 = new AnswerClass("A062c", " If the electric field is strong enough, a positive streamer can not develop from those points.", "Q062", false);
         this.addAnswer(a186);
 
-        AnswerClass a187 = new AnswerClass("A063a", "A lightning hits an object on the ground and it is not called a strike.", "Q063");
+        AnswerClass a187 = new AnswerClass("A063a", "A lightning hits an object on the ground and it is not called a strike.", "Q063", true);
         this.addAnswer(a187);
 
-        AnswerClass a188 = new AnswerClass("A063b", "A lightning does not hit an object on the ground and it is not called a strike.", "Q063");
+        AnswerClass a188 = new AnswerClass("A063b", "A lightning does not hit an object on the ground and it is not called a strike.", "Q063", false);
         this.addAnswer(a188);
 
-        AnswerClass a189 = new AnswerClass("A063c", "A lightning hits an object on the ground and it is called a strike.", "Q063");
+        AnswerClass a189 = new AnswerClass("A063c", "A lightning hits an object on the ground and it is called a strike.", "Q063", false);
         this.addAnswer(a189);
 
-        AnswerClass a190 = new AnswerClass("A064a", "A lightning hits an object or the object will not burn.", "Q064");
+        AnswerClass a190 = new AnswerClass("A064a", "A lightning hits an object or the object will not burn.", "Q064", false);
         this.addAnswer(a190);
 
-        AnswerClass a191 = new AnswerClass("A064b", "A lightning hits an object and the object will burn.", "Q064");
+        AnswerClass a191 = new AnswerClass("A064b", "A lightning hits an object and the object will burn.", "Q064", false);
         this.addAnswer(a191);
 
-        AnswerClass a192 = new AnswerClass("A064c", "A lightning hits an object and the object will not burn.", "Q064");
+        AnswerClass a192 = new AnswerClass("A064c", "A lightning hits an object and the object will not burn.", "Q064", true);
         this.addAnswer(a192);
 
-        AnswerClass a193 = new AnswerClass("A065a", "The house is on fire and only the fire department can save lives.", "Q065");
+        AnswerClass a193 = new AnswerClass("A065a", "The house is on fire and only the fire department can save lives.", "Q065", false);
         this.addAnswer(a193);
 
-        AnswerClass a194 = new AnswerClass("A065b", "The house is not on fire and not only the fire department can save lives.", "Q065");
+        AnswerClass a194 = new AnswerClass("A065b", "The house is not on fire and not only the fire department can save lives.", "Q065", false);
         this.addAnswer(a194);
 
-        AnswerClass a195 = new AnswerClass("A065c", "The house is on fire and some lives can be saved by someone outside fire department.", "Q065");
+        AnswerClass a195 = new AnswerClass("A065c", "The house is on fire and some lives can be saved by someone outside fire department.", "Q065", true);
         this.addAnswer(a195);
 
-        AnswerClass a196 = new AnswerClass("A066a", "There is a storm and some lightnings are not pretty spectacular.", "Q066");
+        AnswerClass a196 = new AnswerClass("A066a", "There is a storm and some lightnings are not pretty spectacular.", "Q066", false);
         this.addAnswer(a196);
 
-        AnswerClass a197 = new AnswerClass("A066b", "There is a storm and all lightnings aren’t pretty spectacular.", "Q066");
+        AnswerClass a197 = new AnswerClass("A066b", "There is a storm and all lightnings aren’t pretty spectacular.", "Q066", false);
         this.addAnswer(a197);
 
-        AnswerClass a198 = new AnswerClass("A066c", "There is a storm and no lightnings are pretty spectacular.", "Q066");
+        AnswerClass a198 = new AnswerClass("A066c", "There is a storm and no lightnings are pretty spectacular.", "Q066", true);
         this.addAnswer(a198);
 
-        AnswerClass a199 = new AnswerClass("A067a", "Lightning strikes a person and it is not usually fatal.", "Q067");
+        AnswerClass a199 = new AnswerClass("A067a", "Lightning strikes a person and it is not usually fatal.", "Q067", true);
         this.addAnswer(a199);
 
-        AnswerClass a200 = new AnswerClass("A067b", "If lightning strikes a person, it is not usually fatal.", "Q067");
+        AnswerClass a200 = new AnswerClass("A067b", "If lightning strikes a person, it is not usually fatal.", "Q067", false);
         this.addAnswer(a200);
 
-        AnswerClass a201 = new AnswerClass("A067c", "If lightning strikes a person, it is not fatal.", "Q067");
+        AnswerClass a201 = new AnswerClass("A067c", "If lightning strikes a person, it is not fatal.", "Q067", false);
         this.addAnswer(a201);
 
-        AnswerClass a203 = new AnswerClass("A068a", "If somebody does not have a fear of thunder or lightning and they may have astraphobia.", "Q068");
+        AnswerClass a203 = new AnswerClass("A068a", "If somebody does not have a fear of thunder or lightning and they may have astraphobia.", "Q068", false);
         this.addAnswer(a203);
 
-        AnswerClass a204 = new AnswerClass("A068b", "Somebody has a fear of thunder or lightning and they may not have astraphobia.", "Q068");
+        AnswerClass a204 = new AnswerClass("A068b", "Somebody has a fear of thunder or lightning and they may not have astraphobia.", "Q068", true);
         this.addAnswer(a204);
 
-        AnswerClass a205 = new AnswerClass("A068c", "If somebody does have a fear of thunder and lightning, they may have astraphobia.", "Q068");
+        AnswerClass a205 = new AnswerClass("A068c", "If somebody does have a fear of thunder and lightning, they may have astraphobia.", "Q068", false);
         this.addAnswer(a205);
 
-        AnswerClass a206 = new AnswerClass("A069a", "You will learn more about lightning if you don’t study fulminology.", "Q069");
+        AnswerClass a206 = new AnswerClass("A069a", "You will learn more about lightning if you don’t study fulminology.", "Q069", false);
         this.addAnswer(a206);
 
-        AnswerClass a207 = new AnswerClass("A069b", "You will not learn more about lightning if you study fulminology.", "Q069");
+        AnswerClass a207 = new AnswerClass("A069b", "You will not learn more about lightning if you study fulminology.", "Q069", false);
         this.addAnswer(a207);
 
-        AnswerClass a208 = new AnswerClass("A069c", "You study fulminology and won’t learn more about lightning.", "Q069");
+        AnswerClass a208 = new AnswerClass("A069c", "You study fulminology and won’t learn more about lightning.", "Q069", true);
         this.addAnswer(a208);
 
-        AnswerClass a209 = new AnswerClass("A070a", "The distance is less than 20 kilometres and no one can hear the thunder.", "Q070");
+        AnswerClass a209 = new AnswerClass("A070a", "The distance is less than 20 kilometres and no one can hear the thunder.", "Q070", true);
         this.addAnswer(a209);
 
-        AnswerClass a210 = new AnswerClass("A070b", "The distance is less than 20 kilometres and some can’t hear the thunder.", "Q070");
+        AnswerClass a210 = new AnswerClass("A070b", "The distance is less than 20 kilometres and some can’t hear the thunder.", "Q070", false);
         this.addAnswer(a210);
 
-        AnswerClass a211 = new AnswerClass("A070c", "The distance is less than 20 kilometres and everyone can hear the thunder.", "Q070");
+        AnswerClass a211 = new AnswerClass("A070c", "The distance is less than 20 kilometres and everyone can hear the thunder.", "Q070", false);
         this.addAnswer(a211);
 
-        AnswerClass a212 = new AnswerClass("A071a", "If a volcano erupts then lava is expelled.", "Q071");
+        AnswerClass a212 = new AnswerClass("A071a", "If a volcano erupts then lava is expelled.", "Q071", false);
         this.addAnswer(a212);
 
-        AnswerClass a213 = new AnswerClass("A071b", "A volcano erupts and lava is not expelled.", "Q071");
+        AnswerClass a213 = new AnswerClass("A071b", "A volcano erupts and lava is not expelled.", "Q071", true);
         this.addAnswer(a213);
 
-        AnswerClass a214 = new AnswerClass("A071c", "If lava is expelled then a volcano erupts.", "Q071");
+        AnswerClass a214 = new AnswerClass("A071c", "If lava is expelled then a volcano erupts.", "Q071", false);
         this.addAnswer(a214);
 
-        AnswerClass a215 = new AnswerClass("A072a", "If lava stops moving then it solidifies.", "Q072");
+        AnswerClass a215 = new AnswerClass("A072a", "If lava stops moving then it solidifies.", "Q072", false);
         this.addAnswer(a215);
 
-        AnswerClass a216 = new AnswerClass("A072b", "Lava solidifies only when it stops moving.", "Q072");
+        AnswerClass a216 = new AnswerClass("A072b", "Lava solidifies only when it stops moving.", "Q072", false);
         this.addAnswer(a216);
 
-        AnswerClass a217 = new AnswerClass("A072c", "Lava starts moving when it solidifies.", "Q072");
+        AnswerClass a217 = new AnswerClass("A072c", "Lava starts moving when it solidifies.", "Q072", true);
         this.addAnswer(a217);
 
-        AnswerClass a218 = new AnswerClass("A073a", "If the speed of the lava is higher then the viscosity is lower.", "Q073");
+        AnswerClass a218 = new AnswerClass("A073a", "If the speed of the lava is higher then the viscosity is lower.", "Q073", true);
         this.addAnswer(a218);
 
-        AnswerClass a219 = new AnswerClass("A073b", "If the speed of the lava is higher then the viscosity is higher.", "Q073");
+        AnswerClass a219 = new AnswerClass("A073b", "If the speed of the lava is higher then the viscosity is higher.", "Q073", false);
         this.addAnswer(a219);
 
-        AnswerClass a220 = new AnswerClass("A073c", "If the speed of the lava is lower then the viscosity is lower.", "Q073");
+        AnswerClass a220 = new AnswerClass("A073c", "If the speed of the lava is lower then the viscosity is lower.", "Q073", false);
         this.addAnswer(a220);
 
-        AnswerClass a221 = new AnswerClass("A074a", "If exposed to the surface then magma becomes lava.", "Q074");
+        AnswerClass a221 = new AnswerClass("A074a", "If exposed to the surface then magma becomes lava.", "Q074", true);
         this.addAnswer(a221);
 
-        AnswerClass a222 = new AnswerClass("A074b", "If exposed to the surface then lava becomes magma.", "Q074");
+        AnswerClass a222 = new AnswerClass("A074b", "If exposed to the surface then lava becomes magma.", "Q074", false);
         this.addAnswer(a222);
 
-        AnswerClass a223 = new AnswerClass("A074c", "If not exposed to the surface then magma becomes lava.", "Q074");
+        AnswerClass a223 = new AnswerClass("A074c", "If not exposed to the surface then magma becomes lava.", "Q074", false);
         this.addAnswer(a223);
 
-        AnswerClass a224 = new AnswerClass("A075a", "Rocks melt if and only if they do not reach the melting point.", "Q075");
+        AnswerClass a224 = new AnswerClass("A075a", "Rocks melt if and only if they do not reach the melting point.", "Q075", true);
         this.addAnswer(a224);
 
-        AnswerClass a225 = new AnswerClass("A075b", "Rocks melt if they reach the melting point.", "Q075");
+        AnswerClass a225 = new AnswerClass("A075b", "Rocks melt if they reach the melting point.", "Q075", false);
         this.addAnswer(a225);
 
-        AnswerClass a226 = new AnswerClass("A075c", "When rocks rich the melting point, they melt.", "Q075");
+        AnswerClass a226 = new AnswerClass("A075c", "When rocks rich the melting point, they melt.", "Q075", false);
         this.addAnswer(a226);
         //5 questions skipped
 
-        AnswerClass a242 = new AnswerClass("A081a", "You will save the forest if and only if you stop the wildfire spreading.", "Q081");
+        AnswerClass a242 = new AnswerClass("A081a", "You will save the forest if and only if you stop the wildfire spreading.", "Q081", false);
         this.addAnswer(a242);
 
-        AnswerClass a243 = new AnswerClass("A081b", "Stopping the wildfire spreading you will save the forest.", "Q081");
+        AnswerClass a243 = new AnswerClass("A081b", "Stopping the wildfire spreading you will save the forest.", "Q081", false);
         this.addAnswer(a243);
 
-        AnswerClass a244 = new AnswerClass("A081c", "If you do not stop the wildfire spreading then you won’t save the forest.", "Q081");
+        AnswerClass a244 = new AnswerClass("A081c", "If you do not stop the wildfire spreading then you won’t save the forest.", "Q081", true);
         this.addAnswer(a244);
 
-        AnswerClass a245 = new AnswerClass("A082a", "If the village is not safe then predators exist.", "Q082");
+        AnswerClass a245 = new AnswerClass("A082a", "If the village is not safe then predators exist.", "Q082", true);
         this.addAnswer(a245);
 
-        AnswerClass a246 = new AnswerClass("A082b", "If the village was safe then predators did not existed.", "Q082");
+        AnswerClass a246 = new AnswerClass("A082b", "If the village was safe then predators did not existed.", "Q082", false);
         this.addAnswer(a246);
 
-        AnswerClass a247 = new AnswerClass("A082c", "If predators existed, the village is not safe.", "Q082");
+        AnswerClass a247 = new AnswerClass("A082c", "If predators existed, the village is not safe.", "Q082", false);
         this.addAnswer(a247);
 
-        AnswerClass a248 = new AnswerClass("A083a", "If the war was lost, then battle training is not crucial", "Q083");
+        AnswerClass a248 = new AnswerClass("A083a", "If the war was lost, then battle training is not crucial", "Q083", true);
         this.addAnswer(a248);
 
-        AnswerClass a249 = new AnswerClass("A083b", "If the battle training is crucial then they will win the war.", "Q083");
+        AnswerClass a249 = new AnswerClass("A083b", "If the battle training is crucial then they will win the war.", "Q083", false);
         this.addAnswer(a249);
 
-        AnswerClass a250 = new AnswerClass("A083c", "Battle training is not crucial in order to win the war.", "Q083");
+        AnswerClass a250 = new AnswerClass("A083c", "Battle training is not crucial in order to win the war.", "Q083", false);
         this.addAnswer(a250);
 
-        AnswerClass a251 = new AnswerClass("A084a", "The village is in danger if no flooding occurred.", "Q084");
+        AnswerClass a251 = new AnswerClass("A084a", "The village is in danger if no flooding occurred.", "Q084", false);
         this.addAnswer(a251);
 
-        AnswerClass a252 = new AnswerClass("A084b", "The village is in danger if some flooring occurred.", "Q084");
+        AnswerClass a252 = new AnswerClass("A084b", "The village is in danger if some flooring occurred.", "Q084", true);
         this.addAnswer(a252);
 
-        AnswerClass a253 = new AnswerClass("A084c", "The village is not in danger if no flooring occurred.", "Q084");
+        AnswerClass a253 = new AnswerClass("A084c", "The village is not in danger if no flooring occurred.", "Q084", false);
         this.addAnswer(a253);
 
-        AnswerClass a254 = new AnswerClass("A085a", "The world is not safe if all villages are under attack", "Q085");
+        AnswerClass a254 = new AnswerClass("A085a", "The world is not safe if all villages are under attack", "Q085", true);
         this.addAnswer(a254);
 
-        AnswerClass a255 = new AnswerClass("A085b", "The world is safe if no village is under attack.", "Q085");
+        AnswerClass a255 = new AnswerClass("A085b", "The world is safe if no village is under attack.", "Q085", false);
         this.addAnswer(a255);
 
-        AnswerClass a256 = new AnswerClass("A085c", "The world is not safe if some villages are under attack.", "Q085");
+        AnswerClass a256 = new AnswerClass("A085c", "The world is not safe if some villages are under attack.", "Q085", false);
         this.addAnswer(a256);
 
-        AnswerClass a257 = new AnswerClass("A086a", "If village people will lose something, then nobody helped them.", "Q086");
+        AnswerClass a257 = new AnswerClass("A086a", "If village people will lose something, then nobody helped them.", "Q086", false);
         this.addAnswer(a257);
 
-        AnswerClass a258 = new AnswerClass("A086b", "If village people will lose everything, then somebody did not helped them.", "Q086");
+        AnswerClass a258 = new AnswerClass("A086b", "If village people will lose everything, then somebody did not helped them.", "Q086", false);
         this.addAnswer(a258);
 
-        AnswerClass a259 = new AnswerClass("A086c", "If village people will lose everything, then nobody helped them.", "Q086");
+        AnswerClass a259 = new AnswerClass("A086c", "If village people will lose everything, then nobody helped them.", "Q086", true);
         this.addAnswer(a259);
         //4 questions skipped
 
-        AnswerClass a272 = new AnswerClass("A091a", "Heroes are giving random acts of kindness.", "Q091");
+        AnswerClass a272 = new AnswerClass("A091a", "Heroes are giving random acts of kindness.", "Q091", true);
         this.addAnswer(a272);
 
-        AnswerClass a273 = new AnswerClass("A091b", "People are heroes.", "Q091");
+        AnswerClass a273 = new AnswerClass("A091b", "People are heroes.", "Q091", false);
         this.addAnswer(a273);
 
-        AnswerClass a274 = new AnswerClass("A091c", "Random acts of kindness are given by some people.", "Q091");
+        AnswerClass a274 = new AnswerClass("A091c", "Random acts of kindness are given by some people.", "Q091", false);
         this.addAnswer(a274);
 
-        AnswerClass a275 = new AnswerClass("A092a", "Only heroes can save the world.", "Q092");
+        AnswerClass a275 = new AnswerClass("A092a", "Only heroes can save the world.", "Q092", false);
         this.addAnswer(a275);
 
-        AnswerClass a276 = new AnswerClass("A092b", "Everyone can save the world.", "Q092");
+        AnswerClass a276 = new AnswerClass("A092b", "Everyone can save the world.", "Q092", true);
         this.addAnswer(a276);
 
-        AnswerClass a277 = new AnswerClass("A092c", "Not everyone can save the world.", "Q092");
+        AnswerClass a277 = new AnswerClass("A092c", "Not everyone can save the world.", "Q092", false);
         this.addAnswer(a277);
 
-        AnswerClass a278 = new AnswerClass("A093a", "The world is threatened.", "Q093");
+        AnswerClass a278 = new AnswerClass("A093a", "The world is threatened.", "Q093", false);
         this.addAnswer(a278);
 
-        AnswerClass a279 = new AnswerClass("A093b", "Superheroes are reacting.", "Q093");
+        AnswerClass a279 = new AnswerClass("A093b", "Superheroes are reacting.", "Q093", false);
         this.addAnswer(a279);
 
-        AnswerClass a280 = new AnswerClass("A093c", "The world is not threatened.", "Q093");
+        AnswerClass a280 = new AnswerClass("A093c", "The world is not threatened.", "Q093", true);
         this.addAnswer(a280);
 
-        AnswerClass a281 = new AnswerClass("A094a", "Superheroes are not humans.", "Q094");
+        AnswerClass a281 = new AnswerClass("A094a", "Superheroes are not humans.", "Q094", false);
         this.addAnswer(a281);
 
-        AnswerClass a282 = new AnswerClass("A094b", "Humans don’t need to save the world.", "Q094");
+        AnswerClass a282 = new AnswerClass("A094b", "Humans don’t need to save the world.", "Q094", true);
         this.addAnswer(a282);
 
-        AnswerClass a283 = new AnswerClass("A094c", "Humans need to save the world.", "Q094");
+        AnswerClass a283 = new AnswerClass("A094c", "Humans need to save the world.", "Q094", false);
         this.addAnswer(a283);
-
-        //end =)
-
     }
 
 
@@ -1330,24 +1324,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         this.addLevel(l10);
     }
 
-
-    public boolean addUserActivity(UserActivityClass userActivity) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_ID, userActivity.getUser_id());
-        values.put(COLUMN_QUESTION_ID, userActivity.getQuestion_id());
-        values.put(COLUMN_ANSWER_ID, userActivity.getAnswer_id());
-        values.put(COLUMN_DATE, userActivity.getDate());
-        database.insert(TABLE_USERS_ACT, null, values);
-        return true;
-    }
-
     // Adding new question
     public void addQuestion(QuestionClass q) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_QUESTION_ID, q.getQuestion_id());
         values.put(COLUMN_QUESTION_TEXT, q.getQuestion_text());
         values.put(COLUMN_LEVEL_ID, q.getLevel_id());
-        values.put(COLUMN_RIGHT_ANSWER, q.getRight_answer());
         database.insert(TABLE_QUESTIONS, null, values);
     }
 
@@ -1357,6 +1339,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         values.put(COLUMN_ANSWER_ID, a.getAnswer_id());
         values.put(COLUMN_ANSWER_TEXT, a.getAnswer_text());
         values.put(COLUMN_QUESTION_ID, a.getQuestion_id());
+        values.put(String.valueOf(COLUMN_ANSWER_STATE), a.getAnswer_state());
         database.insert(TABLE_ANSWERS, null, values);
     }
 
@@ -1371,7 +1354,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS_ACT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
         onCreate(db);
     }
@@ -1392,6 +1374,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return true;
     }
 
+
     public long getUserID(UserClass user) {
         long userID = 0;
         Cursor cursor;
@@ -1410,21 +1393,23 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         values = new ContentValues();
         values.put(COLUMN_USER_ID, score.getUser_id());
         values.put(COLUMN_POINTS, score.getPoints());
-        values.put(COLUMN_WRONG_PERCENT, score.getWrong_percent());
+        values.put(COLUMN_WRONG_NUMBER, score.getWrong_number());
         values.put(COLUMN_LEVEL_ID, score.getLevel_id());
         database.insert(TABLE_SCOREBOARD, null, values);
 
         return true;
     }
 
+
+    //Ver se realmente precisa dessa tabela e os metodos abaixo
     public boolean addScoreboardScreen(ScoreboardScreen scoreboard) {
 
         ContentValues values;
         values = new ContentValues();
-        values.put(COLUMN_USERNAME_SCOREBOARD, scoreboard.getUserName());
-        values.put(COLUMN_LEVELNAME_SCOREBOARD, scoreboard.getLevelName());
-        values.put(COLUMN_POINTS_SCOREBOARD, scoreboard.getPoints());
-        values.put(COLUMN_WRONGPERC_SCOREBOARD, scoreboard.getWrongPerc());
+        values.put(COLUMN_USERNAME, scoreboard.getUserName());
+        values.put(COLUMN_LEVEL_NAME, scoreboard.getLevelName());
+        values.put(COLUMN_POINTS, scoreboard.getPoints());
+        values.put(COLUMN_WRONG_NUMBER, scoreboard.getWrongPerc());
         database.insert(TABLE_SCOREBOARD_SCREEN, null, values);
 
         return true;
@@ -1432,7 +1417,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     public ArrayList<ScoreboardScreen> getScoreboardTable() {
         ArrayList<ScoreboardScreen> scoreList = new ArrayList<ScoreboardScreen>();
-        String selectQuery = "SELECT * FROM " + TABLE_SCOREBOARD_SCREEN + " ORDER BY " + COLUMN_POINTS_SCOREBOARD + " DESC, " + COLUMN_WRONGPERC_SCOREBOARD + " ASC ;";
+        String selectQuery = "SELECT * FROM " + TABLE_SCOREBOARD_SCREEN + " ORDER BY " + COLUMN_POINTS + " DESC, " + COLUMN_WRONG_NUMBER + " ASC ;";
         database = this.getReadableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
@@ -1455,6 +1440,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         return true;
     }
+    //ate aqui
+
 
     public List<UserClass> getAllUsers() {
         List<UserClass> usersList = new ArrayList<>();
@@ -1487,7 +1474,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return levelName;
     }
 
-    public boolean lessonStart(String chosenLevelID, Long userID) {
+    /*public boolean lessonStart(String chosenLevelID, Long userID) {
         String selectQuery = "SELECT u." + COLUMN_ID + " FROM " + TABLE_USERS_ACT
                 + " AS u INNER JOIN " + TABLE_QUESTIONS + " AS q ON u."
                 + COLUMN_QUESTION_ID + " = q." + COLUMN_QUESTION_ID
@@ -1501,7 +1488,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             return true;
         }
         return false;
-    }
+    }*/
 ///fim
 
     public LevelClass getLevel(String levelID) {
@@ -1529,7 +1516,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             scoreobj.setUser_id(cursor.getInt(0));
             scoreobj.setPoints(cursor.getInt(1));
-            scoreobj.setWrong_percent(cursor.getInt(2));
+            scoreobj.setWrong_number(cursor.getInt(2));
             scoreobj.setLevel_id(cursor.getString(3));
         }
         return scoreobj;
@@ -1564,7 +1551,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 levelQuestion.setQuestion_id(cursor.getString(0));
                 levelQuestion.setQuestion_text(cursor.getString(1));
                 levelQuestion.setLevel_id(cursor.getString(2));
-                levelQuestion.setRight_answer(cursor.getString(3));
                 questionsList.add(levelQuestion);
             } while (cursor.moveToNext());
         }
@@ -1584,7 +1570,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             values.put(COLUMN_USER_ID, cursor.getInt(0));
             values.put(COLUMN_POINTS, score);
-            values.put(COLUMN_WRONG_PERCENT, cursor.getInt(2));
+            values.put(COLUMN_WRONG_NUMBER, cursor.getInt(2));
             values.put(COLUMN_LEVEL_ID, levelID);
         }
 
@@ -1604,7 +1590,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             values.put(COLUMN_USER_ID, cursor.getInt(0));
             values.put(COLUMN_POINTS, cursor.getInt(1));
-            values.put(COLUMN_WRONG_PERCENT, wScore);
+            values.put(COLUMN_WRONG_NUMBER, wScore);
             values.put(COLUMN_LEVEL_ID, cursor.getString(3));
         }
 

@@ -49,7 +49,7 @@ public class LevelsActivity extends Activity {
             public void onClick(View v) {
 
                 if (enoughPoints(1))
-                    setToast("1 of Wind");
+                    setToast();
                 else
                     setIntent("L02");
             }
@@ -60,7 +60,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(2)) {
-                    setToast("2 of Sound");
+                    setToast();
                 }else
                     setIntent("L03");
             }
@@ -71,7 +71,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(3))
-                    setToast("3 of Metal");
+                    setToast();
                 else
                     setIntent("L04");
             }
@@ -82,7 +82,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(4))
-                    setToast("4 of Sand");
+                    setToast();
                 else
                     setIntent("L05");
             }
@@ -93,7 +93,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(5))
-                    setToast("5 of Snow");
+                    setToast();
                 else
                     setIntent("L06");
             }
@@ -104,7 +104,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(6))
-                    setToast("6 of Plant");
+                    setToast();
                 else
                     setIntent("L07");
             }
@@ -115,7 +115,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(7))
-                    setToast("7 of Lightning");
+                    setToast();
                 else
                     setIntent("L08");
             }
@@ -126,7 +126,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(8))
-                    setToast("8 of Lava");
+                    setToast();
                 else
                     setIntent("L09");
             }
@@ -137,7 +137,7 @@ public class LevelsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (enoughPoints(9))
-                    setToast("9 of Dark City");
+                    setToast();
                 else
                     setIntent("L010");
             }
@@ -204,7 +204,7 @@ public class LevelsActivity extends Activity {
 
 
 
-      if(db.lessonStart(chosenLevelID, user.getUser_id())) {
+      if(enoughPoints(getLevelInt())) {
           intent = new Intent(LevelsActivity.this, QuizActivity.class);
       }else {
           intent = new Intent(LevelsActivity.this, LessonActivity.class);
@@ -217,7 +217,7 @@ public class LevelsActivity extends Activity {
 
 
     }
-    public void setToast(String levelBefore){
+    public void setToast(){
         Toast.makeText(LevelsActivity.this, "Sorry, but you don't have enough points to access this level!  Answer more question in the levels before!", Toast.LENGTH_SHORT).show();
     }
 
@@ -228,6 +228,23 @@ public class LevelsActivity extends Activity {
             return false;
         else
             return true;
+    }
+
+    public int getLevelInt(){
+        switch (userScore.getLevel_id()){
+            case "L01": return 1;
+            case "L02": return 2;
+            case "L03": return 3;
+            case "L04": return 4;
+            case "L05": return 5;
+            case "L06": return 6;
+            case "L07": return 7;
+            case "L08": return 8;
+            case "L09": return 9;
+            case "L010": return 10;
+            default:
+                return 0;
+        }
     }
 
     public void setlevelView(){

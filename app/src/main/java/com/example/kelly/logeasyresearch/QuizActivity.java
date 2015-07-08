@@ -43,7 +43,7 @@ public class QuizActivity extends Activity {
         selecLevel = (LevelClass)extras.getParcelable("chosenLevel");
         Score = (ScoreboardClass)extras.getParcelable("userScore");
         score = Score.getPoints();
-        wScore = Score.getWrong_percent();
+        wScore = Score.getWrong_number();
 
         txtPoints = (TextView)findViewById(R.id.txtPoints);
         txtQuest =(TextView)findViewById(R.id.txtQuestion);
@@ -64,7 +64,6 @@ public class QuizActivity extends Activity {
             public void onClick(View v) {
                 if ((rda.isChecked()) || (rdb.isChecked()) || (rdc.isChecked())) {
                     userAnswer = (RadioButton) findViewById(grp.getCheckedRadioButtonId());
-                    createUserActivity();
                     if (userAnswer == rightAnswer) {
                         Toast.makeText(QuizActivity.this, "Right Answer!", Toast.LENGTH_SHORT).show();
                         if (selecLevel.getLevel_id().equals(Score.getLevel_id())) {
@@ -162,10 +161,10 @@ public class QuizActivity extends Activity {
         rdb.setText(aList.get(1).getAnswer_text());
         rdc.setText(aList.get(2).getAnswer_text());
 
-        if(qList.get(0).getRight_answer().equals(aList.get(0).getAnswer_id())) {
+        if(aList.get(0).getAnswer_state()) {
             rightAnswer = rda;
         }else {
-            if (qList.get(0).getRight_answer().equals(aList.get(1).getAnswer_id())) {
+            if (aList.get(1).getAnswer_state()) {
                 rightAnswer = rdb;
             } else {
                 rightAnswer = rdc;
@@ -173,7 +172,7 @@ public class QuizActivity extends Activity {
         }
 
         score = Score.getPoints();
-        wScore = Score.getWrong_percent();
+        wScore = Score.getWrong_number();
     }
 
     private void setScoreBoard(){
@@ -303,24 +302,4 @@ public class QuizActivity extends Activity {
                 break;
         }
     }
-
-    private void createUserActivity(){
-        UserActivityClass userActivity = new UserActivityClass();
-        String aID = "";
-
-        for(int i = 0; i < aList.size();i++){
-            if(userAnswer.getText() == aList.get(i).getAnswer_text()){
-                aID = aList.get(i).getAnswer_id();
-                break;
-            }
-        }
-
-        userActivity.setUser_id(User.getUser_id());
-        userActivity.setQuestion_id(qList.get(0).getQuestion_id());
-        userActivity.setAnswer_id(aID);
-        db.addUserActivity(userActivity);
-        qList.remove(0);
-
-    }
-
 }

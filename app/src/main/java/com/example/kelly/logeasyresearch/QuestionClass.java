@@ -7,19 +7,16 @@ public class QuestionClass {
 
     private String question_id;
     private String question_text;
-    private String right_answer;
     private String level_id;
 
     public QuestionClass(){
         question_id = "";
         question_text="";
-        right_answer="";
         level_id="";
     }
 
-    public QuestionClass(String q_id, String q_text, String l_id, String r_answer){
+    public QuestionClass(String q_id, String q_text, String l_id){
         question_text=q_text;
-        right_answer=r_answer;
         level_id=l_id;
         question_id=q_id;
     }
@@ -38,14 +35,6 @@ public class QuestionClass {
 
     public void setQuestion_text(String question_text) {
         this.question_text = question_text;
-    }
-
-    public void setRight_answer(String right_answer){
-        this.right_answer = right_answer;
-    }
-
-    public String getRight_answer(){
-        return right_answer;
     }
 
     public void setLevel_id(String level_id){

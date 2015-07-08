@@ -59,7 +59,7 @@ public class Scoreboard_Activity extends Activity {
            levelName = dbHelper.getUserLevel(userId);
            scoreBoard = dbHelper.getScore(userId);
            points = scoreBoard.getPoints();
-           wrongNum = scoreBoard.getWrong_percent();
+           wrongNum = scoreBoard.getWrong_number();
            totalAnswers = wrongNum + (points/10);
            wrongPerc = 0.0;
            if(totalAnswers != 0){
