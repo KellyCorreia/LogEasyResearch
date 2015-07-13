@@ -23,27 +23,27 @@ public class ScoreboardClass implements Parcelable{
         readFromParcel(in);
     }
 
-    public ScoreboardClass(long user, int no_of_points, int percent_wrong, String level){
-        user_id=user;
-        points=no_of_points;
-        wrong_number=percent_wrong;
+    public ScoreboardClass(long user, int no_of_points, int wro_number, String level){
+        user_id= user;
+        points= no_of_points;
+        wrong_number= wro_number;
         level_id=level;
     }
 
     public long getUser_id() {
-        return user_id;
+        return this.user_id;
     }
 
     public int getPoints() {
-        return points;
+        return this.points;
     }
 
     public int getWrong_number() {
-        return wrong_number;
+        return this.wrong_number;
     }
 
     public String getLevel_id() {
-        return level_id;
+        return this.level_id;
     }
 
     public void setUser_id(long user_id) {
@@ -54,8 +54,8 @@ public class ScoreboardClass implements Parcelable{
         this.points = points;
     }
 
-    public void setWrong_number(int wrong_number) {
-        this.wrong_number = wrong_number;
+    public void setWrong_number(int wro_number) {
+        this.wrong_number = wro_number;
     }
 
     public void setLevel_id(String level_id) {

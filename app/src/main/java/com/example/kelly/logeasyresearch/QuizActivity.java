@@ -161,10 +161,10 @@ public class QuizActivity extends Activity {
         rdb.setText(aList.get(1).getAnswer_text());
         rdc.setText(aList.get(2).getAnswer_text());
 
-        if(aList.get(0).getAnswer_state()) {
+        if(aList.get(0).getAnswer_state() == "1") {
             rightAnswer = rda;
         }else {
-            if (aList.get(1).getAnswer_state()) {
+            if (aList.get(1).getAnswer_state() == "1") {
                 rightAnswer = rdb;
             } else {
                 rightAnswer = rdc;

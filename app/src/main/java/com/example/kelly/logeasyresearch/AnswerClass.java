@@ -8,16 +8,16 @@ public class AnswerClass {
     private String answer_id;
     private String question_id;
     private String answer_text;
-    private Boolean answer_state;
+    private String answer_state;
 
     public AnswerClass() {
         answer_id = "";
         question_id = "";
         answer_text = "";
-        answer_state = false;
+        answer_state = "0";
     }
 
-    public AnswerClass(String a_id, String a_text, String q_id, Boolean a_state) {
+    public AnswerClass(String a_id, String a_text, String q_id, String a_state) {
         answer_id=a_id;
         question_id=q_id;
         answer_text=a_text;
@@ -54,11 +54,11 @@ public class AnswerClass {
         return answer_text;
     }
 
-    public Boolean getAnswer_state() {
+    public String getAnswer_state() {
         return answer_state;
     }
 
-    public void setAnswer_state(Boolean answer_state) {
+    public void setAnswer_state(String answer_state) {
         this.answer_state = answer_state;
     }
 }
