@@ -1,26 +1,15 @@
 package com.example.kelly.logeasyresearch;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class LevelsActivity extends Activity {
 
-    private UserClass user;
-    private ScoreboardClass userScore;
-    private LevelClass chosenLevel;
-    private int pointsU;
-    MySQLiteHelper db;
-    Intent intent = new Intent();
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 
+public class LevelsActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,153 +18,25 @@ public class LevelsActivity extends Activity {
 
         //Getting the object user from the previous screen
         Bundle extras = getIntent().getExtras();
-        user = extras.getParcelable("chosenUser");
+        UserClass user = extras.getParcelable("chosenUser");
 
+        if (savedInstanceState == null) {
 
-        setlevelView();
-        Button btnLevels;
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            SlidingLevelsFragment fragment = new SlidingLevelsFragment();
 
-        btnLevels = (Button)findViewById(R.id.imbLevel1);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setIntent("L01");
-            }
-        });
+            Bundle args = new Bundle();
+            args.putParcelable("chosenUser", user);
+            fragment.setArguments(args);
 
-        btnLevels = (Button)findViewById(R.id.imbLevel2);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            // aqui ele seta o que vai ser substituido dentro do layout
+            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.commit();
 
-                if (enoughPoints(1))
-                    setToast();
-                else
-                    setIntent("L02");
-            }
-        });
+            Toast.makeText(LevelsActivity.this, "Welcome, " + user.getUsername() + " !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LevelsActivity.this, "Choose a Level to start the challenge!", Toast.LENGTH_SHORT).show();
+        }
 
-        btnLevels = (Button)findViewById(R.id.imbLevel3);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(2)) {
-                    setToast();
-                }else
-                    setIntent("L03");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel4);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(3))
-                    setToast();
-                else
-                    setIntent("L04");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel5);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(4))
-                    setToast();
-                else
-                    setIntent("L05");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel6);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(5))
-                    setToast();
-                else
-                    setIntent("L06");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel7);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(6))
-                    setToast();
-                else
-                    setIntent("L07");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel8);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(7))
-                    setToast();
-                else
-                    setIntent("L08");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel9);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(8))
-                    setToast();
-                else
-                    setIntent("L09");
-            }
-        });
-
-        btnLevels = (Button)findViewById(R.id.imbLevel10);
-        btnLevels.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (enoughPoints(9))
-                    setToast();
-                else
-                    setIntent("L010");
-            }
-        });
-
-        Button btnScore = (Button) findViewById(R.id.btnScoreboard);
-        btnScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelsActivity.this, Scoreboard_Activity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(LevelsActivity.this).create();
-                alertDialog.setTitle("Log Out");
-                alertDialog.setMessage("Proceed with Log Out?");
-                alertDialog.setButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                alertDialog.setButton2("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                alertDialog.show();
-            }
-        });
-
-
-        //welcome to the user
-        Toast.makeText(LevelsActivity.this, "Welcome, " + user.getUsername()+" !", Toast.LENGTH_SHORT).show();
-        Toast.makeText(LevelsActivity.this, "Choose a Level to start the challenge!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -199,54 +60,8 @@ public class LevelsActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setIntent(String chosenLevelID){
-        chosenLevel = db.getLevel(chosenLevelID);
 
-
-
-      if(enoughPoints(getLevelInt())) {
-          intent = new Intent(LevelsActivity.this, QuizActivity.class);
-      }else {
-          intent = new Intent(LevelsActivity.this, LessonActivity.class);
-      }
-        intent.putExtra("chosenUser", user);
-        intent.putExtra("chosenLevel", chosenLevel);
-        intent.putExtra("userScore", userScore);
-        startActivity(intent);
-
-
-
-    }
-    public void setToast(){
-        Toast.makeText(LevelsActivity.this, "Sorry, but you don't have enough points to access this level!  Answer more question in the levels before!", Toast.LENGTH_SHORT).show();
-    }
-
-    public boolean enoughPoints(int level){
-        int valor = (level*50);
-
-        if (pointsU>=valor)
-            return false;
-        else
-            return true;
-    }
-
-    public int getLevelInt(){
-        switch (userScore.getLevel_id()){
-            case "L01": return 1;
-            case "L02": return 2;
-            case "L03": return 3;
-            case "L04": return 4;
-            case "L05": return 5;
-            case "L06": return 6;
-            case "L07": return 7;
-            case "L08": return 8;
-            case "L09": return 9;
-            case "L010": return 10;
-            default:
-                return 0;
-        }
-    }
-
+/*
     public void setlevelView(){
 
         db = new MySQLiteHelper(this);
@@ -278,4 +93,5 @@ public class LevelsActivity extends Activity {
         super.onRestart();
         setlevelView();
     }
+    */
 }
