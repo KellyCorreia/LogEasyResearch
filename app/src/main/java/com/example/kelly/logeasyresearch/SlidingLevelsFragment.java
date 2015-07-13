@@ -94,8 +94,11 @@ public class SlidingLevelsFragment extends Fragment {
     }
 
     public boolean enoughPoints(int level) {
-        int valor = (level * 50);
-        return !(pointsU >= valor);
+        int valor = level * 50;
+        if(pointsU > valor){
+            return true;
+        }else
+            return false;
     }
 
     class SamplePagerAdapter extends PagerAdapter {

@@ -90,7 +90,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "database.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 2;
     //OR:     private SQLiteDatabase dbase;
     public SQLiteDatabase database = this.getWritableDatabase();
 
@@ -104,7 +104,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         database = db;
         db.execSQL(QUESTIONS_DATABASE_CREATE);
         db.execSQL(USERS_DATABASE_CREATE);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ANSWERS);
         db.execSQL(ANSWERS_DATABASE_CREATE);
         db.execSQL(SCOREBOARD_DATABASE_CREATE);
         db.execSQL(LEVEL_DATABASE_CREATE);

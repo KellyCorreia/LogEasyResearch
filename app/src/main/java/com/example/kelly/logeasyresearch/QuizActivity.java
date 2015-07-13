@@ -170,6 +170,8 @@ public class QuizActivity extends Activity {
                 rightAnswer = rdc;
             }
         }
+        qList.remove(0);
+
 
         score = Score.getPoints();
         wScore = Score.getWrong_number();
