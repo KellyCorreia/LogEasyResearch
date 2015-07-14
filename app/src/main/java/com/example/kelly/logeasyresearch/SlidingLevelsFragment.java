@@ -1,6 +1,5 @@
 package com.example.kelly.logeasyresearch;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,18 +14,18 @@ import android.widget.Toast;
 
 public class SlidingLevelsFragment extends Fragment {
 
-    MySQLiteHelper db;
-    Intent intent = new Intent();
     private ViewPager mViewPager;
     private ScoreboardClass userScore;
     private LevelClass chosenLevel;
     private int pointsU;
     private UserClass user;
+    MySQLiteHelper db;
+    Intent intent = new Intent();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        user = getArguments().getParcelable("chosenUser");
+        user = (UserClass) getArguments().getParcelable("chosenUser");
 
         db = new MySQLiteHelper(getActivity());
 
@@ -43,62 +42,6 @@ public class SlidingLevelsFragment extends Fragment {
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new SamplePagerAdapter());
 
-    }
-
-    public void setIntent(String chosenLevelID) {
-        chosenLevel = db.getLevel(chosenLevelID);
-
-
-        if (enoughPoints(getLevelInt())) {
-            intent = new Intent(getActivity(), QuizActivity.class);
-        } else {
-            intent = new Intent(getActivity(), LessonActivity.class);
-        }
-        intent.putExtra("chosenUser", user);
-        intent.putExtra("chosenLevel", chosenLevel);
-        intent.putExtra("userScore", userScore);
-        startActivity(intent);
-
-
-    }
-
-    public int getLevelInt() {
-        switch (userScore.getLevel_id()) {
-            case "L01":
-                return 1;
-            case "L02":
-                return 2;
-            case "L03":
-                return 3;
-            case "L04":
-                return 4;
-            case "L05":
-                return 5;
-            case "L06":
-                return 6;
-            case "L07":
-                return 7;
-            case "L08":
-                return 8;
-            case "L09":
-                return 9;
-            case "L010":
-                return 10;
-            default:
-                return 0;
-        }
-    }
-
-    public void setToast() {
-        Toast.makeText(getActivity(), "Sorry, but you don't have enough points to access this level!  Answer more question in the levels before!", Toast.LENGTH_SHORT).show();
-    }
-
-    public boolean enoughPoints(int level) {
-        int valor = level * 50;
-        if(pointsU > valor){
-            return true;
-        }else
-            return false;
     }
 
     class SamplePagerAdapter extends PagerAdapter {
@@ -138,12 +81,13 @@ public class SlidingLevelsFragment extends Fragment {
                     setIntent("L01");
                 }
             });
+
             btn2 = (Button) view.findViewById(R.id.imbLevel2);
             btn2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if (enoughPoints(1))
+                    if (pointsU < (1*50))
                         setToast();
                     else
                         setIntent("L02");
@@ -153,9 +97,9 @@ public class SlidingLevelsFragment extends Fragment {
             btn3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(2)) {
+                    if (pointsU < (2*50))
                         setToast();
-                    } else
+                    else
                         setIntent("L03");
                 }
             });
@@ -163,7 +107,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(3))
+                    if (pointsU < (3*50))
                         setToast();
                     else
                         setIntent("L04");
@@ -174,7 +118,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn5.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(4))
+                    if (pointsU < (4*50))
                         setToast();
                     else
                         setIntent("L05");
@@ -185,7 +129,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn6.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(5))
+                    if (pointsU < (5*50))
                         setToast();
                     else
                         setIntent("L06");
@@ -196,7 +140,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn7.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(6))
+                    if (pointsU < (6*50))
                         setToast();
                     else
                         setIntent("L07");
@@ -207,7 +151,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn8.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(7))
+                    if (pointsU < (7*50))
                         setToast();
                     else
                         setIntent("L08");
@@ -218,7 +162,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn9.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(8))
+                    if (pointsU < (8*50))
                         setToast();
                     else
                         setIntent("L09");
@@ -229,7 +173,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn10.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (enoughPoints(9))
+                    if (pointsU < (9*50))
                         setToast();
                     else
                         setIntent("L010");
@@ -273,65 +217,49 @@ public class SlidingLevelsFragment extends Fragment {
         }
 
     }
-}
-/*
+    public void setIntent(String chosenLevelID) {
+        chosenLevel = db.getLevel(chosenLevelID);
 
-          Button btnScore = (Button) findViewById(R.id.btnScoreboard);
-        btnScore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LevelsActivity.this, Scoreboard_Activity.class);
-                startActivity(intent);
-            }
-        });
+        if (pointsU>(getLevelInt()*50)) {
+            intent = new Intent(getActivity(), QuizActivity.class);
+        } else {
+            intent = new Intent(getActivity(), LessonActivity.class);
+        }
 
-        Button btnLogout = (Button) findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                AlertDialog alertDialog = new AlertDialog.Builder(LevelsActivity.this).create();
-                alertDialog.setTitle("Log Out");
-                alertDialog.setMessage("Proceed with Log Out?");
-                alertDialog.setButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                    }
-                });
-                alertDialog.setButton2("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                alertDialog.show();
-            }
-        });
-
-    public void setlevelView(){
-
-        db = new MySQLiteHelper(this);
-
-        TextView pointsView;
-        TextView levelView;
-        TextView txtViewUsername;
-
-        String pointsUser;
-        String levelName;
-
-        //Getting the scoreboard
-        userScore = db.getScore(user.getUser_id());
-        pointsU = userScore.getPoints();
-        levelName =  db.getUserLevel(user.getUser_id());
-
-        txtViewUsername = (TextView) findViewById(R.id.txtvUsername);
-        txtViewUsername.setText(user.getUsername());
-
-        levelView = (TextView) findViewById(R.id.txtvLevel);
-        levelView.setText(levelName);
-
-        pointsUser = Integer.toString(pointsU);
-        pointsView = (TextView) findViewById(R.id.txtvPoints);
-        pointsView.setText(pointsUser+" Points");
+        intent.putExtra("chosenUser", user);
+        intent.putExtra("chosenLevel", chosenLevel);
+        intent.putExtra("userScore", userScore);
+        startActivity(intent);
     }
 
-}
+    public int getLevelInt() {
+        switch (userScore.getLevel_id()) {
+            case "L01":
+                return 1;
+            case "L02":
+                return 2;
+            case "L03":
+                return 3;
+            case "L04":
+                return 4;
+            case "L05":
+                return 5;
+            case "L06":
+                return 6;
+            case "L07":
+                return 7;
+            case "L08":
+                return 8;
+            case "L09":
+                return 9;
+            case "L010":
+                return 10;
+            default:
+                return 0;
+        }
+    }
 
-*/
+    public void setToast() {
+        Toast.makeText(getActivity(), "Sorry, but you don't have enough points to access this level!  Answer more question in the levels before!", Toast.LENGTH_SHORT).show();
+    }
+}

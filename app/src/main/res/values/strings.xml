@@ -24,4 +24,15 @@
     <string name="title_activity_info">InfoActivity</string>
     <string name="info_credits">This application is result of a project developed in the module Project of the 2nd Year of Bs Honours in Computing (National College of Ireland). The objective of the program is become the learning of proporsional logic ease for the users by using elemets of gamification. The responsable developers are: Correia, Kelly - 14101297; Cozma, Ioana- 13118897; Portela, Elaine - 14101203; Torres, Driele - 14101319. The imagens here provided were based in free vectors available in Freepik: http://www.freepik.com. The proposicional concepts here provided were based in: http://www.criticalthinkeracademy.com/.
     The font  used in some of the images is a free font: Purisa( Thai handwriting outline font.Copyright (&#169;) 2003, 2004 Poonlap Veerathanabutr) </string>
+
+    <string-array name="options_array">
+        <item>Levels Way</item>
+        <item>User Details</item>
+        <item>Scoreboard</item>
+        <item>Quit</item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_logout">Log out</string>
+
 </resources>
