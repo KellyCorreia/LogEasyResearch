@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff7ebcf"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/topUserDetails"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="10dp"
+        android:paddingTop="50dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/topAvatarDetails"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Your avatar is: "
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/avatar1"
+            android:id="@+id/circleAvatar"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:id="@+id/topAvatarDescription"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/levelName" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/levelDiscrip"
+                android:text="Aqui vou  procurar"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBarU"
+        android:layout_below="@+id/topUserDetails" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomUserDetails"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/progressBarU">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/usename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ff5c3022"
+                android:text="Username:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/usernameU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff5c3022"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="User"
+                android:textSize="14sp"
+                android:textStyle="normal"
+
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ff5c3022"
+                android:text="Email:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/emailU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff5c3022"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="123@gmail.com"
+                android:textSize="14sp"
+                android:textStyle="normal"
+
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ff5c3022"
+                android:text="Points:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/pointsU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff5c3022"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="34"
+                android:textSize="14sp"
+                android:textStyle="normal"
+
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ff5c3022"
+                android:text="Level:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/levelU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff5c3022"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="1"
+                android:textSize="14sp"
+                android:textStyle="normal"
+
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/answeredQuestions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ff5c3022"
+                android:text="Answered Questions:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/answeredQuestionsU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff5c3022"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="34"
+                android:textSize="14sp"
+                android:textStyle="normal"
+
+                />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/answeredWrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:textColor="#ff5c3022"
+                android:text="Answered Wrong:"
+                android:textSize="14sp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/answeredWrongU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ff5c3022"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                android:text="34"
+                android:textSize="14sp"
+                android:textStyle="normal"
+
+                />
+        </TableRow>
+
+    </TableLayout>
+
+
+</RelativeLayout>

@@ -77,9 +77,12 @@ public class LevelsActivity extends AppCompatActivity implements LevelsAdapter.O
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(new LevelsAdapter(mOptionsTitles, ICONS, NAME, EMAIL, PROFILE, this));
         // enable ActionBar app icon to behave as action to toggle nav drawer
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
+        try{
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }catch(NullPointerException ere){
+            Toast.makeText(this, "NO ACTIONBAR!", Toast.LENGTH_SHORT).show();
+        }
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
@@ -169,16 +172,16 @@ public class LevelsActivity extends AppCompatActivity implements LevelsAdapter.O
                 transaction.addToBackStack(null);
                 transaction.commit();
                 break;
-            /*case 1:
-                SlidingLevelsFragment fragment = new SlidingLevelsFragment();
+            case 1:
+                UserDetailsFragment ufragment = new UserDetailsFragment();
                 args.putParcelable("chosenUser", user);
-                fragment.setArguments(args);
+                ufragment.setArguments(args);
                 // aqui ele seta o que vai ser substituido dentro do layout
-                transaction.replace(R.id.sample_content_fragment, fragment);
+                transaction.replace(R.id.sample_content_fragment, ufragment);
                 transaction.commit();
-                break;*/
+                break;
             case 2:
-                Scoreboard_Activity fragment1 = new Scoreboard_Activity();
+                ScoreboardFragment fragment1 = new ScoreboardFragment();
                 // aqui ele seta o que vai ser substituido dentro do layout
                 transaction.replace(R.id.sample_content_fragment, fragment1);
                 transaction.commit();
@@ -187,6 +190,7 @@ public class LevelsActivity extends AppCompatActivity implements LevelsAdapter.O
                 finishApplication();
                 break;
         }
+
         setTitle(mOptionsTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
@@ -194,7 +198,11 @@ public class LevelsActivity extends AppCompatActivity implements LevelsAdapter.O
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
+        try{
+            getSupportActionBar().setTitle(mTitle);
+        }catch(NullPointerException ere){
+            Toast.makeText(this, "NO ACTIONBAR!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**

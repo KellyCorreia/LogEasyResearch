@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scoreboard_Activity extends Fragment {
+public class ScoreboardFragment extends Fragment {
     private ScoreboardClass scoreBoard;
     private UserClass user;
     private List<UserClass> userList;
