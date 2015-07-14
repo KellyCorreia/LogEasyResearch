@@ -1,30 +1,36 @@
 package com.example.kelly.logeasyresearch;
 
-/**
- * Created by mikasa on 14/07/15.
- */
-import android.content.Intent;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Locale;
 
-
+/**
+ * Created by mikasa on 14/07/15.
+ */
 public class UserDetailsFragment extends Fragment {
 
     private ScoreboardClass userScore;
     private UserClass user;
-    MySQLiteHelper db;
+    private MySQLiteHelper db;
     private LevelClass userLevel;
 
+    private ProgressBar mProgress;
+
+    int circleAvatarV,pointsUV,answeredWrongUV;
+    String levelNameV,levelDiscripV,usernameUV,emailUV, levelUV;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_userdetails, container, false);
         user = getArguments().getParcelable("chosenUser");
 
@@ -42,14 +48,32 @@ public class UserDetailsFragment extends Fragment {
         TextView levelU = (TextView)view.findViewById(R.id.levelU);
         TextView answeredWrongU = (TextView)view.findViewById(R.id.answeredWrongU);
 
-        circleAvatar.setImageResource(getResources().getIdentifier(user.getAvatar().toLowerCase(Locale.getDefault()),"drawable",getActivity().getPackageName()));
-        levelName.setText(userLevel.getLevelname());
-        levelDiscrip.setText(userLevel.getLevelname());
-        usernameU.setText(user.getUsername());
-        emailU.setText(user.getEmail());
-        pointsU.setText(userScore.getPoints());
-        levelU.setText(userScore.getLevel_id());
-        answeredWrongU.setText(userScore.getWrong_number());
+        circleAvatarV = getResources().getIdentifier(user.getAvatar().toLowerCase(Locale.getDefault()),"drawable",getActivity().getPackageName());
+        circleAvatar.setImageResource(circleAvatarV);
+
+        levelNameV =userLevel.getLevelname();
+        levelName.setText(levelNameV);
+
+        levelDiscripV = userLevel.getLevelname();
+        levelDiscrip.setText(levelDiscripV);
+
+        usernameUV = user.getUsername();
+        usernameU.setText(usernameUV);
+
+        emailUV= user.getEmail();
+        emailU.setText(emailUV);
+
+        pointsUV = userScore.getPoints();
+        pointsU.setText(((Integer)pointsUV).toString());
+
+        levelUV = userScore.getLevel_id();
+        levelU.setText(levelUV);
+
+        answeredWrongUV = userScore.getWrong_number();
+        answeredWrongU.setText(((Integer)answeredWrongUV).toString());
+
+        mProgress = (ProgressBar) view.findViewById(R.id.progressBarU);
+        mProgress.setProgress(pointsUV);
 
         return view;
     }

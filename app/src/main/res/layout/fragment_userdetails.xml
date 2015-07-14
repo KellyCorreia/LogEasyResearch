@@ -12,9 +12,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/topUserDetails"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="50dp">
+        android:background="#fffffbe9"
+        android:padding="30dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -43,7 +42,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="15dp"
             android:id="@+id/topAvatarDescription"
             android:layout_gravity="center_vertical">
 
@@ -68,17 +67,26 @@
 
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        style="?android:attr/progressBarStyleHorizontal"
+        android:max="500"
+        android:progress="200"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
         android:id="@+id/progressBarU"
-        android:layout_below="@+id/topUserDetails" />
+        android:layout_below="@+id/topUserDetails"
+        android:progressTint="@color/ColorPrimaryDark"
+        android:progressBackgroundTint="@color/ColorPrimary"
+        android:progressDrawable="@android:drawable/progress_horizontal"
+        />
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bottomUserDetails"
         android:layout_marginLeft="30dp"
-        android:layout_below="@+id/progressBarU">
+        android:layout_below="@+id/progressBarU"
+        android:layout_marginTop="30dp">
 
         <TableRow
             android:layout_width="match_parent"
