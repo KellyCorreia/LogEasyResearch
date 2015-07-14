@@ -77,7 +77,7 @@ public class SlidingLevelsFragment extends Fragment {
             btn1 = (Button) view.findViewById(R.id.imbLevel1);
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v){
                     setIntent("L01");
                 }
             });
@@ -220,7 +220,7 @@ public class SlidingLevelsFragment extends Fragment {
     public void setIntent(String chosenLevelID) {
         chosenLevel = db.getLevel(chosenLevelID);
 
-        if (pointsU>(getLevelInt()*50)) {
+        if (pointsU>=(((getLevelInt()-1)*50)+10)){
             intent = new Intent(getActivity(), QuizActivity.class);
         } else {
             intent = new Intent(getActivity(), LessonActivity.class);
@@ -232,8 +232,8 @@ public class SlidingLevelsFragment extends Fragment {
         startActivity(intent);
     }
 
-    public int getLevelInt() {
-        switch (userScore.getLevel_id()) {
+    public int getLevelInt(){
+        switch ( userScore.getLevel_id() ){
             case "L01":
                 return 1;
             case "L02":
