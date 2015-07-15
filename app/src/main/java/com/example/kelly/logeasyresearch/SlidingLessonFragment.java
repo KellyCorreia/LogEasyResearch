@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import android.text.Html;
@@ -47,7 +48,7 @@ public class SlidingLessonFragment extends Fragment {
         chosenLevel = (LevelClass) getArguments().getParcelable("chosenLevel");
         db = new MySQLiteHelper(getActivity());
         //lesson = new SpannedString(Html.fromHtml(chosenLevel.getLesson()));
-        lessonS = (Html.fromHtml(chosenLevel.getLesson())).toString();
+        lessonS = chosenLevel.getLesson();
         splitLesson();
         count = lessonParts.size();
         return inflater.inflate(R.layout.fragment_base, container, false);
@@ -151,7 +152,7 @@ public class SlidingLessonFragment extends Fragment {
                     break;
             }
            // txtLesson.setText(Html.fromHtml(chosenLevel.getLesson()));
-            txtLesson.setText(lessonParts.get(position));
+            txtLesson.setText(Html.fromHtml(lessonParts.get(position)));
             return view;
         }
 
@@ -163,20 +164,11 @@ public class SlidingLessonFragment extends Fragment {
     }
 
     private void splitLesson() {
-        TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
-
+        TextUtils.StringSplitter splitter = new TextUtils.SimpleStringSplitter('|');
         splitter.setString(lessonS);
-        int i = 0;
-        String subS = " ";
-        for (String s : splitter) {
-            if (i < 20) {
-                TextUtils.concat(subS, " ", s);
-                i++;
-            } else {
-                lessonParts.add(subS);
-                subS = " ";
-                i = 0;
-            }
+        Iterator<String> i = splitter.iterator();
+        while(i.hasNext()) {
+            lessonParts.add(i.next());
         }
     }
 }
