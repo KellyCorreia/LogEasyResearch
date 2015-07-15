@@ -1214,26 +1214,26 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     private void addLevels() {
 
-        LevelClass l1 = new LevelClass("L01", "Level 1 - Wind", "<p><b>Hello!</b> This is " +
+        LevelClass l1 = new LevelClass("L01", "Level 1 - Wind", "<p><b>Hello!</b><br/> This is " +
                 "the first level of your power conquest. On this level you are going to " +
-                "learn the concept of <b>propositional logic</b> and <b>contradictory propositions.</b> " +
+                "learn the concept of <b>propositional logic</b> and <b>contradictory propositions.</b> |" +
                 "In the end of this level you will have the <b>wind power</b> which is the first " +
                 "step to get the <b>air power</b>, but to finish the level one you have to prove " +
                 "your knowledge about wind by answering 5 questions. " + "</p>|" +
                 "<p>So, lets get started with the concepts:" + "</p>" +
                 "<p><b>Propositional logics</b> is also called <b>“sentential logic”</b> or <b>“statement logic”</b> " +
                 "and it deals with logical relationship between propositions (also called: " +
-                "<b>claims</b>, <b>statement</b>, <b>sentences</b>, <b>assertions</b>, ..) taken as wholes. A proposition " +
+                "<b>claims</b>, <b>statement</b>, <b>sentences</b>, <b>assertions</b>, ..) taken as wholes.| A proposition " +
                 "is a declarative sentence which has a <b>True/false</b> value and it is composed by a " +
-                "subject term and a predicate term, for example:" + "</p>|" +
+                "subject term and a predicate term, for example:" + "</p>" +
                 "<p>“The wind is cold”." + "</p>" + "<p>The wind= subject term" + "</p>" + "<p>“is cold” = " +
                 "the predicate" + "</p>" + "<p>We symbolize the proposition using a single letter: " +
                 "</p>" + "<p><b>j</b>: “ Jill is wearing a red dress”." + "</p>" + "<br />" + "|<p><b>Contradictories,</b> " +
                 "operator \"<b>not</b>\":" + "</p>" + "<p>The Contradictory of A is a claim that always has the " +
                 "opposite truth value of A. In the case of a simple proposition just use a " +
                 "negative word or expression (<b>\"no\"</b>, <b>\"not\"</b>, <b>\"It is not true\"</b>, <b>\"It is false\"</b>...)" +
-                " before the sentence, and you have the contradictory. The <b>“not”</b> operator can also be " +
-                "represented by <b>“¬”</b>. For example:" + "</p>|" + "<p><b>a</b>: “The wind is blowing”" + "</p>" +
+                " before the sentence, and you have the contradictory.| The <b>“not”</b> operator can also be " +
+                "represented by <b>“¬”</b>. For example:" + "</p>" + "<p><b>a</b>: “The wind is blowing”" + "</p>" +
                 "<p><b>¬a</b>: “The wind is not blowing”" + "</p>" + "<p>Notice that <b>‘¬a’</b> is the contradictory claim " +
                 "of <b>‘a’</b> and vice-versa. " + "</p>", "Tip1|");
         this.addLevel(l1);

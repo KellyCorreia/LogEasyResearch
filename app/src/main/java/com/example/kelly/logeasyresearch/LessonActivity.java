@@ -10,11 +10,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class LessonActivity extends FragmentActivity {
@@ -23,6 +25,8 @@ public class LessonActivity extends FragmentActivity {
     RelativeLayout layout;
     LinearLayout firstLayout;
     LevelClass selecLevel;
+    ImageView ImgAvatar;
+    Random rd = new Random();
 
     UserClass User;
     ScoreboardClass Score;
@@ -38,9 +42,9 @@ public class LessonActivity extends FragmentActivity {
         bd = new MySQLiteHelper(this);
 
         Bundle extras = getIntent().getExtras();
-        User = (UserClass)extras.getParcelable("chosenUser");
-        selecLevel = (LevelClass)extras.getParcelable("chosenLevel");
-        Score = (ScoreboardClass)extras.getParcelable("userScore");
+        User = extras.getParcelable("chosenUser");
+        selecLevel =extras.getParcelable("chosenLevel");
+        Score =extras.getParcelable("userScore");
 
         q = bd.levelQuestion(selecLevel.getLevel_id());
         txtPoints = (TextView)findViewById(R.id.txtPoints);
@@ -48,6 +52,8 @@ public class LessonActivity extends FragmentActivity {
         btnLevels=(Button)findViewById(R.id.btnLevels);
         layout = (RelativeLayout)findViewById(R.id.relativeLayoutLesson);
         firstLayout = (LinearLayout)findViewById(R.id.linearLayoutFirst);
+        ImgAvatar = (ImageView)findViewById(R.id.imageViewAvatar);
+
 
         this.setLesson();
 
@@ -87,6 +93,77 @@ public class LessonActivity extends FragmentActivity {
     private void setLesson(){ //Method to take the lesson from the Level Class and from the User Class
         txtPoints.setText(Integer.toString(Score.getPoints()));
         firstLayout.setBackgroundColor(Color.parseColor("#FF192030"));
+
+
+        switch (User.getAvatar()) {
+            case "Avatar1":
+                int random = rd.nextInt(4);
+                if (random == 0)
+                    ImgAvatar.setImageResource(R.drawable.avatar12);
+                else {
+                    if (random == 1)
+                        ImgAvatar.setImageResource(R.drawable.avatar13);
+                    else {
+                        if (random == 2)
+                            ImgAvatar.setImageResource(R.drawable.avatar14);
+                        else {
+                            ImgAvatar.setImageResource(R.drawable.avatar15);
+                        }
+                    }
+                }
+                break;
+
+            case "Avatar2":
+                random = rd.nextInt(4);
+                if (random == 0)
+                    ImgAvatar.setImageResource(R.drawable.avatar22);
+                else {
+                    if (random == 1)
+                        ImgAvatar.setImageResource(R.drawable.avatar23);
+                    else {
+                        if (random == 2)
+                            ImgAvatar.setImageResource(R.drawable.avatar24);
+                        else {
+                            ImgAvatar.setImageResource(R.drawable.avatar25);
+                        }
+                    }
+                }
+                break;
+
+            case "Avatar3":
+                random = rd.nextInt(4);
+                if (random == 0)
+                    ImgAvatar.setImageResource(R.drawable.avatar32);
+                else {
+                    if (random == 1)
+                        ImgAvatar.setImageResource(R.drawable.avatar33);
+                    else {
+                        if (random == 2)
+                            ImgAvatar.setImageResource(R.drawable.avatar34);
+                        else {
+                            ImgAvatar.setImageResource(R.drawable.avatar35);
+                        }
+                    }
+                }
+                break;
+
+            case "Avatar4":
+                random = rd.nextInt(4);
+                if (random == 0)
+                    ImgAvatar.setImageResource(R.drawable.avatar42);
+                else {
+                    if (random == 1)
+                        ImgAvatar.setImageResource(R.drawable.avatar43);
+                    else {
+                        if (random == 2)
+                            ImgAvatar.setImageResource(R.drawable.avatar44);
+                        else {
+                            ImgAvatar.setImageResource(R.drawable.avatar45);
+                        }
+                    }
+                }
+                break;
+        }
 
         switch(selecLevel.getLevel_id()){
             case "L01":
