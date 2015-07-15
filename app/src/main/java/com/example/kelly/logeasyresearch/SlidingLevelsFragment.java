@@ -34,7 +34,7 @@ public class SlidingLevelsFragment extends Fragment {
 
 
         // acha o layout da onde vem a page
-        return inflater.inflate(R.layout.fragment_boardlevel, container, false);
+        return inflater.inflate(R.layout.fragment_base, container, false);
     }
 
     @Override

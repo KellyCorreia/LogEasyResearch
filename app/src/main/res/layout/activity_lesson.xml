@@ -41,83 +41,50 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="245dp"
-        android:layout_height="235dp"
-        android:layout_weight="0.71"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         android:id="@+id/linearLayoutMiddle"
-        android:layout_alignParentRight="true"
         android:layout_above="@+id/linearLayoutBottom"
-        android:gravity="center_vertical|right|center_horizontal"
-        android:background="@drawable/ballonlevel"
-        android:layout_marginRight="20dp"
-        android:weightSum="1"
-        android:baselineAligned="false">
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        >
 
-        <ScrollView
+        <FrameLayout
+            android:id="@+id/sample_content_fragmentlesson"
             android:layout_width="0dp"
-            android:layout_height="190dp"
-            android:id="@+id/scrollViewLesson"
-            android:fillViewport="false"
-            android:layout_margin="5dp"
-            android:layout_gravity="top|center_horizontal"
-            android:layout_weight="0.65">
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtLesson"
-                android:gravity="fill_horizontal|fill_vertical"
-                android:textColor="#ff313745"
-                android:textAlignment="center" />
-        </ScrollView>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/linearLayoutBottom"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:gravity="fill_vertical"
+        android:layout_marginTop="10dp">
 
-        <ImageView
-            android:layout_width="140dp"
-            android:layout_height="180dp"
-            android:id="@+id/imageViewAvatar"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="left|bottom"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/avatar22" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/layoutButtons"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="10dp"
-            android:gravity="right"
-            android:layout_marginLeft="40dp">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="fill_vertical">
 
             <Button
                 android:layout_width="116dp"
                 android:layout_height="34dp"
                 android:id="@+id/btnPlay"
                 android:onClick= "OnClick"
-                android:singleLine="false"
-                android:gravity="bottom|right" />
+                android:layout_gravity="left" />
 
             <Button
                 android:layout_width="116dp"
                 android:layout_height="34dp"
                 android:id="@+id/btnLevels"
-                android:singleLine="false"
-                android:gravity="bottom|right"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/levelscore"
-                android:layout_marginBottom="5dp" />
-        </LinearLayout>
+                android:background="@drawable/levelscore" />
+        </TableRow>
 
-    </LinearLayout>
+    </TableLayout>
 
 </RelativeLayout>

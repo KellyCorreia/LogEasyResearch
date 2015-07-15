@@ -1,35 +1,32 @@
 package com.example.kelly.logeasyresearch;
 
-import android.app.Activity;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Html;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 
-public class LessonActivity extends Activity {
+public class LessonActivity extends FragmentActivity {
     TextView txtPoints;
-    TextView txtLesson;
     Button btnPlay, btnLevels;
-    ImageView ImgAvatar;
     RelativeLayout layout;
-    LinearLayout firstLayout, secondLayout;
+    LinearLayout firstLayout;
     LevelClass selecLevel;
+
     UserClass User;
     ScoreboardClass Score;
-    Random rd = new Random();
+
     List <QuestionClass> q = new ArrayList<>();
     MySQLiteHelper bd;
 
@@ -38,22 +35,19 @@ public class LessonActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lesson);
 
+        bd = new MySQLiteHelper(this);
+
         Bundle extras = getIntent().getExtras();
         User = (UserClass)extras.getParcelable("chosenUser");
         selecLevel = (LevelClass)extras.getParcelable("chosenLevel");
         Score = (ScoreboardClass)extras.getParcelable("userScore");
 
-
-        bd = new MySQLiteHelper(this);
         q = bd.levelQuestion(selecLevel.getLevel_id());
         txtPoints = (TextView)findViewById(R.id.txtPoints);
-        txtLesson =(TextView)findViewById(R.id.txtLesson);
         btnPlay=(Button)findViewById(R.id.btnPlay);
         btnLevels=(Button)findViewById(R.id.btnLevels);
-        ImgAvatar = (ImageView)findViewById(R.id.imageViewAvatar);
         layout = (RelativeLayout)findViewById(R.id.relativeLayoutLesson);
         firstLayout = (LinearLayout)findViewById(R.id.linearLayoutFirst);
-        secondLayout = (LinearLayout)findViewById(R.id.linearLayoutMiddle);
 
         this.setLesson();
 
@@ -79,83 +73,20 @@ public class LessonActivity extends Activity {
                 finish();
             }
         });
+
+        //Calling the lesson  fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        SlidingLessonFragment fragment = new SlidingLessonFragment();
+        fragment.setArguments(extras);
+        transaction.replace(R.id.sample_content_fragmentlesson, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+
     }
 
     private void setLesson(){ //Method to take the lesson from the Level Class and from the User Class
         txtPoints.setText(Integer.toString(Score.getPoints()));
-        txtLesson.setText(Html.fromHtml(selecLevel.getLesson()));
-        secondLayout.setBackgroundResource(R.drawable.ballonlevel);
         firstLayout.setBackgroundColor(Color.parseColor("#FF192030"));
-
-        switch (User.getAvatar()){
-            case "Avatar1":
-                int random = rd.nextInt(4);
-                if(random == 0)
-                    ImgAvatar.setImageResource(R.drawable.avatar12);
-                else{
-                    if(random == 1)
-                        ImgAvatar.setImageResource(R.drawable.avatar13);
-                    else{
-                        if(random == 2)
-                            ImgAvatar.setImageResource(R.drawable.avatar14);
-                        else{
-                            ImgAvatar.setImageResource(R.drawable.avatar15);
-                        }
-                    }
-                }
-                break;
-
-            case "Avatar2":
-                random = rd.nextInt(4);
-                if(random == 0)
-                    ImgAvatar.setImageResource(R.drawable.avatar22);
-                else{
-                    if(random == 1)
-                        ImgAvatar.setImageResource(R.drawable.avatar23);
-                    else{
-                        if(random == 2)
-                            ImgAvatar.setImageResource(R.drawable.avatar24);
-                        else{
-                            ImgAvatar.setImageResource(R.drawable.avatar25);
-                        }
-                    }
-                }
-                break;
-
-            case "Avatar3":
-                random = rd.nextInt(4);
-                if(random == 0)
-                    ImgAvatar.setImageResource(R.drawable.avatar32);
-                else{
-                    if(random == 1)
-                        ImgAvatar.setImageResource(R.drawable.avatar33);
-                    else{
-                        if(random == 2)
-                            ImgAvatar.setImageResource(R.drawable.avatar34);
-                        else{
-                            ImgAvatar.setImageResource(R.drawable.avatar35);
-                        }
-                    }
-                }
-                break;
-
-            case "Avatar4":
-                random = rd.nextInt(4);
-                if(random == 0)
-                    ImgAvatar.setImageResource(R.drawable.avatar42);
-                else{
-                    if(random == 1)
-                        ImgAvatar.setImageResource(R.drawable.avatar43);
-                    else{
-                        if(random == 2)
-                            ImgAvatar.setImageResource(R.drawable.avatar44);
-                        else{
-                            ImgAvatar.setImageResource(R.drawable.avatar45);
-                        }
-                    }
-                }
-                break;
-        }
 
         switch(selecLevel.getLevel_id()){
             case "L01":
@@ -203,7 +134,6 @@ public class LessonActivity extends Activity {
     }
 
     public String getCurrentClass() {
-
         ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> runningTaskInfo = manager.getRunningTasks(1);
 
