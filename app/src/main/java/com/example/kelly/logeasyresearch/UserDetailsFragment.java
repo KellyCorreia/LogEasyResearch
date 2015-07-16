@@ -25,7 +25,7 @@ public class UserDetailsFragment extends Fragment {
 
     private ProgressBar mProgress;
 
-    int circleAvatarV,pointsUV,answeredWrongUV;
+    int circleAvatarV,pointsUV,answeredWrongUV,questionsA;
     String levelNameV,levelDiscripV,usernameUV,emailUV, levelUV;
 
     @Override
@@ -47,6 +47,7 @@ public class UserDetailsFragment extends Fragment {
         TextView pointsU = (TextView)view.findViewById(R.id.pointsU);
         TextView levelU = (TextView)view.findViewById(R.id.levelU);
         TextView answeredWrongU = (TextView)view.findViewById(R.id.answeredWrongU);
+        TextView answeredQuestions = (TextView)view.findViewById(R.id.answeredQuestionsU);
 
         circleAvatarV = getResources().getIdentifier(user.getAvatar().toLowerCase(Locale.getDefault()),"drawable",getActivity().getPackageName());
         circleAvatar.setImageResource(circleAvatarV);
@@ -64,13 +65,16 @@ public class UserDetailsFragment extends Fragment {
         emailU.setText(emailUV);
 
         pointsUV = userScore.getPoints();
-        pointsU.setText(((Integer)pointsUV).toString());
+        pointsU.setText((String.valueOf(pointsUV)));
+
+        answeredWrongUV = userScore.getWrong_number();
+        answeredWrongU.setText((String.valueOf(answeredWrongUV)));
 
         levelUV = userScore.getLevel_id();
         levelU.setText(levelUV);
 
-        answeredWrongUV = userScore.getWrong_number();
-        answeredWrongU.setText(((Integer)answeredWrongUV).toString());
+        questionsA = (pointsUV/10) + answeredWrongUV;
+        answeredQuestions.setText(String.valueOf(questionsA));
 
         mProgress = (ProgressBar) view.findViewById(R.id.progressBarU);
         mProgress.setProgress(pointsUV);
