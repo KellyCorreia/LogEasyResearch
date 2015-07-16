@@ -70,6 +70,9 @@ public class QuizActivity extends Activity {
                             score += 10;
                             setScoreBoard();
                         }
+                        else{
+                            setQuestionView();
+                        }
                     }else {
                         Toast.makeText(QuizActivity.this, "Wrong answer!", Toast.LENGTH_SHORT).show();
                         setQuestionView();

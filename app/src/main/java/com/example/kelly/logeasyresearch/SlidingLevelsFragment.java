@@ -220,7 +220,7 @@ public class SlidingLevelsFragment extends Fragment {
     public void setIntent(String chosenLevelID) {
         chosenLevel = db.getLevel(chosenLevelID);
 
-        if (pointsU>=(((getLevelInt()-1)*50)+10)){
+        if (pointsU>=((((getLevelInt())-1)*50)+10)){
             intent = new Intent(getActivity(), QuizActivity.class);
         } else {
             intent = new Intent(getActivity(), LessonActivity.class);
@@ -233,7 +233,7 @@ public class SlidingLevelsFragment extends Fragment {
     }
 
     public int getLevelInt(){
-        switch ( userScore.getLevel_id() ){
+        switch ( chosenLevel.getLevel_id() ){
             case "L01":
                 return 1;
             case "L02":
