@@ -1,5 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xmSl version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ColorPrimary">#FF5722</color>
     <color name="ColorPrimaryDark">#E64A19</color>
+    <color name="TextColor">#E64A19</color>
+
+    <color name="AzulClaro">#FF86BCEB</color>
+    <color name="AzulBright">#FF386AFF</color>
+    <color name="AzulV">#FF008080</color>
+    <color name="Azul">#FF192030</color>
+
+    <color name="Verdinho">#FF68C497</color>
+    <color name="Verde">#FF214726</color>
+
+    <color name="Vermelho">#FF8C0000</color>
+
+    <color name="Marrom">#FF67423A</color>
+    <color name="MarromForte">#FF4D1B02</color>
+
+    <color name="Laranja">#FFF47458</color>
+    <color name="LaranjaBright">#FFFF690F</color>
+
+
+    <color name="Bege">#FFE38FFF</color>
+    <color name="Rosinha">#FFF8D5B4</color>
+    <color name="Rosa">#FFF9C7AD</color>
+
+    <color name="Branco">#FFFFFFFF</color>
+    <color name="Cinza1">#FFA1A2A0</color>
+    <color name="Cinza2">#FF818283</color>
+    <color name="Cinza3">#FF343333</color>
+
 </resources>
