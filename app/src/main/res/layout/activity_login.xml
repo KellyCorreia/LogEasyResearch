@@ -78,13 +78,16 @@
                     android:maxLines="1" android:singleLine="true"
                     android:layout_height="wrap_content" android:hint="@string/prompt_password"
                     android:layout_gravity="top|center_horizontal"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="10dp"
+                    android:textColor="@color/Cinza3" />
 
-                <Button android:id="@+id/btnLogin"
+                <ImageButton android:id="@+id/btnLogin"
                     android:layout_width="95dp" android:layout_height="35dp"
                     android:layout_gravity="bottom|center_horizontal"
-                    android:background="@drawable/buttonlogin"
-                    android:layout_margin="10dp" />
+                    android:layout_margin="10dp"
+                    android:src="@drawable/buttonlogin"
+                    android:background="@color/Verde"
+                    android:elevation="12sp"/>
             </LinearLayout>
 
         </LinearLayout>

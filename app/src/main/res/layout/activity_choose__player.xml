@@ -57,14 +57,16 @@
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:layout_width="95dp"
-            android:layout_height="34dp"
+        <ImageButton
+            android:layout_width="130dp"
+            android:layout_height="40dp"
             android:id="@+id/btnnewuser"
             android:layout_gravity="bottom|center_horizontal"
-            android:background="@drawable/buttonred"
+            android:background="@color/Azul"
             android:gravity="bottom"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:src="@drawable/buttonsignup"
+            android:elevation="15dp"/>
     </LinearLayout>
 
     <RelativeLayout

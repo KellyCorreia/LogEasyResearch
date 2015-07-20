@@ -26,7 +26,7 @@
     The font  used in some of the images is a free font: Purisa( Thai handwriting outline font.Copyright (&#169;) 2003, 2004 Poonlap Veerathanabutr) </string>
 
     <string-array name="options_array">
-        <item>Levels Way</item>
+        <item>Levels Page</item>
         <item>User Details</item>
         <item>Scoreboard</item>
         <item>Quit</item>

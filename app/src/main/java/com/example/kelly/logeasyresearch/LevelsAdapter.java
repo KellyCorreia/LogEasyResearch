@@ -7,12 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by mikasa on 12/07/15.
- */
-
-
 public class LevelsAdapter extends RecyclerView.Adapter<LevelsAdapter.ViewHolder> {
+
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     private String[] mDataset;

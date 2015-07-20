@@ -16,34 +16,39 @@
         android:layout_marginTop="60dp"
         android:background="@drawable/logeasylogo"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
-
-    </LinearLayout>
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_gravity="bottom|center_horizontal"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="70dp"
         android:id="@+id/LayoutButtons">
 
-        <Button
-            android:layout_width="152dp"
-            android:layout_height="48dp"
+        <ImageButton
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:elevation ="15sp"
             android:id="@+id/btnStart"
-            android:background="@drawable/buttonazul"
+            android:background="@color/Azul"
             android:layout_gravity="top|center_horizontal"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:src="@drawable/buttonazul"/>
 
-        <Button
-            android:layout_width="152dp"
-            android:layout_height="48dp"
+        <ImageButton
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:elevation ="15sp"
             android:id="@+id/btnInfo"
-            android:background="@drawable/buttongreen"
+            android:background="@color/Verde"
+            android:layout_gravity="bottom|center_horizontal"
+            android:src="@drawable/buttongreen"
             android:layout_marginTop="36dp"
-            android:layout_gravity="bottom|center_horizontal" />
+            android:layout_marginBottom="36dp"/>
 
     </LinearLayout>
 

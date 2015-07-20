@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff7ebcf"
+    android:background="@color/Bege"
     android:orientation="vertical"
     android:weightSum="1">
 
@@ -60,6 +60,7 @@
                 android:id="@+id/levelDiscrip"
                 android:text="Aqui vou  procurar"
                 android:layout_gravity="center" />
+
         </LinearLayout>
 
 
@@ -67,7 +68,6 @@
 
 
     <ProgressBar
-
         style="?android:attr/progressBarStyleHorizontal"
         android:max="500"
         android:progress="200"
@@ -75,9 +75,7 @@
         android:layout_height="20dp"
         android:id="@+id/progressBarU"
         android:layout_below="@+id/topUserDetails"
-        android:progressTint="@color/ColorPrimaryDark"
-        android:progressBackgroundTint="@color/ColorPrimary"
-        android:progressDrawable="@android:drawable/progress_horizontal"
+        android:progressDrawable="@drawable/custom_progressbar"
         />
 
     <TableLayout
@@ -264,7 +262,132 @@
                 android:textStyle="normal"
 
                 />
+
         </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/userElements"
+        android:layout_below="@+id/bottomUserDetails">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Your Elements: "
+            android:id="@+id/txvElements"
+            android:layout_gravity="top|center_horizontal"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView1"
+                android:src="@drawable/level1s"
+                android:layout_marginLeft="15dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/level2s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView3"
+                android:src="@drawable/level3s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView4"
+                android:src="@drawable/level4s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView5"
+                android:src="@drawable/level5s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView6"
+                android:src="@drawable/level6s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView7"
+                android:src="@drawable/level7s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView8"
+                android:src="@drawable/level8s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+        </TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Challenges Completed: "
+            android:id="@+id/txvchallenges"
+            android:layout_gravity="top|center_horizontal"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView9"
+                android:src="@drawable/level9s"
+                android:layout_marginLeft="15dp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imageView10"
+                android:src="@drawable/level10s"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
+        </TableRow>
+
 
     </TableLayout>
 

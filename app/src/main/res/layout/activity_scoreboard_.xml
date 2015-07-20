@@ -3,29 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffe48f">
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="305dp"
-        android:layout_height="60dp"
-        android:id="@+id/layoutTopScoreBoard"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentLeft="false"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/topscoreboard" />
+    android:background="@color/Bege">
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/layoutTopScoreBoard"
         android:layout_marginTop="30dp"
-        android:layout_above="@+id/layoutBottomScoreBoard"
-        android:id="@+id/listViewStructure">
+        android:id="@+id/listViewStructure"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_centerHorizontal="true">
 
         <TableLayout
             android:layout_width="wrap_content"
@@ -83,32 +71,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="top"
-                android:background="#ffffffff">
+                android:background="@color/Branco">
             </ListView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listViewBackButton"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentBottom="true"
-            android:gravity="center_horizontal"
-            android:layout_centerHorizontal="true">
 
         </LinearLayout>
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="305dp"
-        android:layout_height="40dp"
-        android:id="@+id/layoutBottomScoreBoard"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/bottomcreateuser"
-        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

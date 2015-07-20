@@ -15,7 +15,7 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Azul"
+            android:background="@color/AzulBright"
             android:elevation="4dp"
             >
 
@@ -36,6 +36,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
         android:choiceMode="singleChoice"
-        android:background="#fff"
+        android:background="@color/Branco"
         />
 </android.support.v4.widget.DrawerLayout>
