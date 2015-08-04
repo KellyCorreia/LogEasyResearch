@@ -133,8 +133,14 @@ public class FragmentSlidingLevels extends Fragment {
 
         @Override
         public void onClick(View v) {
-            if (pointsU >= (i*50))
-                setIntent(i+1);
+            if (pointsU >= (i*50)) {
+                if (i < 2) {
+                    setIntent(i + 1);
+                }
+                else{
+                    setToast();
+                }
+            }
             else
                 setToast();
         }

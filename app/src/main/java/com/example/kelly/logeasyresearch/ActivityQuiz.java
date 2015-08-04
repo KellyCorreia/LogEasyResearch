@@ -132,16 +132,26 @@ public class ActivityQuiz extends Activity {
             qList = db.levelQuestion(selecLevel.getLevel_id());
         }
 
+        rdc.setVisibility(View.GONE);
+
         aList = db.getAnswer(qList.get(0).getQuestion_id());
         String backBaseName = "backgroundlevel";
-        layout.setBackgroundResource(getResources().getIdentifier(backBaseName+String.valueOf(selecLevel.getLevel_id()),"drawable", this.getPackageName()));
+        layout.setBackgroundResource(getResources().getIdentifier(backBaseName + String.valueOf(selecLevel.getLevel_id()), "drawable", this.getPackageName()));
 
         txtPoints.setText(Integer.toString(Score.getPoints()));
         txtQuest.setText(qList.get(0).getQuestion_text());
-        rda.setText(aList.get(0).getAnswer_text());
-        rdb.setText(aList.get(1).getAnswer_text());
-        rdc.setText(aList.get(2).getAnswer_text());
-
+        int i= 0;
+        while(i < aList.size()) {
+            if(i == 0) {
+                rda.setText(aList.get(i).getAnswer_text());
+            }else if(i == 1){
+                rdb.setText(aList.get(i).getAnswer_text());
+            }else if(i == 2){
+                rdc.setVisibility(View.VISIBLE);
+                rdc.setText(aList.get(i).getAnswer_text());
+            }
+            i++;
+        }
         if(aList.get(0).getAnswer_state() == 1) {
             rightAnswer = rda;
         }else {
@@ -162,7 +172,7 @@ public class ActivityQuiz extends Activity {
 
         intent.setClass(ActivityQuiz.this, ActivityLesson.class);
 
-        if( (score==(selecLevel.getLevel_id()*50))&&(score<= 500)){
+        if( (score==(selecLevel.getLevel_id()*50))&&(score<= 50)){
             db.updatingScore(score, User, selecLevel.getLevel_id()+1);
             selecLevel = db.getLevel( selecLevel.getLevel_id()+1);
             Score = db.getScore(User.getUser_id());
@@ -179,6 +189,10 @@ public class ActivityQuiz extends Activity {
 
         }else{
             db.updatingScore(score, User, Score.getLevel_id());
+            if(score == 100){
+                Toast.makeText(ActivityQuiz.this, "You defeated the "+selecLevel.getLevelname()+" !", Toast.LENGTH_SHORT).show();
+                finish();
+            }
             Score = db.getScore(User.getUser_id());
             setQuestionView();
         }
