@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,7 +16,8 @@ import java.util.Random;
 
 public class ActivityLesson extends FragmentActivity {
     TextView txtPoints;
-    Button btnPlay, btnLevels;
+    ImageButton btnPlay;
+    ImageButton btnLevels;
     RelativeLayout layout;
     LinearLayout firstLayout;
     ClassLevel selecLevel;
@@ -36,8 +38,8 @@ public class ActivityLesson extends FragmentActivity {
         Score = extras.getParcelable("userScore");
 
         txtPoints = (TextView)findViewById(R.id.txtPoints);
-        btnPlay=(Button)findViewById(R.id.btnPlay);
-        btnLevels=(Button)findViewById(R.id.btnLevels);
+        btnPlay=(ImageButton)findViewById(R.id.btnPlay);
+        btnLevels= (ImageButton)findViewById(R.id.btnLevels);
         layout = (RelativeLayout)findViewById(R.id.relativeLayoutLesson);
         firstLayout = (LinearLayout)findViewById(R.id.linearLayoutFirst);
         ImgAvatar = (ImageView)findViewById(R.id.imageViewAvatar);

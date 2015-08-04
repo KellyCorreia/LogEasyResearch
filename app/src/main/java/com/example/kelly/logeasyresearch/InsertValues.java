@@ -16,7 +16,54 @@ public class InsertValues {
     }
 
     private void addQuestions() {
-        ClassQuestion q1 = new ClassQuestion("Q001", "Which one is the contradictory of the " +
+
+        //these are the questions for test purposes on the summer project
+        //Level 1
+        ClassQuestion q1 = new ClassQuestion("Q001", "One essential feature of a proposition is:", 1);
+        db.addQuestion(q1);
+
+        ClassQuestion q2 = new ClassQuestion("Q002", "Does the following express a proposition or a " +
+                "fragment? \n 'While waiting for the wind to change directions.'", 1);
+        db.addQuestion(q2);
+
+        ClassQuestion q3 = new ClassQuestion("Q003", "Does the following express a proposition or a" +
+                " fragment? \n 'While waiting for the wind to change directions, I stayed home.'", 1);
+        db.addQuestion(q3);
+
+        ClassQuestion q4 = new ClassQuestion("Q004", "Does the following express a proposition or a" +
+                " fragment?\n 'The coldest wind in the world.'", 1);
+        db.addQuestion(q4);
+
+        ClassQuestion q5 = new ClassQuestion("Q005", "Does the following express a proposition or a" +
+                " fragment?\n The wind from south is the coldest wind in the world.", 1);
+        db.addQuestion(q5);
+
+        //level 2
+        ClassQuestion q11 = new ClassQuestion("Q011", "Determine whether the following contains an " +
+                "argument.\n People appreciate the silence. Yet, at the same time, they enjoy noisy music concerts.", 2);
+        db.addQuestion(q11);
+
+        ClassQuestion q12 = new ClassQuestion("Q012", "Determine whether the following contains an " +
+                "argument.\n There is more and more concern about the noise in our environment. One " +
+                "reason is that our environment keeps getting noisier and noisier.", 2);
+        db.addQuestion(q12);
+
+        ClassQuestion q13 = new ClassQuestion("Q013", "Determine whether the following contains an " +
+                "argument.\n Music is a combination of sound and silence. Musicians put together " +
+                "different instrument sounds. Then, they add vocal sound to produce music.", 2);
+        db.addQuestion(q13);
+
+        ClassQuestion q14 = new ClassQuestion("Q014", "Determine whether the following contains an " +
+                "argument.\n People enjoy listening nature sounds. Since it helps them to relax.", 2);
+        db.addQuestion(q14);
+
+        ClassQuestion q15 = new ClassQuestion("Q015", " Determine whether the following contains an" +
+                " argument.\n Some people do not wear hearing protection in noisy environments. As " +
+                "a result they lose their hearing capability.", 2);
+        db.addQuestion(q15);
+
+       //These are the questions from the first version of the app
+        /*ClassQuestion q1 = new ClassQuestion("Q001", "Which one is the contradictory of the " +
                 "following claim: \n “Sometimes the wind is blowing hard.”", 1);
         db.addQuestion(q1);
 
@@ -355,13 +402,82 @@ public class InsertValues {
         ClassQuestion q94 = new ClassQuestion("Q094", "Please select the inference that derive from the following premises:\n" +
                 "p: If you have super powers you are a superhero.\n" + "q: If you don’t have super powers than you are human.\n" +
                 "r: If you are a superhero then you need to save the world.", 10);
-        db.addQuestion(q94);
+        db.addQuestion(q94);*/
 
 
     }
 
     private void addAnswers() {
-        ClassAnswer a1 = new ClassAnswer("A001a", "The wind is not blowing hard.", "Q001", 0);
+
+        //These are the answers for testing purposes on the summer project
+        //level 1
+        ClassAnswer a1 = new ClassAnswer("A001a", "It asks a question.", "Q001", 0);
+        db.addAnswer(a1);
+
+        ClassAnswer a2 = new ClassAnswer("A001b", "It is either true or false.", "Q001", 1);
+        db.addAnswer(a2);
+
+        ClassAnswer a3 = new ClassAnswer("A001c", "It issues a command.", "Q001", 0);
+        db.addAnswer(a3);
+
+        ClassAnswer a4 = new ClassAnswer("A002a", "Proposition", "Q002", 1);
+        db.addAnswer(a4);
+
+        ClassAnswer a5 = new ClassAnswer("A002b", "Fragment", "Q002", 0);
+        db.addAnswer(a5);
+
+        ClassAnswer a7 = new ClassAnswer("A003a", "Proposition.", "Q003", 1);
+        db.addAnswer(a7);
+
+        ClassAnswer a8 = new ClassAnswer("A003b", "Fragment", "Q003", 0);
+        db.addAnswer(a8);
+
+        ClassAnswer a10 = new ClassAnswer("A004a", "Proposition", "Q004", 0);
+        db.addAnswer(a10);
+
+        ClassAnswer a11 = new ClassAnswer("A004b", "Fragment", "Q004", 1);
+        db.addAnswer(a11);
+
+        ClassAnswer a13 = new ClassAnswer("A005a", "Proposition", "Q005", 1);
+        db.addAnswer(a13);
+
+        ClassAnswer a14 = new ClassAnswer("A005b", "Fragment", "Q005", 0);
+        db.addAnswer(a14);
+
+        //level2
+        ClassAnswer a31 = new ClassAnswer("A011a", "Yes, it contains an argument.", "Q011", 0);
+        db.addAnswer(a31);
+
+        ClassAnswer a32 = new ClassAnswer("A011b", "No, it doesn't contain an argument.", "Q011", 1);
+        db.addAnswer(a32);
+
+        ClassAnswer a34 = new ClassAnswer("A012a", "Yes, it contains an argument.", "Q012", 0);
+        db.addAnswer(a34);
+
+        ClassAnswer a35 = new ClassAnswer("A012b", "No, it doesn't contain an argument.", "Q012", 1);
+        db.addAnswer(a35);
+
+        ClassAnswer a37 = new ClassAnswer("A013a", "Yes, it contains an argument.", "Q013", 0);
+        db.addAnswer(a37);
+
+        ClassAnswer a38 = new ClassAnswer("A013b", "No, it doesn't contain an argument.", "Q013", 1);
+        db.addAnswer(a38);
+
+        ClassAnswer a40 = new ClassAnswer("A014a", "Yes, it contains an argument.", "Q014", 1);
+        db.addAnswer(a40);
+
+        ClassAnswer a41 = new ClassAnswer("A014b", "No, it doesn't contain an argument.", "Q014", 0);
+        db.addAnswer(a41);
+
+        ClassAnswer a43 = new ClassAnswer("A015a", "Yes, it contains an argument.", "Q015", 1);
+        db.addAnswer(a43);
+
+        ClassAnswer a44 = new ClassAnswer("A015b", "No, it doesn't contain an argument.", "Q015", 0);
+        db.addAnswer(a44);
+
+
+        //These are the answers for the first version of logeasy
+        /*ClassAnswer a1 = new ClassAnswer("A001a", "The wind is not blowing hard.", "Q001", 0);
         db.addAnswer(a1);
 
         ClassAnswer a2 = new ClassAnswer("A001b", "Sometimes the wind is not blowing hard.", "Q001", 0);
@@ -1110,13 +1226,35 @@ public class InsertValues {
 
         ClassAnswer a283 = new ClassAnswer("A094c", "Humans need to save the world.", "Q094", 0);
         db.addAnswer(a283);
-
+*/
 
     }
 
     private void addLevels() {
 
-        ClassLevel l1 = new ClassLevel(1,"Wind", "<p><b>Hello!</b><br/> This is " +
+        //This is the insert for test purposes on the summer project
+        ClassLevel l1 = new ClassLevel(1,"Wind", "<p><b>Hi, Alchemist!</b></p> <p>Let’s master the" +
+                " four basic nature elements and become a hero!</p> | <p>So this is the first level" +
+                " of your power conquest. On this level you are going to learn the concept of " +
+                "propositional logic. In the end of this level you will have the wind power which" +
+                " is the first step to get the air power and to achieve that you need to prove " +
+                "your knowledge about wind by answering 5 questions.</p> | <p>So lets get started " +
+                "with the concepts:</p> <p>A concept identifies a certain class of things; a " +
+                "proposition asserts something about that class. Concepts give us indispensable " +
+                "tools for thought and speech by grouping together similar objects, actions, " +
+                "properties, and relationships.| However, a concept by itself is not a complete " +
+                "thought, and a word by itself doesn't say anything.</p> <p>Words need to be put " +
+                "together into sentences that express propositions. One essential feature of a " +
+                "proposition is that it is either true or false.</p> | <p>To assert a proposition, " +
+                "we need a complete declarative sentence, with a subject and a predicate.</p> |" +
+                "<p> Example:</p> <p><b>The following are propositions:</b></p> <p>The wind is the" +
+                " flow of gases.</p> <p>The wind blows south in the winter.</p> <p>The wind is " +
+                "blowing now.</p> | <p><b>The following are fragments:</b></p> <p> Wind </p> <p> " +
+                "The wind from Ireland </p> <p> What a cold wind!</p>", "Tip1");
+        db.addLevel(l1);
+
+        //This is the insert for the first version of the app
+       /* ClassLevel l1 = new ClassLevel(1,"Wind", "<p><b>Hello!</b><br/> This is " +
                 "the first level of your power conquest. On this level you are going to " +
                 "learn the concept of <b>propositional logic</b> and <b>contradictory propositions.</b> |" +
                 "In the end of this level you will have the <b>wind power</b> which is the first " +
@@ -1138,9 +1276,27 @@ public class InsertValues {
                 "represented by <b>“¬”</b>. For example:" + "</p>" + "<p><b>a</b>: “The wind is blowing”" + "</p>" +
                 "<p><b>¬a</b>: “The wind is not blowing”" + "</p>" + "<p>Notice that <b>‘¬a’</b> is the contradictory claim " +
                 "of <b>‘a’</b> and vice-versa. " + "</p>", "Tip1");
-        db.addLevel(l1);
+        db.addLevel(l1);*/
 
-        ClassLevel l2 = new ClassLevel(2,"Sound", "<p><b>Hello!</b> This is the last level of " +
+        //This is the insert for test purposes on the summer project
+
+        ClassLevel l2 = new ClassLevel(2,"Sound", "<p><b>Hi, Alchemist!</b></p> <p>This is the last level" +
+                " of your air power conquest. On this level you are going to learn how to recognize " +
+                "an argument. | In the end of this level you will have the air power, but to finish " +
+                "the level 2 you have to prove your knowledge about sound as well as you proved " +
+                "about wind by answering 5 questions right. </p> | <p>So, lets get started with the " +
+                "concepts:</p> <p>In logic, we use the term \"argument\" to mean a set of propositions" +
+                " in which some propositions--the premises--are asserted as support or evidence for " +
+                "another--the conclusion. | The author doesn't just tell us something that he takes to " +
+                "be true; he also presents reasons intended to convince us that it is true.</p> " +
+                "<p>This intention is usually signaled by certain indicator words. The following is a " +
+                "list of the more common indicator words:</p> | " +
+                "<p><b>Premise Indicators :</b></p> <p>Since :: Because ::  As ::  For :: Given that ::  Assuming that</p>" +
+                "<p><b>Conclusion Indicators:</b></p> <p>Therefore :: Thus :: So :: Consequently :: As a result :: It follows that</p>", "Tip2");
+        db.addLevel(l2);
+
+        //This is the insert for the first version of the app
+        /*ClassLevel l2 = new ClassLevel(2,"Sound", "<p><b>Hello!</b> This is the last level of " +
                 "your air power conquest. On this level you are going to learn the <b>conjunctions</b>. In " +
                 "the end of this level you will have the <b>air power</b>, but to finish the level 2 you have" +
                 " to prove your knowledge about <b>sound</b> as well as you proved about wind by answering 5" +
@@ -1149,7 +1305,7 @@ public class InsertValues {
                 " for example:" + "</p>" + "<p>“The wind is blowing hard and it is raining”." + "</p>" +
                 "<p>To evaluate this proposition as true <b>both</b> propositions must be <b>true</b>, if one is false" +
                 " then the whole statement is false. The <b>“and”</b> operator can be also represented by <b>“^”</b>.</p>", "Tip2");
-        db.addLevel(l2);
+        db.addLevel(l2);*/
 
         ClassLevel l3 = new ClassLevel(3,"Metal", "<p>In order to master the <b>Earth power</b> " +
                 "you have to pass two levels (<b>Metal</b> and <b>Sand</b>). This is the first one that you have" +

@@ -70,22 +70,22 @@
         android:layout_alignParentBottom="true"
         android:layout_marginTop="10dp">
 
-            <ImageButton
-                android:layout_width="116dp"
-                android:layout_height="34dp"
-                android:id="@+id/btnPlay"
-                android:onClick= "OnClick"
-                android:layout_gravity="left"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true" />
+        <ImageButton
+            android:layout_width="116dp"
+            android:layout_height="34dp"
+            android:id="@+id/btnPlay"
+            android:onClick= "OnClick"
+            android:layout_gravity="left"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
 
-            <ImageButton
-                android:layout_width="116dp"
-                android:layout_height="34dp"
-                android:id="@+id/btnLevels"
-                android:background="@drawable/levelscore"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true" />
+        <ImageButton
+            android:layout_width="116dp"
+            android:layout_height="34dp"
+            android:id="@+id/btnLevels"
+            android:background="@drawable/levelscore"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
 </RelativeLayout>
