@@ -75,7 +75,7 @@ public class ActivityQuiz extends Activity {
                     if (userAnswer == rightAnswer) {
                         Toast.makeText(ActivityQuiz.this, "Right Answer!", Toast.LENGTH_SHORT).show();
 
-                        if ( selecLevel.getLevel_id() == Score.getLevel_id() ) {
+                        if (selecLevel.getLevel_id()*50 > Score.getPoints()) {
                             score += 10;
                             setScoreBoard();
                         }
@@ -172,7 +172,7 @@ public class ActivityQuiz extends Activity {
 
         intent.setClass(ActivityQuiz.this, ActivityLesson.class);
 
-        if( (score==(selecLevel.getLevel_id()*50))&&(score<= 50)){
+        if((score==(selecLevel.getLevel_id()*50))&&(score<= 50)){
             db.updatingScore(score, User, selecLevel.getLevel_id()+1);
             selecLevel = db.getLevel( selecLevel.getLevel_id()+1);
             Score = db.getScore(User.getUser_id());
