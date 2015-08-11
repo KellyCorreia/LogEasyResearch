@@ -420,10 +420,10 @@ public class InsertValues {
         ClassAnswer a3 = new ClassAnswer("A001c", "It issues a command.", "Q001", 0);
         db.addAnswer(a3);
 
-        ClassAnswer a4 = new ClassAnswer("A002a", "Proposition", "Q002", 1);
+        ClassAnswer a4 = new ClassAnswer("A002a", "Proposition", "Q002", 0);
         db.addAnswer(a4);
 
-        ClassAnswer a5 = new ClassAnswer("A002b", "Fragment", "Q002", 0);
+        ClassAnswer a5 = new ClassAnswer("A002b", "Fragment", "Q002", 1);
         db.addAnswer(a5);
 
         ClassAnswer a7 = new ClassAnswer("A003a", "Proposition.", "Q003", 1);
