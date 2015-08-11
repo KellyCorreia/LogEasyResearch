@@ -7,12 +7,12 @@
         android:layout_height="wrap_content">
 
         <solid
-            android:color="#888888" >
+            android:color="#64ffffff" >
         </solid>
 
         <stroke
             android:width="2dp"
-            android:color="#C4CDE0" >
+            android:color="#64ffffff" >
         </stroke>
 
         <padding

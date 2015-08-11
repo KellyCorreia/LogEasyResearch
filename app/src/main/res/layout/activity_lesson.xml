@@ -14,28 +14,20 @@
         android:layout_alignParentTop="true"
         android:background="#ff192030">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="160dp"
-            android:layout_height="35dp"
-            android:id="@+id/layoutLevelPoIntsLeft"
-            android:background="@drawable/points"></LinearLayout>
+        <ImageView
+            android:layout_width="145dp"
+            android:layout_height="20dp"
+            android:id="@+id/imvPoints2"
+            android:src="@drawable/points" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="160dp"
-            android:layout_height="35dp"
-            android:id="@+id/layoutLevelPoIntsRight">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
+                android:text="123"
                 android:id="@+id/txtPoints"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginTop="5dp" />
-        </LinearLayout>
+                android:textColor="@color/Branco" />
 
     </LinearLayout>
 
@@ -73,19 +65,24 @@
         <ImageButton
             android:layout_width="116dp"
             android:layout_height="34dp"
-            android:id="@+id/btnPlay"
-            android:onClick= "OnClick"
-            android:layout_gravity="left"
+            android:id="@+id/btnLevels"
+            android:background="@drawable/levelscore"
             android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="40dp" />
 
         <ImageButton
             android:layout_width="116dp"
             android:layout_height="34dp"
-            android:id="@+id/btnLevels"
-            android:background="@drawable/levelscore"
+            android:id="@+id/btnPlay"
+            android:onClick= "OnClick"
+            android:layout_gravity="left"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp" />
+
+
+
     </RelativeLayout>
 
 </RelativeLayout>

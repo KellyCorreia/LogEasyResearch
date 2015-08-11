@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class ActivityLesson extends FragmentActivity {
+
     TextView txtPoints;
     ImageButton btnPlay, btnLevels;
     RelativeLayout layout;
@@ -79,6 +79,7 @@ public class ActivityLesson extends FragmentActivity {
 
     private void setLesson(){ //Method to take the lesson from the Level Class and from the User Class
         txtPoints.setText(Integer.toString(Score.getPoints()));
+
         firstLayout.setBackgroundColor(Color.parseColor("#FF192030"));
 
 
@@ -156,42 +157,52 @@ public class ActivityLesson extends FragmentActivity {
             case 1:
                 layout.setBackgroundResource(R.drawable.backgroundlevel1);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin1);
                 break;
             case 2:
                 layout.setBackgroundResource(R.drawable.backgroundlevel2);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel2);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin2);
                 break;
             case 3:
                 layout.setBackgroundResource(R.drawable.backgroundlevel3);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel3);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin3);
                 break;
             case 4:
                 layout.setBackgroundResource(R.drawable.backgroundlevel4);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel4);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin4);
                 break;
             case 5:
                 layout.setBackgroundResource(R.drawable.backgroundlevel5);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel5);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin5);
                 break;
             case 6:
                 layout.setBackgroundResource(R.drawable.backgroundlevel6);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel6);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin6);
                 break;
             case 7:
                 layout.setBackgroundResource(R.drawable.backgroundlevel7);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel7);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin7);
                 break;
             case 8:
                 layout.setBackgroundResource(R.drawable.backgroundlevel8);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel8);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin8);
                 break;
             case 9:
                 layout.setBackgroundResource(R.drawable.backgroundlevel9);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel9);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin9);
                 break;
             case 10:
                 layout.setBackgroundResource(R.drawable.backgroundlevel10);
                 btnPlay.setBackgroundResource(R.drawable.buttomlevel10);
+                btnLevels.setBackgroundResource(R.drawable.buttomhin10);
                 break;
         }
     }

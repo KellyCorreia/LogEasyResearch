@@ -241,7 +241,7 @@ public class ActivityLevels extends AppCompatActivity implements LevelsAdapter.O
     public void finishApplication() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ActivityLevels.this);
-        builder.setTitle("Log Out")
+        builder.setTitle("Log out")
                 .setMessage("Proceed with log out?")
                 .setCancelable(true)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
