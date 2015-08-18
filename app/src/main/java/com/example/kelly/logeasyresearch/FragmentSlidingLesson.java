@@ -76,7 +76,7 @@ public class FragmentSlidingLesson extends Fragment {
                 icon.setImageResource(R.drawable.end);
             }
             if((position+1)==1){
-                ImageView icon = (ImageView) view.findViewById(R.id.iconNext);
+                ImageView icon = (ImageView) view.findViewById(R.id.iconBack);
                 icon.setVisibility(View.GONE);
             }
 
