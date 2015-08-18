@@ -167,6 +167,23 @@ public class ActivityQuiz extends Activity {
         score = Score.getPoints();
         wScore = Score.getWrong_number();
     }
+    public void setAlertView(){
+        RelativeLayout lay1, lay2;
+        Button next1;
+        lay1 = (RelativeLayout)findViewById(R.id.ShowIt);
+        lay2 = (RelativeLayout)findViewById(R.id.HideIt);
+        next1 = (Button)findViewById(R.id.NextIt);
+        lay1.setVisibility(View.VISIBLE);
+        lay2.setVisibility(View.GONE);
+
+        next1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
     private void setScoreBoard(){
 
@@ -174,19 +191,17 @@ public class ActivityQuiz extends Activity {
 
         if((score==(selecLevel.getLevel_id()*50))&&(score<= 50)){
             db.updatingScore(score, User, selecLevel.getLevel_id()+1);
-            selecLevel = db.getLevel( selecLevel.getLevel_id()+1);
+            selecLevel = db.getLevel(selecLevel.getLevel_id()+1);
             Score = db.getScore(User.getUser_id());
             intent.putExtra("chosenUser", User);
             intent.putExtra("chosenLevel", selecLevel);
             intent.putExtra("userScore", Score);
 
-            if( selecLevel.getLevelname().equals("Dark City") )
-                Toast.makeText(ActivityQuiz.this, "Congratulations! You master the "+selecLevel.getLevelname()+" element!", Toast.LENGTH_SHORT).show();
-            else
+            if( selecLevel.getLevel_id()==9)
                 Toast.makeText(ActivityQuiz.this, "You defeated the "+selecLevel.getLevelname()+" !", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
-            finish();
-
+            else
+                Toast.makeText(ActivityQuiz.this, "Congratulations! You master the "+selecLevel.getLevelname()+" element!", Toast.LENGTH_SHORT).show();
+            setAlertView();
         }else{
             db.updatingScore(score, User, Score.getLevel_id());
             if(score == 100){

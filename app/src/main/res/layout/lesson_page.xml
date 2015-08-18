@@ -5,9 +5,10 @@
     android:id="@+id/boardLesson">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView2" >
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:id="@+id/scrollView2"
+        android:background="@drawable/rectangle_shape">
 
         <TextView
             android:background="#32ffedee"
@@ -19,5 +20,22 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
      />
     </ScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iconBack"
+        android:src="@drawable/ic_back"
+        android:layout_below="@+id/scrollView2"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentLeft="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iconNext"
+        android:src="@drawable/nexticon"
+        android:layout_below="@+id/scrollView2"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>
