@@ -38,6 +38,14 @@ public class InsertValues {
                 " fragment?\n The wind from south is the coldest wind in the world.", 1);
         db.addQuestion(q5);
 
+        ClassQuestion q6 = new ClassQuestion("Q006", "Does the following express a proposition or a" +
+                " fragment?\n The wind's direction", 1);
+        db.addQuestion(q6);
+
+        ClassQuestion q7 = new ClassQuestion("Q007", "Does the following express a proposition or a" +
+                " fragment?\n The wind's direction is south", 1);
+        db.addQuestion(q7);
+
         //level 2
         ClassQuestion q11 = new ClassQuestion("Q011", "Determine whether the following contains an " +
                 "argument.\n People appreciate the silence. Yet, at the same time, they enjoy noisy music concerts.", 2);
@@ -61,6 +69,16 @@ public class InsertValues {
                 " argument.\n Some people do not wear hearing protection in noisy environments. As " +
                 "a result they lose their hearing capability.", 2);
         db.addQuestion(q15);
+
+        ClassQuestion q16 = new ClassQuestion("Q015", " Determine whether the following contains an" +
+                " argument.\n People don't like to stay in noise environments. Since it makes them feel stressed.", 2);
+        db.addQuestion(q16);
+
+        ClassQuestion q17 = new ClassQuestion("Q015", " Determine whether the following contains an" +
+                " argument.\n In order to make a song musicians need to add sounds together in a harmonic way.", 2);
+        db.addQuestion(q17);
+
+
 
        //These are the questions from the first version of the app
         /*ClassQuestion q1 = new ClassQuestion("Q001", "Which one is the contradictory of the " +
@@ -444,6 +462,18 @@ public class InsertValues {
         ClassAnswer a14 = new ClassAnswer("A005b", "Fragment", "Q005", 0);
         db.addAnswer(a14);
 
+        ClassAnswer a15 = new ClassAnswer("A006a", "Proposition", "Q006", 0);
+        db.addAnswer(a15);
+
+        ClassAnswer a16 = new ClassAnswer("A006b", "Fragment", "Q006", 1);
+        db.addAnswer(a16);
+
+        ClassAnswer a17 = new ClassAnswer("A007a", "Proposition", "Q007", 1);
+        db.addAnswer(a17);
+
+        ClassAnswer a18 = new ClassAnswer("A007b", "Fragment", "Q007", 0);
+        db.addAnswer(a18);
+
         //level2
         ClassAnswer a31 = new ClassAnswer("A011a", "Yes, it contains an argument.", "Q011", 0);
         db.addAnswer(a31);
@@ -474,6 +504,18 @@ public class InsertValues {
 
         ClassAnswer a44 = new ClassAnswer("A015b", "No, it doesn't contain an argument.", "Q015", 0);
         db.addAnswer(a44);
+
+        ClassAnswer a45 = new ClassAnswer("A016a", "Yes, it contains an argument.", "Q016", 1);
+        db.addAnswer(a45);
+
+        ClassAnswer a46 = new ClassAnswer("A016b", "No, it doesn't contain an argument.", "Q016", 0);
+        db.addAnswer(a46);
+
+        ClassAnswer a47 = new ClassAnswer("A017a", "Yes, it contains an argument.", "Q017", 0);
+        db.addAnswer(a47);
+
+        ClassAnswer a48 = new ClassAnswer("A017b", "No, it doesn't contain an argument.", "Q017", 1);
+        db.addAnswer(a48);
 
 
         //These are the answers for the first version of logeasy
